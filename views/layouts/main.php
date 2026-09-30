@@ -807,12 +807,12 @@
                                 <a href="/">
                                     <span class="list-text">Home</span>
                                 </a>
-                                <ul class="header-sub-menu">
+                               <!-- <ul class="header-sub-menu">
                                     <li><a href="/">Home-1</a></li>
                                     <li><a href="/home-two">Home-2</a></li>
                                     <li><a href="/home-three">Home-3</a></li>
 
-                                </ul>
+                                </ul>-->
                             </li>
                             <li class="mega-menu">
                                 <a href="/product-sidebar">
@@ -887,7 +887,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li>
+                           <!--<li>
                                 <a href="#">
                                     <span class="list-text">Pages</span>
                                     <span>
@@ -914,28 +914,28 @@
                                     <li><a href="/product-sidebar">Shop Category Icon</a></li>
                                     <li><a href="/product-sidebar">Shop List View</a></li>
                                 </ul>
-                            </li>
+                            </li>-->
                             <li>
                                 <a href="/about">
-                                    <span class="list-text">About</span>
+                                    <span class="list-text">Conocenos</span>
                                 </a>
                             </li>
-                            <li>
+                            <!--<li>
                                 <a href="/blogs">
                                     <span class="list-text">Blog</span>
                                 </a>
                                 <ul class="header-sub-menu">
                                     <li><a href="/blogs-details">Blog-details</a></li>
                                 </ul>
-                            </li>
-                            <li>
+                            </li>-->
+                            <!--<li>
                                 <a href="/user-profile">
                                     <span class="list-text">User Dashboard</span>
                                 </a>
-                            </li>
+                            </li>-->
                             <li>
                                 <a href="/contact-us">
-                                    <span class="list-text">Contact</span>
+                                    <span class="list-text">Contacto</span>
                                 </a>
                             </li>
                         </ul>
