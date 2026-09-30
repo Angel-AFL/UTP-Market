@@ -4,10 +4,10 @@
             <div class="blog-bradcrum">
                 <span><a href="/">Home</a></span>
                 <span class="devider">/</span>
-                <span><a href="#">Contact</a></span>
+                <span><a href="/contact-us">Contacto</a></span>
             </div>
             <div class="blog-heading about-heading">
-                <h1 class="heading">Contact</h1>
+                <h1 class="heading">Contacto</h1>
             </div>
         </div>
     </section>
