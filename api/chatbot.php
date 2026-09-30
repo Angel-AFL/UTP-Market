@@ -1,19 +1,20 @@
 <?php
 header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
-// Habilitar logging de errores en PHP para depuración (se verá en los logs de Apache/Laragon)
-ini_set('display_errors', 0);
-ini_set('log_errors', 1);
-error_reporting(E_ALL);
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit;
+}
 
-// Permitir peticiones solo POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo json_encode(['error' => 'Método no permitido']);
     exit;
 }
 
-// Leer el JSON enviado
 $input = json_decode(file_get_contents('php://input'), true);
 $message = $input['message'] ?? '';
 
@@ -23,25 +24,40 @@ if (!$message) {
     exit;
 }
 
-// Configuración de Ollama (En línea)
-$url = 'https://ollama.com/api/chat';
-$model = 'gemma4:31b';
-$apiKey = 'd8318037886e4bdc9b268add87bcf417.2hBLwxdbRlKYcRrJZvasodNX';
+// Configuración de Groq Cloud
+$url = 'https://api.groq.com/openai/v1/chat/completions';
+// Leer API Key desde el archivo .env
+$envFile = __DIR__ . '/../.env';
+$apiKey = '';
+if (file_exists($envFile)) {
+    $envVariables = parse_ini_file($envFile);
+    $apiKey = $envVariables['GROQ_API_KEY'] ?? '';
+}
 
-// Preparar el cuerpo de la petición para la API de Ollama
+if (!$apiKey) {
+    http_response_code(500);
+    echo json_encode(['error' => 'API Key no configurada en el servidor']);
+    exit;
+}
+$model = 'qwen/qwen3.8-27b'; // Modelo compatible de generación de texto en Groq
+
 $data = [
     "model" => $model,
     "messages" => [
         [
             "role" => "system",
-            "content" => "Eres un asistente virtual útil para una tienda en línea llamada ShopUS. Responde de manera concisa, amable y profesional. Responde en español."
+            "content" => "Eres un asistente virtual útil para una tienda en línea llamada UTP-Market. Responde de manera concisa, amable y profesional en español."
         ],
         [
             "role" => "user",
             "content" => $message
         ]
     ],
-    "stream" => false // Esperar toda la respuesta
+    "temperature" => 1,
+    "max_tokens" => 2048, // 'max_completion_tokens' es usado en OpenAI o1, en Groq se usa 'max_tokens'
+    "top_p" => 1,
+    "stream" => false,
+    "stop" => null
 ];
 
 $ch = curl_init($url);
@@ -53,33 +69,18 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, [
 ]);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
 
-// Ejecutar petición
 $response = curl_exec($ch);
 $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-$curlError = curl_error($ch);
 curl_close($ch);
 
-// Loguear resultados para depuración
-error_log("--- OLLAMA API DEBUG ---");
-error_log("HTTP Code: " . $httpCode);
-if ($curlError) {
-    error_log("CURL Error: " . $curlError);
-}
-error_log("Response: " . $response);
-
-// Manejo de errores basado en el código HTTP
-if ($httpCode >= 400 || $response === false) {
+if ($httpCode >= 400 || !$response) {
     http_response_code(500);
-    echo json_encode([
-        'error' => 'Error al comunicarse con Ollama.',
-        'details' => $response ? json_decode($response) : 'Sin respuesta del servidor',
-        'curl_error' => $curlError
-    ]);
+    echo json_encode(['error' => 'Error al comunicarse con la IA', 'details' => json_decode($response)]);
     exit;
 }
 
-// Extraemos directamente el texto de la respuesta
 $responseData = json_decode($response, true);
-$botText = $responseData['message']['content'] ?? 'No pude generar una respuesta.';
+// Estructura estándar OpenAI/Groq
+$botText = $responseData['choices'][0]['message']['content'] ?? 'No se pudo generar respuesta.';
 
 echo json_encode(['response' => $botText]);
