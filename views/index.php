@@ -61,11 +61,11 @@
                     <div class="col-lg-6">
                         <div class="product-wrapper wrapper-one" data-aos="fade-right">
                             <div class="wrapper-info">
-                                <span class="wrapper-subtitle">NEW STYLE</span>
-                                <h4 class="wrapper-details">Get 65% Offer
-                                    <span class="wrapper-inner-title">& Make New</span> Fusion.
+                                <span class="wrapper-subtitle">Diseños Personalizados</span>
+                                <h4 class="wrapper-details">MDF,impresion 3D y
+                                    <span class="wrapper-inner-title"></span> Sublimacion.
                                 </h4>
-                                <a href="/product-sidebar" class="shop-btn">Shop Now
+                                <a href="/product-sidebar" class="shop-btn">Ver mas
                                     <span>
                                         <svg width="8" height="14" viewBox="0 0 8 14" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -82,13 +82,13 @@
                     <div class="col-lg-6">
                         <div class="product-wrapper wrapper-two" data-aos="fade-up">
                             <div class="wrapper-info">
-                                <span class="wrapper-subtitle">Mega OFFER</span>
+                                <span class="wrapper-subtitle">Aprende y crea</span>
                                 <h4 class="wrapper-details">
-                                    Make your New
-                                    <span class="wrapper-inner-title">Styles with Our</span>
-                                    Products
+                                   Cursos de robótica
+                                    <span class="wrapper-inner-title"></span>
+                                    Construye,programa y descubre
                                 </h4>
-                                <a href="/product-sidebar" class="shop-btn">Shop Now
+                                <a href="/product-sidebar" class="shop-btn">Ver más
                                     <span>
                                         <svg width="8" height="14" viewBox="0 0 8 14" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
