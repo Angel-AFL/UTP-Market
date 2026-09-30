@@ -116,35 +116,73 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="question-section login-section ">
+                        <div class="question-section login-section">
                             <div class="review-form">
-                                <h5 class="comment-title">Get In Touch</h5>
-                                <div class=" account-inner-form">
+                                <h5 class="comment-title">Contáctanos</h5>
+
+                                <div class="account-inner-form">
                                     <div class="review-form-name">
-                                        <label for="fname" class="form-label">Name*</label>
-                                        <input type="text" id="fname" class="form-control" placeholder="Name">
+                                        <label for="fname" class="form-label">Nombre*</label>
+                                        <input type="text" id="fname" class="form-control" placeholder="Tu nombre">
                                     </div>
+
                                     <div class="review-form-name">
-                                        <label for="email" class="form-label">Email*</label>
-                                        <input type="email" id="email" class="form-control"
-                                            placeholder="user@gmail.com">
+                                        <label for="email" class="form-label">Correo electrónico*</label>
+                                        <input type="email" id="email" class="form-control" placeholder="correo@gmail.com">
                                     </div>
+
                                     <div class="review-form-name">
-                                        <label for="subject" class="form-label">Subject*</label>
-                                        <input type="text" id="subject" class="form-control" placeholder="Subject">
+                                        <label for="subject" class="form-label">Asunto*</label>
+                                        <input type="text" id="subject" class="form-control" placeholder="Asunto">
                                     </div>
                                 </div>
+
                                 <div class="review-textarea">
-                                    <label for="floatingTextarea">Massage*</label>
-                                    <textarea class="form-control" placeholder="Write Massage..........."
-                                        id="floatingTextarea" rows="3"></textarea>
+                                    <label for="floatingTextarea">Mensaje*</label>
+                                    <textarea
+                                        class="form-control"
+                                        placeholder="Escribe tu mensaje..."
+                                        id="floatingTextarea"
+                                        rows="3"></textarea>
                                 </div>
+
                                 <div class="login-btn">
-                                    <a href="#" class="shop-btn">Send Now</a>
+                                    <a href="#" class="shop-btn" onclick="enviarWhatsApp(event)">
+                                        Enviar por WhatsApp
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <script>
+                        function enviarWhatsApp(event) {
+                            event.preventDefault();
+
+                            const nombre = document.getElementById('fname').value.trim();
+                            const email = document.getElementById('email').value.trim();
+                            const asunto = document.getElementById('subject').value.trim();
+                            const mensaje = document.getElementById('floatingTextarea').value.trim();
+
+                            if (!nombre || !email || !asunto || !mensaje) {
+                                alert('Por favor, completa todos los campos.');
+                                return;
+                            }
+
+                            const texto =
+                                `Hola, me pongo en contacto con ustedes.%0A%0A` +
+                                `*Nombre:* ${nombre}%0A` +
+                                `*Correo:* ${email}%0A` +
+                                `*Asunto:* ${asunto}%0A%0A` +
+                                `*Mensaje:*%0A${mensaje}`;
+
+                            const telefono = '529991527698';
+
+                            const url = `https://wa.me/${telefono}?text=${texto}`;
+
+                            window.open(url, '_blank');
+                        }
+                    </script>
                 </div>
             </div>
         </div>
