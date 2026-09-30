@@ -608,6 +608,13 @@ button {
     gap: 0px;
     padding: 1.9rem 0 2.2rem 0;
 }
+.header-center .logo {
+    position: relative;
+    left: -300px;
+}
+
+
+
 .header-center .header-cart-items {
     display: flex;
     flex-direction: row;
