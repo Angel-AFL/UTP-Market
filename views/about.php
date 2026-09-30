@@ -20,15 +20,17 @@
                 <div class="row align-items-center gy-5">
                     <div class="col-lg-6">
                         <div class="about-img" data-aos="fade-right">
-                            <img src="assets/images/homepage-one/about/3d impresion.avif" alt="img">
+                            <img src="assets/images/homepage-one/about/camara.avif" alt="img">
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="about-content" data-aos="fade-up">
+                        <d
+                        
+                        
+                        iv class="about-content" data-aos="fade-up">
                             <h3 class="about-title">Conoce más sobre nosotros</h3>
                             <p class="about-info">
-                                Somos una empresa dedicada a la venta de objetos personalizados con tecnología de impresión 3D y sublimación.
-                                Entre más cosas para ofrecer, calidad de productos con la facilidad de compra y venta.
+                                Somos una empresa dedicada a la venta de objetos personalizados con tecnología de impresión 3D y sublimación corte con laser y sin olvidar el tema de ventas de recuerdos. fotograficos                 Entre más cosas para ofrecer, calidad de productos con la facilidad de compra y venta.
                             </p>
                             <div class="about-list">
                                 <ul>
@@ -510,7 +512,7 @@
                     <div class="col-lg-4 col-sm-6">
                         <div class="blogs-wrapper product-wrapper" data-aos="fade-up" data-aos-duration="300">
                             <div class="wrapper-img">
-                                <img src="assets/images/homepage-one/about/image.png" alt="">
+                                <img src="assets/images/homepage-one/about/about-img-2.webp" alt="">
                             </div>
                             <div class="wrapper-info">
                                 <div class="wrapper-data">
@@ -547,9 +549,8 @@
                                         </span>
                                     </div>
                                 </div>
-                                <a href="/blogs-details" class="about-details wrapper-details"
-                                >Nuevos diseños y acabados en sublimación de tazas y playeras personalizados
-                            </a>
+                                <a href="/blogs-details" class="about-details wrapper-details">Top 10 Best
+                                    Professional Blogging Platforms for 2022
                                 </a>
                                 <div class="divider"></div>
 
@@ -570,7 +571,7 @@
                     <div class="col-lg-4 col-sm-6">
                         <div class="blogs-wrapper product-wrapper" data-aos="fade-up" data-aos-duration="400">
                             <div class="wrapper-img">
-                                <img src="assets/images/homepage-one/about/cursos_robotica.jpeg" alt="">
+                                <img src="assets/images/homepage-one/about/about-img-3.webp" alt="">
                             </div>
                             <div class="wrapper-info">
                                 <div class="wrapper-data">
@@ -607,8 +608,9 @@
                                         </span>
                                     </div>
                                 </div>
-                                <a href="/blogs-details" class="about-details wrapper-details">
-                                    Inauguramos nuevos talleres y cursos especializados en robótica
+                                <a href="/blogs-details" class="about-details wrapper-details">Logistics of
+                                    container cargo into
+                                    ship and cargo plane
                                 </a>
                                 <div class="divider"></div>
 
@@ -629,7 +631,7 @@
                     <div class="col-lg-4 col-sm-6">
                         <div class="blogs-wrapper product-wrapper" data-aos="fade-up" data-aos-duration="600">
                             <div class="wrapper-img">
-                                <img src="assets/images/homepage-one/about/cut.jpeg" alt="">
+                                <img src="assets/images/homepage-one/about/about-img-4.webp" alt="">
                             </div>
                             <div class="wrapper-info">
                                 <div class="wrapper-data">
@@ -666,8 +668,8 @@
                                         </span>
                                     </div>
                                 </div>
-                                <a href="/blogs-details" class="about-details wrapper-details">
-                                    Nuevos servicios de prototipado rápido con corte láser
+                                <a href="/blogs-details" class="about-details wrapper-details">15 Best WordPress
+                                    Newspaper Themes to Look Out 
                                 </a>
                                 <div class="divider"></div>
 
