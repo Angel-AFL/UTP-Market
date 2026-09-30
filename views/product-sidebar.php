@@ -262,7 +262,7 @@
                                             </span>
                                         </div>
                                         <div class="product-description">
-                                            <a href="/product-info" class="product-details">Floppa
+                                            <a href="/product-info" class="product-details">figura 3D Gato Floppa
                                             </a>
                                             <div class="price">
                                                 <span class="price-cut">$31.99</span>
@@ -371,7 +371,7 @@
                                             </span>
                                         </div>
                                         <div class="product-description">
-                                            <a href="/product-info" class="product-details">Dummy 13
+                                            <a href="/product-info" class="product-details">Figura 3D articulada Dummy 13
                                             </a>
                                             <div class="price">
                                                 <span class="price-cut">$50.99</span>
@@ -480,7 +480,7 @@
                                             </span>
                                         </div>
                                         <div class="product-description">
-                                            <a href="/product-info" class="product-details">Anillo Green Lanter
+                                            <a href="/product-info" class="product-details">Anillo 3D Green Lanter
                                             </a>
                                             <div class="price">
                                                 <span class="price-cut">$25.99</span>
