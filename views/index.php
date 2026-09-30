@@ -66,11 +66,11 @@
                                 <h4 class="wrapper-details">MDF,impresion 3D y
                                     <span class="wrapper-inner-title"></span> Sublimacion.
 
-                                <span class="wrapper-subtitle">ALTA PRECISIÓN</span>
-                                <h4 class="wrapper-details">Diseños Únicos en
-                                    <span class="wrapper-inner-title">Corte Láser</span> & 3D.
+                                <span class="wrapper-subtitle"></span>
+                                <h4 class="wrapper-details">
+                                    <span class="wrapper-inner-title"></span>
                                 </h4>
-                                <a href="/product-sidebar" class="shop-btn">Cotizar Ahora
+                                <a href="/product-sidebar" class="shop-btn">Ver mas
                                     <span>
                                         <svg width="8" height="14" viewBox="0 0 8 14" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -166,7 +166,7 @@
     <!--------------- category-section-end--------------->
 
     <!--------------- brand-section--------------->
-    <section class="product brand" data-aos="fade-up">
+    <!--<section class="product brand" data-aos="fade-up">
         <div class="container">
             <div class="section-title">
                 <h5>Tecnologías y Aliados</h5>
@@ -217,7 +217,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>-->
     <!--------------- brand-section-end--------------->
 
     <!--------------- arrival-section--------------->
@@ -316,7 +316,7 @@
     <!--------------- arrival-section-end--------------->
 
     <!--------------- style-section --------------->
-    <section class="product fashion-style">
+    <!--<section class="product fashion-style">
         <div class="container">
             <div class="style-section">
                 <div class="row gy-4 gx-5 gy-lg-0">
@@ -368,11 +368,12 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>-->
+    
     <!--------------- style-section-end --------------->
 
     <!--------------- category-section--------------->
-    <section class="product-category">
+    <!--<section class="product-category">
         <div class="container">
             <div class="section-title">
                 <h5>Our Categories</h5>
@@ -477,7 +478,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>-->
     <!--------------- category-section-end--------------->
 
     <!--------------- brand-section--------------->
@@ -526,7 +527,7 @@
     <!--------------- brand-section-end--------------->
 
     <!--------------- arrival-section--------------->
-    <section class="product arrival">
+    <!--<section class="product arrival">
         <div class="container">
             <div class="section-title">
                 <h5>NEW ARRIVALS</h5>
@@ -1409,11 +1410,11 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>-->
     <!--------------- arrival-section-end--------------->
 
     <!--------------- flash-section--------------->
-    <section class="product flash-sale">
+    <!--<section class="product flash-sale">
         <div class="container">
             <div class="section-title">
                 <h5>Flash Sale</h5>
@@ -1878,11 +1879,11 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>-->
     <!--------------- flash-section-end--------------->
 
     <!--------------- top-sell-section--------------->
-    <section class="product top-selling">
+    <!--<section class="product top-selling">
         <div class="container">
             <div class="section-title">
                 <h5>Top Selling Prodcuts</h5>
@@ -2547,11 +2548,11 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>-->
     <!--------------- top-sell-section-end--------------->
 
     <!--------------- best-sell-section--------------->
-    <section class="product best-seller">
+   <!-- <section class="product best-seller">
         <div class="container">
             <div class="best-selling-section">
                 <div class="section-title">
@@ -2664,11 +2665,11 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>-->
     <!--------------- best-sell-section-end--------------->
 
     <!--------------- weekly-section--------------->
-    <section class="product weekly-sale">
+    <!--<section class="product weekly-sale">
         <div class="container">
             <div class="section-title">
                 <h5>Best Sell in this Week</h5>
@@ -3164,11 +3165,11 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>-->
     <!--------------- weekly-section-end--------------->
 
     <!--------------- flash-section--------------->
-    <section class="product best-product">
+    <!--<section class="product best-product">
         <div class="container">
             <div class="section-title">
                 <h5>Flash Sale</h5>
@@ -3659,5 +3660,5 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>-->
     <!--------------- flash-section-end--------------->
