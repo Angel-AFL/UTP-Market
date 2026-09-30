@@ -7,11 +7,11 @@
                         <div class="col-lg-6">
                             <div class="wrapper-section" data-aos="fade-up">
                                 <div class="wrapper-info">
-                                    <h5 class="wrapper-subtitle">UP TO <span class="wrapper-inner-title">70%</span> OFF
+                                    <h5 class="wrapper-subtitle">TECNOLOGÍA E <span class="wrapper-inner-title">INNOVACIÓN</span>
                                     </h5>
-                                    <h1 class="wrapper-details">Fashion Collection
-                                        Summer Sale</h1>
-                                    <a href="/product-sidebar" class="shop-btn">Shop Now</a>
+                                    <h1 class="wrapper-details">Corte Láser &
+                                        Impresión 3D</h1>
+                                    <a href="/product-sidebar" class="shop-btn">Explorar Servicios</a>
                                 </div>
                             </div>
                         </div>
@@ -22,11 +22,11 @@
                         <div class="col-lg-6">
                             <div class="wrapper-section">
                                 <div class="wrapper-info">
-                                    <h5 class="wrapper-subtitle">UP TO <span class="wrapper-inner-title">70%</span> OFF
+                                    <h5 class="wrapper-subtitle">CREATIVIDAD <span class="wrapper-inner-title">SIN LÍMITES</span>
                                     </h5>
-                                    <h1 class="wrapper-details">Fashion Collection
-                                        Summer Sale</h1>
-                                    <a href="#" class="shop-btn">Shop Now</a>
+                                    <h1 class="wrapper-details">Proyectos de Robótica
+                                        y Automatización</h1>
+                                    <a href="#" class="shop-btn">Saber Más</a>
                                 </div>
                             </div>
                         </div>
@@ -37,11 +37,11 @@
                         <div class="col-lg-6">
                             <div class="wrapper-section">
                                 <div class="wrapper-info">
-                                    <h5 class="wrapper-subtitle">UP TO <span class="wrapper-inner-title">70%</span> OFF
+                                    <h5 class="wrapper-subtitle">PERSONALIZACIÓN <span class="wrapper-inner-title">& ARTE</span>
                                     </h5>
-                                    <h1 class="wrapper-details">Fashion Collection
-                                        Summer Sale</h1>
-                                    <a href="#" class="shop-btn">Shop Now</a>
+                                    <h1 class="wrapper-details">Sublimación y
+                                        Fotografía Profesional</h1>
+                                    <a href="#" class="shop-btn">Ver Catálogo</a>
                                 </div>
                             </div>
                         </div>
@@ -61,9 +61,272 @@
                     <div class="col-lg-6">
                         <div class="product-wrapper wrapper-one" data-aos="fade-right">
                             <div class="wrapper-info">
+
                                 <span class="wrapper-subtitle">Diseños Personalizados</span>
                                 <h4 class="wrapper-details">MDF,impresion 3D y
                                     <span class="wrapper-inner-title"></span> Sublimacion.
+
+                                <span class="wrapper-subtitle">ALTA PRECISIÓN</span>
+                                <h4 class="wrapper-details">Diseños Únicos en
+                                    <span class="wrapper-inner-title">Corte Láser</span> & 3D.
+                                </h4>
+                                <a href="/product-sidebar" class="shop-btn">Cotizar Ahora
+                                    <span>
+                                        <svg width="8" height="14" viewBox="0 0 8 14" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <rect x="1.45312" y="0.914062" width="9.25346" height="2.05632"
+                                                transform="rotate(45 1.45312 0.914062)" />
+                                            <rect x="8" y="7.45703" width="9.25346" height="2.05632"
+                                                transform="rotate(135 8 7.45703)" />
+                                        </svg>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="product-wrapper wrapper-two" data-aos="fade-up">
+                            <div class="wrapper-info">
+                                <span class="wrapper-subtitle">SOLUCIONES TECNOLÓGICAS</span>
+                                <h4 class="wrapper-details">
+                                    Impulsa tus Ideas
+                                    <span class="wrapper-inner-title">con Robótica</span> & Sublimación
+                                </h4>
+                                <a href="/product-sidebar" class="shop-btn">Ver Más
+                                    <span>
+                                        <svg width="8" height="14" viewBox="0 0 8 14" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <rect x="1.45312" y="0.914062" width="9.25346" height="2.05632"
+                                                transform="rotate(45 1.45312 0.914062)" />
+                                            <rect x="8" y="7.45703" width="9.25346" height="2.05632"
+                                                transform="rotate(135 8 7.45703)" />
+                                        </svg>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--------------- style-section-end --------------->
+
+    <!--------------- category-section--------------->
+    <section class="product-category">
+        <div class="container">
+            <div class="section-title">
+                <h5>Nuestras Categorías y Servicios</h5>
+                <a href="/product-sidebar" class="view">Ver Todo</a>
+            </div>
+            <div class="category-section">
+                <div class="product-wrapper" data-aos="fade-right" data-aos-duration="100">
+                    <div class="wrapper-img">
+                        <img src="assets/images/homepage-one/category-img/dresses.webp" alt="Corte Láser">
+                    </div>
+                    <div class="wrapper-info">
+                        <a href="/product-sidebar" class="wrapper-details">Corte Láser</a>
+                    </div>
+                </div>
+                <div class="product-wrapper" data-aos="fade-right" data-aos-duration="200">
+                    <div class="wrapper-img">
+                        <img src="assets/images/homepage-one/category-img/bags.webp" alt="Impresión 3D">
+                    </div>
+                    <div class="wrapper-info">
+                        <a href="/product-sidebar" class="wrapper-details">Impresión 3D</a>
+                    </div>
+                </div>
+                <div class="product-wrapper" data-aos="fade-right" data-aos-duration="300">
+                    <div class="wrapper-img">
+                        <img src="assets/images/homepage-one/category-img/sweaters.webp" alt="Fotografía">
+                    </div>
+                    <div class="wrapper-info">
+                        <a href="/product-sidebar" class="wrapper-details">Fotografía</a>
+                    </div>
+                </div>
+                <div class="product-wrapper" data-aos="fade-right" data-aos-duration="400">
+                    <div class="wrapper-img">
+                        <img src="assets/images/homepage-one/category-img/shoes.webp" alt="Robótica">
+                    </div>
+                    <div class="wrapper-info">
+                        <a href="/product-sidebar" class="wrapper-details">Robótica</a>
+                    </div>
+                </div>
+                <div class="product-wrapper" data-aos="fade-right" data-aos-duration="500">
+                    <div class="wrapper-img">
+                        <img src="assets/images/homepage-one/category-img/gift.webp" alt="Sublimación">
+                    </div>
+                    <div class="wrapper-info">
+                        <a href="/product-sidebar" class="wrapper-details">Sublimación</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--------------- category-section-end--------------->
+
+    <!--------------- brand-section--------------->
+    <section class="product brand" data-aos="fade-up">
+        <div class="container">
+            <div class="section-title">
+                <h5>Tecnologías y Aliados</h5>
+                <a href="/product-sidebar" class="view">Ver Todo</a>
+            </div>
+            <div class="brand-section">
+                <div class="product-wrapper">
+                    <div class="wrapper-img">
+                        <a href="/product-sidebar">
+                            <img src="assets/images/homepage-one/brand-img-1.webp" alt="img">
+                        </a>
+                    </div>
+                </div>
+                <div class="product-wrapper">
+                    <div class="wrapper-img">
+                        <a href="/product-sidebar">
+                            <img src="assets/images/homepage-one/brand-img-2.webp" alt="img">
+                        </a>
+                    </div>
+                </div>
+                <div class="product-wrapper">
+                    <div class="wrapper-img">
+                        <a href="/product-sidebar">
+                            <img src="assets/images/homepage-one/brand-img-3.webp" alt="img">
+                        </a>
+                    </div>
+                </div>
+                <div class="product-wrapper">
+                    <div class="wrapper-img">
+                        <a href="/product-sidebar">
+                            <img src="assets/images/homepage-one/brand-img-4.webp" alt="img">
+                        </a>
+                    </div>
+                </div>
+                <div class="product-wrapper">
+                    <div class="wrapper-img">
+                        <a href="/product-sidebar">
+                            <img src="assets/images/homepage-one/brand-img-5.webp" alt="img">
+                        </a>
+                    </div>
+                </div>
+                <div class="product-wrapper">
+                    <div class="wrapper-img">
+                        <a href="/product-sidebar">
+                            <img src="assets/images/homepage-one/brand-img-6.webp" alt="img">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--------------- brand-section-end--------------->
+
+    <!--------------- arrival-section--------------->
+    <section class="product arrival">
+        <div class="container">
+            <div class="section-title">
+                <h5>NUEVOS PRODUCTOS Y PROYECTOS</h5>
+                <a href="/product-sidebar" class="view">Ver Todo</a>
+            </div>
+            <div class="arrival-section">
+                <div class="row g-5">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="product-wrapper" data-aos="fade-up">
+                            <div class="product-img">
+                                <img src="assets/images/homepage-one/product-img/product-img-1.webp" alt="product-img">
+                                <!-- Botones de acción flotantes (se mantienen los SVG originales) -->
+                                <div class="product-cart-items">
+                                    <a href="#" class="cart cart-item"><span>...</span></a>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-description">
+                                    <a href="/product-info" class="product-details">Prototipo 3D Personalizado</a>
+                                    <div class="price">
+                                        <span class="price-cut">$25.99</span>
+                                        <span class="new-price">$18.99</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-cart-btn">
+                                <a href="/cart" class="product-btn">Añadir al Carrito</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="product-wrapper" data-aos="fade-up">
+                            <div class="product-img">
+                                <img src="assets/images/homepage-one/product-img/product-img-2.webp" alt="product-img">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-description">
+                                    <a href="/product-info" class="product-details">Kit de Robótica Educativa</a>
+                                    <div class="price">
+                                        <span class="price-cut">$45.99</span>
+                                        <span class="new-price">$35.99</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-cart-btn">
+                                <a href="/cart" class="product-btn">Añadir al Carrito</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="product-wrapper" data-aos="fade-up">
+                            <div class="product-img">
+                                <img src="assets/images/homepage-one/product-img/product-img-3.webp" alt="product-img">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-description">
+                                    <a href="/product-info" class="product-details">Taza Sublimada Personalizada</a>
+                                    <div class="price">
+                                        <span class="price-cut">$9.99</span>
+                                        <span class="new-price">$6.99</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-cart-btn">
+                                <a href="/cart" class="product-btn">Añadir al Carrito</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="product-wrapper" data-aos="fade-up">
+                            <div class="product-img">
+                                <img src="assets/images/homepage-one/product-img/product-img-4.webp" alt="product-img">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-description">
+                                    <a href="/product-info" class="product-details">Cuadro Decorativo Corte Láser</a>
+                                    <div class="price">
+                                        <span class="price-cut">$20.99</span>
+                                        <span class="new-price">$14.99</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-cart-btn">
+                                <a href="/cart" class="product-btn">Añadir al Carrito</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--------------- arrival-section-end--------------->
+
+    <!--------------- style-section --------------->
+    <section class="product fashion-style">
+        <div class="container">
+            <div class="style-section">
+                <div class="row gy-4 gx-5 gy-lg-0">
+                    <div class="col-lg-6">
+                        <div class="product-wrapper wrapper-one" data-aos="fade-right">
+                            <div class="wrapper-info">
+                                <span class="wrapper-subtitle">NEW STYLE</span>
+                                <h4 class="wrapper-details">Get 65% Offer
+                                    <span class="wrapper-inner-title">& Make New</span> Fusion.
+
                                 </h4>
                                 <a href="/product-sidebar" class="shop-btn">Ver mas
                                     <span>
@@ -221,96 +484,44 @@
     <section class="product brand" data-aos="fade-up">
         <div class="container">
             <div class="section-title">
-                <h5>Brand of Prodcuts</h5>
-                <a href="/product-sidebar" class="view">View All</a>
+                <h5>Empresas</h5>
+                <a href="/product-sidebar" class="view">Ver Todo</a>
             </div>
             <div class="brand-section">
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/brand-img-1.webp" alt="img">
+                            <img src="assets/images/homepage-one/dopeprints.jpg" alt="img">
                         </a>
                     </div>
                 </div>
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/brand-img-2.webp" alt="img">
+                            <img src="assets/images/homepage-one/inovabot.jpg" alt="img">
                         </a>
                     </div>
                 </div>
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/brand-img-3.webp" alt="img">
+                            <img src="assets/images/homepage-one/novacut.jpg" alt="img">
                         </a>
                     </div>
                 </div>
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/brand-img-4.webp" alt="img">
+                            <img src="assets/images/homepage-one/creatics.jpg" alt="img">
                         </a>
                     </div>
                 </div>
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/brand-img-5.webp" alt="img">
+                            <img src="assets/images/homepage-one/aerial.jpg" alt="img">
                         </a>
                     </div>
-                </div>
-                <div class="product-wrapper">
-                    <div class="wrapper-img">
-                        <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/brand-img-6.webp" alt="img">
-                        </a>
-                    </div>
-                </div>
-                <div class="product-wrapper">
-                    <div class="wrapper-img">
-                        <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/brand-img-7.webp" alt="img">
-                        </a>
-                    </div>
-                </div>
-                <div class="product-wrapper">
-                    <div class="wrapper-img">
-                        <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/brand-img-8.webp" alt="img">
-                        </a>
-                    </div>
-                </div>
-                <div class="product-wrapper">
-                    <div class="wrapper-img">
-                        <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/brand-img-9.webp" alt="img">
-                        </a>
-                    </div>
-                </div>
-                <div class="product-wrapper">
-                    <div class="wrapper-img">
-                        <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/brand-img-10.webp" alt="img">
-                        </a>
-                    </div>
-                </div>
-                <div class="product-wrapper">
-                    <div class="wrapper-img">
-                        <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/brand-img-11.webp" alt="img">
-                        </a>
-                    </div>
-                </div>
-                <div class="product-wrapper">
-                    <div class="wrapper-img">
-                        <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/brand-img-12.webp" alt="img">
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
     <!--------------- brand-section-end--------------->
 
