@@ -1298,10 +1298,10 @@
                     <div class="row g-5">
                         <div class="col-lg-6">
                             <div class="section-content" style="background: url(assets/images/homepage-three/discount-img-1.webp) no-repeat center / cover;">
-                                <p class="subtitle">New Style</p>
-                                <h3 class="wrapper-title">Get <span class="inner-text">65% Offer</span> <br> & Make New <br> Fusion.</h3>
+                                <p class="subtitle">Creaciones Personalizadas</p>
+                                <h3 class="wrapper-title">MDF,<span class="inner-text">impresión</span> <br>3D <br> sublimacion.</h3>
                                 <a href="#" class="shop-btn">
-                                    Shop Now
+                                    Ver mas
                                     <span>
                                         <svg width="25" height="12" viewBox="0 0 25 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path
