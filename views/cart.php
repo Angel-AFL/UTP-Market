@@ -2,12 +2,12 @@
     <section class="blog about-blog">
         <div class="container">
             <div class="blog-bradcrum">
-                <span><a href="/">Home</a></span>
+                <span><a href="/">Inicio</a></span>
                 <span class="devider">/</span>
-                <span><a href="#">Cart</a></span>
+                <span><a href="#">Carrito</a></span>
             </div>
             <div class="blog-heading about-heading">
-                <h1 class="heading">Cart</h1>
+                <h1 class="heading">Carrito</h1>
             </div>
         </div>
     </section>
@@ -21,26 +21,26 @@
                     <tbody>
                         <tr class="table-row table-top-row">
                             <td class="table-wrapper wrapper-product">
-                                <h5 class="table-heading">PRODUCT</h5>
+                                <h5 class="table-heading">Producto</h5>
                             </td>
                             <td class="table-wrapper">
                                 <div class="table-wrapper-center">
-                                    <h5 class="table-heading">PRICE</h5>
+                                    <h5 class="table-heading">Precio</h5>
                                 </div>
                             </td>
                             <td class="table-wrapper">
                                 <div class="table-wrapper-center">
-                                    <h5 class="table-heading">QUANTITY</h5>
+                                    <h5 class="table-heading">Cantidad</h5>
                                 </div>
                             </td>
                             <td class="table-wrapper wrapper-total">
                                 <div class="table-wrapper-center">
-                                    <h5 class="table-heading">TOTAL</h5>
+                                    <h5 class="table-heading">Total</h5>
                                 </div>
                             </td>
                             <td class="table-wrapper">
                                 <div class="table-wrapper-center">
-                                    <h5 class="table-heading">ACTION</h5>
+                                    <h5 class="table-heading">Acción</h5>
                                 </div>
                             </td>
                         </tr>
@@ -52,7 +52,7 @@
                                             alt="img">
                                     </div>
                                     <div class="wrapper-content">
-                                        <h5 class="heading">Classic Oxford Shirt</h5>
+                                        <h5 class="heading">Playera Clasica Oxford </h5>
                                     </div>
                                 </div>
                             </td>
@@ -100,7 +100,7 @@
                                             alt="img">
                                     </div>
                                     <div class="wrapper-content">
-                                        <h5 class="heading"> black Shirt</h5>
+                                        <h5 class="heading">Playera Negra</h5>
                                     </div>
                                 </div>
                             </td>
@@ -148,7 +148,7 @@
                                             alt="img">
                                     </div>
                                     <div class="wrapper-content">
-                                        <h5 class="heading">Blue Party Shirt</h5>
+                                        <h5 class="heading">Playera de Fiesta Azul</h5>
                                     </div>
                                 </div>
                             </td>
@@ -196,7 +196,7 @@
                                             alt="img">
                                     </div>
                                     <div class="wrapper-content">
-                                        <h5 class="heading">Red Party Dress</h5>
+                                        <h5 class="heading">Vestido de Fiesta Rojo</h5>
                                     </div>
                                 </div>
                             </td>
@@ -240,9 +240,9 @@
                 </table>
             </div>
             <div class="wishlist-btn cart-btn">
-                <a href="/empty-cart" class="clean-btn">Clear Cart</a>
-                <a href="#" class="shop-btn update-btn">Update Cart</a>
-                <a href="/checkout" class="shop-btn">Proceed to Checkout</a>
+                <a href="/empty-cart" class="clean-btn">Vaciar Carrito</a>
+                <a href="#" class="shop-btn update-btn">Actualizar Carrito</a>
+                <a href="/checkout" class="shop-btn">Proceder al Pago</a>
             </div>
         </div>
     </section>

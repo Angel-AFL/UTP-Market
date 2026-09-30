@@ -29,9 +29,6 @@
 
     <!--------------- additional-css ---------------->
     <link rel="stylesheet" href="<?= asset('assets/css/style.css') ?>">
-    
-    <!-- Chatbot CSS -->
-    <link rel="stylesheet" href="<?= asset('assets/css/chatbot.css') ?>">
 
 </head>
 
@@ -79,7 +76,7 @@
                                             <input type="text" placeholder="Search Products.........">
                                             <div class="divider"></div>
                                             <button type="button">Todas las Categorias</button>
-                                            <a href="#" class="shop-btn">Search</a>
+                                            <a href="#" class="shop-btn">Buscar</a>
                                         </div>
                                     </div>
                                 </div>
@@ -102,7 +99,7 @@
                                         <path
                                             d="M15.8191 16.2178C16.2209 16.2178 16.5865 16.2178 16.9502 16.2178C17.094 18.1466 15.8186 20.4108 13.7543 21.4035C12.4109 22.0494 11.0178 22.1834 9.58161 21.7617C8.16971 21.3469 7.07978 20.4912 6.20169 19.1686C6.20169 19.8418 6.20169 20.3895 6.20169 20.9639C5.79687 20.9639 5.43125 20.9639 4.99518 20.9639C4.99518 20.8201 4.99518 20.6703 4.99518 20.5199C4.99518 19.6612 4.99121 18.8029 4.99716 17.9442C5.00014 17.4838 5.19907 17.2169 5.59943 17.21C6.64173 17.1916 7.68403 17.204 8.75957 17.204C8.75957 17.6064 8.75957 17.9809 8.75957 18.3892C8.25008 18.3892 7.75348 18.3892 7.24895 18.3892C7.56794 19.6428 9.57466 20.8404 11.2852 20.8007C12.526 20.772 13.597 20.3111 14.4736 19.4285C15.3492 18.547 15.758 17.457 15.8191 16.2178Z"
                                             fill="white" />
-                                        <circle cx="25.9322" cy="8" r="8" fill="#AE1C9A" />
+                                        <circle cx="25.9322" cy="8" r="8" fill="#1CAE71" />
                                         <path
                                             d="M26.012 13.1392C25.3292 13.1392 24.7194 13.0215 24.1825 12.7862C23.6488 12.5509 23.2263 12.2244 22.9147 11.8068C22.6065 11.3859 22.4407 10.8987 22.4175 10.3452H23.9786C23.9985 10.6468 24.0996 10.9086 24.2819 11.1307C24.4675 11.3494 24.7094 11.5185 25.0077 11.6378C25.306 11.7571 25.6375 11.8168 26.0021 11.8168C26.4031 11.8168 26.7577 11.7472 27.066 11.608C27.3775 11.4687 27.6211 11.2749 27.7968 11.0263C27.9725 10.7744 28.0603 10.4844 28.0603 10.1562C28.0603 9.81487 27.9725 9.51491 27.7968 9.25639C27.6245 8.99455 27.3709 8.78906 27.0361 8.63991C26.7047 8.49077 26.3037 8.41619 25.833 8.41619H24.9729V7.16335H25.833C26.2109 7.16335 26.5423 7.09541 26.8273 6.95952C27.1157 6.82363 27.3411 6.63471 27.5035 6.39276C27.6659 6.14749 27.7471 5.8608 27.7471 5.53267C27.7471 5.2178 27.6758 4.94437 27.5333 4.71236C27.3941 4.47704 27.1952 4.29309 26.9367 4.16051C26.6815 4.02794 26.3799 3.96165 26.0319 3.96165C25.7004 3.96165 25.3906 4.02296 25.1022 4.1456C24.8172 4.26491 24.5852 4.43726 24.4062 4.66264C24.2272 4.88471 24.1311 5.15151 24.1178 5.46307H22.6313C22.6479 4.91288 22.8103 4.42898 23.1185 4.01136C23.4301 3.59375 23.8411 3.26728 24.3515 3.03196C24.8619 2.79664 25.4287 2.67898 26.0518 2.67898C26.7047 2.67898 27.2682 2.80658 27.7421 3.06179C28.2194 3.31368 28.5873 3.65009 28.8458 4.07102C29.1076 4.49195 29.2369 4.95265 29.2336 5.45312C29.2369 6.0232 29.0778 6.5071 28.7563 6.90483C28.4381 7.30256 28.0139 7.56937 27.4836 7.70526V7.7848C28.1597 7.88755 28.6834 8.15601 29.0546 8.5902C29.4291 9.02438 29.6147 9.56297 29.6114 10.206C29.6147 10.7661 29.459 11.2682 29.1441 11.7124C28.8326 12.1565 28.4067 12.5062 27.8664 12.7614C27.3262 13.0133 26.708 13.1392 26.012 13.1392Z"
                                             fill="#F9FFFB" />
@@ -990,7 +987,7 @@
                             </div>
                             <div class="service-content">
                                 <h5 class="service-info service-title">Free Shipping</h5>
-                                <p class="service-info service-details">When ordering over $100</p>
+                                <p class="service-info service-details">Ordena más de $100</p>
                             </div>
                         </div>
                     </div>
@@ -1009,8 +1006,8 @@
                                 </span>
                             </div>
                             <div class="service-content">
-                                <h5 class="service-info service-title">Free Return</h5>
-                                <p class="service-info service-details">Get Return within 30 days</p>
+                                <h5 class="service-info service-title">Devolución Gratis</h5>
+                                <p class="service-info service-details">Obtén devolución dentro de 30 días</p>
                             </div>
                         </div>
                     </div>
@@ -1034,8 +1031,8 @@
                                 </span>
                             </div>
                             <div class="service-content">
-                                <h5 class="service-info service-title">Secure Payment</h5>
-                                <p class="service-info service-details">100% Secure Online Payment</p>
+                                <h5 class="service-info service-title">Pago Seguro</h5>
+                                <p class="service-info service-details">100% Pago Online Seguro</p>
                             </div>
                         </div>
                     </div>
@@ -1060,8 +1057,8 @@
                                 </span>
                             </div>
                             <div class="service-content">
-                                <h5 class="service-info service-title">Best Quality</h5>
-                                <p class="service-info service-details">Original Product Guarenteed</p>
+                                <h5 class="service-info service-title">Mejor Calidad</h5>
+                                <p class="service-info service-details">Producto Original Garantizado</p>
                             </div>
                         </div>
                     </div>
@@ -1076,9 +1073,9 @@
                             </div>
                             <div class="footer-link order-link">
                                 <ul>
-                                    <li><a href="/order">Track Order</a></li>
-                                    <li><a href="/cart">Delivery & Returns</a></li>
-                                    <li><a href="/about">Warranty</a></li>
+                                    <li><a href="/order">Rastrear Pedido</a></li>
+                                    <li><a href="/cart">Entrega y Devoluciones</a></li>
+                                    <li><a href="/about">Garantía</a></li>
                                 </ul>
                             </div>
 
@@ -1087,14 +1084,14 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="about-us">
                             <h4 class="footer-heading footer-title">
-                                About Us
+                                Acerca de Nosotros
                             </h4>
                             <div class="footer-link about-link">
                                 <ul>
-                                    <li><a href="/about">Rave’s Story</a></li>
-                                    <li><a href="/about">Work With Us</a></li>
-                                    <li><a href="/about">Coporate News</a></li>
-                                    <li><a href="/about">Investors</a></li>
+                                    <li><a href="/about">La Historia de Rave</a></li>
+                                    <li><a href="/about">Trabaja con Nosotros</a></li>
+                                    <li><a href="/about">Noticias Corporativas</a></li>
+                                    <li><a href="/about">Inversores</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -1102,14 +1099,14 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="links">
                             <h4 class="footer-heading footer-title">
-                                Useful Links
+                                Links Útiles
                             </h4>
                             <div class="footer-link useful-link">
                                 <ul>
-                                    <li><a href="/about">Secure Payment</a></li>
-                                    <li><a href="/privacy">Privacy Policy</a></li>
-                                    <li><a href="/terms">Terms of Use</a></li>
-                                    <li><a href="/product-sidebar">Archived Products</a></li>
+                                    <li><a href="/about">Pago Seguro</a></li>
+                                    <li><a href="/privacy">Política de Privacidad</a></li>
+                                    <li><a href="/terms">Términos de Uso</a></li>
+                                    <li><a href="/product-sidebar">Productos Archivados</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -1117,7 +1114,7 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="contact-info">
                             <h4 class="footer-heading footer-title">
-                                Contact Info
+                                Información de Contacto
                             </h4>
                             <div class="footer-link contact-link">
                                 <div class="address">
@@ -1144,7 +1141,7 @@
                                         </span>
                                     </div>
                                     <div class="details">
-                                        <h4 class="footer-heading">Address:</h4>
+                                        <h4 class="footer-heading">Dirección:</h4>
                                         <p>4517 Washington Ave. Manchester, Kentucky 39495</p>
                                     </div>
                                 </div>
@@ -1169,7 +1166,7 @@
                                         </span>
                                     </div>
                                     <div class="details">
-                                        <h4 class="footer-heading">Phone:</h4>
+                                        <h4 class="footer-heading">Teléfono:</h4>
                                         <p>+880171889547</p>
                                     </div>
                                 </div>
@@ -1200,44 +1197,6 @@
 
     <!--------------- additional-js ---------------->
     <script src="<?= asset('assets/js/shopus.js') ?>"></script>
-
-    <!-- Chatbot HTML -->
-    <div class="chatbot-widget">
-        <div id="chatbot-toggle" class="chatbot-toggle">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
-            </svg>
-        </div>
-        
-        <div id="chatbot-window" class="chatbot-window">
-            <div class="chatbot-header">
-                <span>Asistente Virtual</span>
-                <span id="chatbot-close" class="chatbot-close">&times;</span>
-            </div>
-            
-            <div id="chatbot-messages" class="chatbot-messages">
-                <div class="chat-message bot">
-                    Hola! Soy tu asistente virtual. ¿En qué puedo ayudarte hoy?
-                </div>
-                
-                <div id="typing-indicator" class="typing-indicator">
-                    <span></span><span></span><span></span>
-                </div>
-            </div>
-            
-            <div class="chatbot-input-container">
-                <input type="text" id="chatbot-input" class="chatbot-input" placeholder="Escribe un mensaje..." autocomplete="off">
-                <button id="chatbot-send" class="chatbot-send">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Chatbot JS -->
-    <script src="<?= asset('assets/js/chatbot.js') ?>"></script>
 
 </body>
 
