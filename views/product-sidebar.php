@@ -5,65 +5,19 @@
                 <div class="col-lg-3">
                     <div class="sidebar" data-aos="fade-right">
                         <div class="sidebar-section">
-                            <div class="sidebar-wrapper">
-                                <h5 class="wrapper-heading">Categorías</h5>
-                                <div class="sidebar-item">
-                                    <ul class="sidebar-list">
-                                        <li>
-                                            <input type="checkbox" id="impresion-3d" name="impresion-3d">
-                                            <label for="impresion-3d">Impresión 3D</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="cortadora-laser" name="cortadora-laser">
-                                            <label for="cortadora-laser">Cortadora Láser</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="playeras" name="playeras">
-                                            <label for="playeras">Playeras Personalizadas</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="fotografias" name="fotografias">
-                                            <label for="fotografias">Fotografías</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="cursos" name="cursos">
-                                            <label for="cursos">Cursos y Talleres</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="prototipado" name="prototipado">
-                                            <label for="prototipado">Prototipado Rápido</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="figuras" name="figuras">
-                                            <label for="figuras">Figuras y Coleccionables</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="grabado-madera" name="grabado-madera">
-                                            <label for="grabado-madera">Grabado en Madera</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="corte-acrilico" name="corte-acrilico">
-                                            <label for="corte-acrilico">Corte en Acrílico</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="dtf" name="dtf">
-                                            <label for="dtf">Estampado DTF</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="sublimacion" name="sublimacion">
-                                            <label for="sublimacion">Sublimación</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="foto-producto" name="foto-producto">
-                                            <label for="foto-producto">Fotografía de Producto</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="modelado-3d" name="modelado-3d">
-                                            <label for="modelado-3d">Modelado 3D</label>
-                                        </li>
-                                    </ul>
+<div class="sidebar-wrapper">
+                                    <h5 class="wrapper-heading">Categorías</h5>
+                                    <div class="sidebar-item">
+                                        <ul class="sidebar-list">
+                                            <?php foreach (categorias() as $catSlug => $catNombre): ?>
+                                            <li>
+                                                <input type="checkbox" id="<?= $catSlug ?>" name="<?= $catSlug ?>">
+                                                <label for="<?= $catSlug ?>"><?= $catNombre ?></label>
+                                            </li>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
                             <hr>
                             <div class="sidebar-wrapper sidebar-range">
                                 <h5 class="wrapper-heading">Price Range</h5>
@@ -211,7 +165,9 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 col-sm-6">
-                                <div class="product-wrapper" data-aos="fade-up">
+                                <div class="product-wrapper" data-aos="fade-up"
+                                    data-servicio="impresion-3d"
+                                    data-keywords="figura coleccionable estatuilla impresion 3d filamentos resinas">
                                     <div class="product-img">
                                         <img src="assets/images/homepage-one/product-img/product-img-2.jpeg"
                                             alt="product-img">
@@ -1530,4 +1486,58 @@
             </div>
         </div>
     </section>
+
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Quita acentos y mayúsculas para comparar
+    const norm = s => (s || '').toString().toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+
+    const section   = document.querySelector('.product-sidebar-section');
+    const resultTxt = document.querySelector('.product-sorting-section .result p span');
+    const dealBox   = document.querySelector('.product-deal-section')?.closest('[class*="col-"]');
+
+    // Cada producto: su columna, su nombre y palabras clave opcionales (data-keywords)
+    const items = [...section.querySelectorAll('.product-wrapper')].map(w => ({
+        col: w.closest('[class*="col-"]'),
+        text: norm(w.querySelector('.product-details')?.textContent) + ' ' + norm(w.dataset.keywords)
+    }));
+
+    // Mensaje de "sin resultados"
+    const empty = document.createElement('div');
+    empty.className = 'col-lg-12';
+    empty.style.display = 'none';
+    empty.innerHTML = '<p class="text-center py-5">No se encontraron servicios con ese término.</p>';
+    section.querySelector('.row').appendChild(empty);
+
+    function filtrar(query) {
+        const words = norm(query).split(/\s+/).filter(Boolean);
+        let visibles = 0;
+
+        items.forEach(it => {
+            const ok = words.every(w => it.text.includes(w));
+            it.col.style.display = ok ? '' : 'none';
+            if (ok) visibles++;
+        });
+
+        if (resultTxt) {
+            resultTxt.textContent = words.length
+                ? `${visibles} resultado(s) para "${query}"`
+                : `1–${items.length} of ${items.length} results`;
+        }
+        empty.style.display = (words.length && visibles === 0) ? '' : 'none';
+        if (dealBox) dealBox.style.display = words.length ? 'none' : '';
+    }
+
+    // Búsqueda que viene del header (?q=...)
+    const q = new URLSearchParams(location.search).get('q') || '';
+    const input = document.getElementById('search-input');
+    if (input) {
+        input.value = q;
+        // Filtra en vivo si ya estás en esta página
+        input.addEventListener('input', () => filtrar(input.value));
+    }
+    if (q) filtrar(q);
+});
+</script>
     <!--------------- products-sidebar-section-end--------------->

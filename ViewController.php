@@ -35,6 +35,102 @@ class ViewController
     }
 
     /**
+     * Catálogo central de servicios de UTP Market.
+     * Única fuente de verdad: el buscador, el menú y el sidebar se alimentan de aquí.
+     */
+    public static function servicios(): array
+    {
+        return [
+            [
+                'nombre' => 'Impresión 3D',
+                'slug' => 'impresion-3d',
+                'subservicios' => [
+                    'Prototipado Rápido',
+                    'Figuras y Coleccionables',
+                    'Refacciones y Piezas',
+                    'Filamentos y Resinas',
+                ],
+            ],
+            [
+                'nombre' => 'Cortadora Láser',
+                'slug' => 'cortadora-laser',
+                'subservicios' => [
+                    'Grabado en Madera',
+                    'Corte en Acrílico',
+                    'Letreros y Señalética',
+                    'Reconocimientos y Trofeos',
+                ],
+            ],
+            [
+                'nombre' => 'Playeras Personalizadas',
+                'slug' => 'playeras-personalizadas',
+                'subservicios' => [
+                    'Estampado DTF',
+                    'Sublimación',
+                    'Vinil Textil',
+                    'Playeras para Eventos',
+                ],
+            ],
+            [
+                'nombre' => 'Fotografías',
+                'slug' => 'fotografias',
+                'subservicios' => [
+                    'Fotografía de Producto',
+                    'Sesiones de Estudio',
+                    'Impresión en Cuadros',
+                    'Restauración Digital',
+                ],
+            ],
+            [
+                'nombre' => 'Cursos',
+                'slug' => 'cursos-y-talleres',
+                'subservicios' => [
+                    'Modelado 3D',
+                    'Manejo de Corte Láser',
+                    'Técnicas de Estampado',
+                    'Fotografía Básica',
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * Categorías que se muestran en el sidebar de filtros (mismo orden actual)
+     */
+    public static function categorias(): array
+    {
+        return [
+            'impresion-3d' => 'Impresión 3D',
+            'cortadora-laser' => 'Cortadora Láser',
+            'playeras-personalizadas' => 'Playeras Personalizadas',
+            'fotografias' => 'Fotografías',
+            'cursos-y-talleres' => 'Cursos y Talleres',
+            'prototipado-rapido' => 'Prototipado Rápido',
+            'figuras-y-coleccionables' => 'Figuras y Coleccionables',
+            'grabado-en-madera' => 'Grabado en Madera',
+            'corte-en-acrilico' => 'Corte en Acrílico',
+            'estampado-dtf' => 'Estampado DTF',
+            'sublimacion' => 'Sublimación',
+            'fotografia-de-producto' => 'Fotografía de Producto',
+            'modelado-3d' => 'Modelado 3D',
+        ];
+    }
+
+    /**
+     * Genera un slug legible a partir de un nombre de servicio
+     */
+    public static function slugify(string $text): string
+    {
+        $map = [
+            'á' => 'a', 'é' => 'e', 'í' => 'i', 'ó' => 'o', 'ú' => 'u', 'ü' => 'u', 'ñ' => 'n',
+            'Á' => 'a', 'É' => 'e', 'Í' => 'i', 'Ó' => 'o', 'Ú' => 'u', 'Ü' => 'u', 'Ñ' => 'n',
+        ];
+        $text = strtr($text, $map);
+        $text = preg_replace('/[^A-Za-z0-9]+/', '-', $text);
+        return strtolower(trim($text, '-'));
+    }
+
+    /**
      * Renderiza una vista dentro del layout principal
      *
      * @param string $viewName Nombre del archivo en views/ (sin extensión .php)
@@ -92,5 +188,23 @@ if (!function_exists('url')) {
 if (!function_exists('view')) {
     function view(string $viewName, array $data = [], ?string $layout = 'main'): void {
         ViewController::render($viewName, $data, $layout);
+    }
+}
+
+if (!function_exists('servicios')) {
+    function servicios(): array {
+        return ViewController::servicios();
+    }
+}
+
+if (!function_exists('categorias')) {
+    function categorias(): array {
+        return ViewController::categorias();
+    }
+}
+
+if (!function_exists('slugify')) {
+    function slugify(string $text): string {
+        return ViewController::slugify($text);
     }
 }
