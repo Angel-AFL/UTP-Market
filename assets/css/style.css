@@ -1716,17 +1716,17 @@ button {
 }
 
 .hero-slider-one {
-    background: url("/assets/images/homepage-one/hero-slider-one.webp")
+    background: url("/assets/images/homepage-one/Fondo2.png")
         no-repeat center/cover;
 }
 
 .hero-slider-two {
-    background: url("/assets/images/homepage-one/hero-slider-two.webp")
+    background: url("/assets/images/homepage-one/Fondo3.png")
         no-repeat center/cover;
 }
 
 .hero-slider-three {
-    background: url("/assets/images/homepage-one/hero-slider-three.webp")
+    background: url("/assets/images/homepage-one/Fondo1.png")
         no-repeat center/cover;
 }
 

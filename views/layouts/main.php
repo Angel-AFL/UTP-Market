@@ -13,7 +13,7 @@
     <link rel="icon" href="<?= asset('assets/images/homepage-one/icon.png') ?>">
 
     <!--title  -->
-    <title>Shopus: Your One-Stop Destination for Fashion and Style</title>
+    <title>UTP-MARKET</title>
 
 
     <link rel="stylesheet" href="<?= asset('assets/css/swiper10-bundle.min.css') ?>">
@@ -960,7 +960,7 @@
 <?= $content ?? "" ?>
 
 <!--------------- footer-section--------------->
-    <section class="product footer">
+   <section class="product footer">
         <div class="container">
             <div class="footer-service-section">
                 <div class="row gy-4">
