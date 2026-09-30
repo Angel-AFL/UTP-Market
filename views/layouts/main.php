@@ -29,6 +29,9 @@
 
     <!--------------- additional-css ---------------->
     <link rel="stylesheet" href="<?= asset('assets/css/style.css') ?>">
+    
+    <!-- Chatbot CSS -->
+    <link rel="stylesheet" href="<?= asset('assets/css/chatbot.css') ?>">
 
 </head>
 
@@ -1197,6 +1200,44 @@
 
     <!--------------- additional-js ---------------->
     <script src="<?= asset('assets/js/shopus.js') ?>"></script>
+
+    <!-- Chatbot HTML -->
+    <div class="chatbot-widget">
+        <div id="chatbot-toggle" class="chatbot-toggle">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+            </svg>
+        </div>
+        
+        <div id="chatbot-window" class="chatbot-window">
+            <div class="chatbot-header">
+                <span>Asistente Virtual</span>
+                <span id="chatbot-close" class="chatbot-close">&times;</span>
+            </div>
+            
+            <div id="chatbot-messages" class="chatbot-messages">
+                <div class="chat-message bot">
+                    Hola! Soy tu asistente virtual. ¿En qué puedo ayudarte hoy?
+                </div>
+                
+                <div id="typing-indicator" class="typing-indicator">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+            
+            <div class="chatbot-input-container">
+                <input type="text" id="chatbot-input" class="chatbot-input" placeholder="Escribe un mensaje..." autocomplete="off">
+                <button id="chatbot-send" class="chatbot-send">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Chatbot JS -->
+    <script src="<?= asset('assets/js/chatbot.js') ?>"></script>
 
 </body>
 
