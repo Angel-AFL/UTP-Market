@@ -184,28 +184,35 @@ function switchDashboard() {
 // header-search-positioning-------------------------
 function layoutHeaderSearch() {
   const search = document.querySelector(".header-center .header-search");
+  const wrapper = search ? search.querySelector(".modal-wrapper") : null;
   const pill = search ? search.querySelector(".modal-main") : null;
-  if (!pill) return;
+  if (!search || !wrapper || !pill) return;
 
   const logo = document.querySelector(".header-center .logo");
   const cartItems = document.querySelector(".header-center .header-cart-items");
   if (!logo || !cartItems) return;
 
-  const iconBox = search.getBoundingClientRect();
   const logoBox = logo.getBoundingClientRect();
   const cartBox = cartItems.getBoundingClientRect();
   const gap = 24;
 
-  const left = Math.round(logoBox.right + gap);
-  const width = Math.max(200, Math.round(cartBox.left - gap - left));
+  const available = Math.round(cartBox.left - gap - (logoBox.right + gap));
 
-  pill.style.left = left + "px";
-  pill.style.width = width + "px";
-  pill.style.top = Math.round(iconBox.top + iconBox.height / 2) + "px";
-  pill.classList.toggle("search-compact", width < 440);
+  wrapper.style.width = Math.max(200, available) + "px";
+  pill.classList.toggle("search-compact", available < 440);
 }
 
 window.addEventListener("resize", layoutHeaderSearch);
+
+window.addEventListener(
+  "scroll",
+  function () {
+    document.querySelectorAll(".header-search .modal-wrapper.active").forEach(function (modal) {
+      modal.classList.remove("active");
+    });
+  },
+  { passive: true }
+);
 
 // modal-------------------------------------------
 function modalAction(elemnt) {
