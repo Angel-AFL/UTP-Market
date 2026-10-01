@@ -20,14 +20,16 @@
                 <div class="row align-items-center gy-5">
                     <div class="col-lg-6">
                         <div class="about-img" data-aos="fade-right">
-                            <img src="assets/images/homepage-one/about/3d impresion.avif" alt="img">
+                            <img src="assets/images/homepage-one/about/camara.avif" alt="img">
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="about-content" data-aos="fade-up">
                             <h3 class="about-title">Conoce más sobre nosotros</h3>
                             <p class="about-info">
-                                Somos una empresa dedicada a la venta de objetos personalizados con tecnología de impresión 3D y sublimación.
+                                Somos una empresa dedicada a la venta de objetos personalizados con tecnología de impresión 3D y
+                                sublimación como objetos dibujados medinate laser otra particularidad es en si la de fotografia 
+                                que se maneja de manera profesional y con la mejor calidad de imagen,
                                 Entre más cosas para ofrecer, calidad de productos con la facilidad de compra y venta.
                             </p>
                             <div class="about-list">
