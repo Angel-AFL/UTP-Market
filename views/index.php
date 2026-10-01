@@ -232,7 +232,7 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="product-wrapper" data-aos="fade-up">
                             <div class="product-img">
-                                <img src="assets/images/homepage-one/product-img/product-img-1.webp" alt="product-img">
+                                <img src="assets/images/homepage-one/product-img/crea.jpeg" alt="product-img">
                                 <!-- Botones de acción flotantes (se mantienen los SVG originales) -->
                                 <div class="product-cart-items">
                                     <a href="#" class="cart cart-item"><span>...</span></a>
@@ -242,8 +242,8 @@
                                 <div class="product-description">
                                     <a href="/product-info" class="product-details">Prototipo 3D Personalizado</a>
                                     <div class="price">
-                                        <span class="price-cut">$25.99</span>
-                                        <span class="new-price">$18.99</span>
+                                        <span class="price-cut"></span>
+                                        <span class="new-price"></span>
                                     </div>
                                 </div>
                             </div>
@@ -255,14 +255,14 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="product-wrapper" data-aos="fade-up">
                             <div class="product-img">
-                                <img src="assets/images/homepage-one/product-img/product-img-2.webp" alt="product-img">
+                                <img src="assets/images/homepage-one/product-img/arial.jpeg" alt="product-img">
                             </div>
                             <div class="product-info">
                                 <div class="product-description">
-                                    <a href="/product-info" class="product-details">Kit de Robótica Educativa</a>
+                                    <a href="/product-info" class="product-details">Fotos estilo  polaroid</a>
                                     <div class="price">
-                                        <span class="price-cut">$45.99</span>
-                                        <span class="new-price">$35.99</span>
+                                        <span class="price-cut"></span>
+                                        <span class="new-price"></span>
                                     </div>
                                 </div>
                             </div>
@@ -274,14 +274,14 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="product-wrapper" data-aos="fade-up">
                             <div class="product-img">
-                                <img src="assets/images/homepage-one/product-img/product-img-3.webp" alt="product-img">
+                                <img src="assets/images/homepage-one/product-img/dope.jpeg" alt="product-img">
                             </div>
                             <div class="product-info">
                                 <div class="product-description">
                                     <a href="/product-info" class="product-details">Taza Sublimada Personalizada</a>
                                     <div class="price">
-                                        <span class="price-cut">$9.99</span>
-                                        <span class="new-price">$6.99</span>
+                                        <span class="price-cut"></span>
+                                        <span class="new-price"></span>
                                     </div>
                                 </div>
                             </div>
@@ -293,14 +293,14 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="product-wrapper" data-aos="fade-up">
                             <div class="product-img">
-                                <img src="assets/images/homepage-one/product-img/product-img-4.webp" alt="product-img">
+                                <img src="assets/images/homepage-one/product-img/corte.jpeg" alt="product-img">
                             </div>
                             <div class="product-info">
                                 <div class="product-description">
-                                    <a href="/product-info" class="product-details">Cuadro Decorativo Corte Láser</a>
+                                    <a href="/product-info" class="product-details">Portacelular Corte Láser</a>
                                     <div class="price">
-                                        <span class="price-cut">$20.99</span>
-                                        <span class="new-price">$14.99</span>
+                                        <span class="price-cut"></span>
+                                        <span class="new-price"></span>
                                     </div>
                                 </div>
                             </div>
