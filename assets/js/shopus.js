@@ -181,6 +181,39 @@ function switchDashboard() {
   toggleBtn.classList.toggle("active");
 }
 
+// header-search-positioning-------------------------
+function layoutHeaderSearch() {
+  const search = document.querySelector(".header-center .header-search");
+  const wrapper = search ? search.querySelector(".modal-wrapper") : null;
+  const pill = search ? search.querySelector(".modal-main") : null;
+  if (!search || !wrapper || !pill) return;
+
+  const logo = document.querySelector(".header-center .logo");
+  const cartItems = document.querySelector(".header-center .header-cart-items");
+  if (!logo || !cartItems) return;
+
+  const logoBox = logo.getBoundingClientRect();
+  const cartBox = cartItems.getBoundingClientRect();
+  const gap = 24;
+
+  const available = Math.round(cartBox.left - gap - (logoBox.right + gap));
+
+  wrapper.style.width = Math.max(200, available) + "px";
+  pill.classList.toggle("search-compact", available < 440);
+}
+
+window.addEventListener("resize", layoutHeaderSearch);
+
+window.addEventListener(
+  "scroll",
+  function () {
+    document.querySelectorAll(".header-search .modal-wrapper.active").forEach(function (modal) {
+      modal.classList.remove("active");
+    });
+  },
+  { passive: true }
+);
+
 // modal-------------------------------------------
 function modalAction(elemnt) {
   const moalMain = document.querySelector(elemnt);
@@ -188,8 +221,21 @@ function modalAction(elemnt) {
     moalMain.classList.remove("active");
   } else {
     moalMain.classList.add("active");
+    layoutHeaderSearch();
+    const searchField = moalMain.querySelector('input[type="text"]');
+    if (searchField) {
+      searchField.focus();
+    }
   }
 }
+
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Escape") {
+    document.querySelectorAll(".modal-wrapper.active").forEach(function (modal) {
+      modal.classList.remove("active");
+    });
+  }
+});
 
 // image-uploader
 

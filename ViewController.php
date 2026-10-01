@@ -23,7 +23,12 @@ class ViewController
      */
     public static function asset(string $path): string
     {
-        return self::getBaseUrl() . '/' . ltrim($path, '/');
+        $url = self::getBaseUrl() . '/' . ltrim($path, '/');
+        $file = __DIR__ . '/' . ltrim($path, '/');
+        if (is_file($file)) {
+            $url .= '?v=' . filemtime($file);
+        }
+        return $url;
     }
 
     /**
