@@ -1383,6 +1383,14 @@ button {
     font-size: 1.8rem;
     font-weight: 600;
 }
+.header-nav .header-nav-menu .menu-list .mega-menu .shop-menu .menu-wrapper .menu-list .menu-title a.service-menu-title {
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+}
+.header-nav .header-nav-menu .menu-list .mega-menu .shop-menu .menu-wrapper .menu-list .menu-title a.service-menu-title:hover {
+    color: var(--color-accent);
+}
 .header-nav
     .header-nav-menu
     .menu-list
