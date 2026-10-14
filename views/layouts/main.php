@@ -867,7 +867,7 @@
                                                 <li><a href="/product-sidebar">Fotografía de Producto</a></li>
                                                 <li><a href="/product-sidebar">Sesiones de Estudio</a></li>
                                                 <li><a href="/product-sidebar">Impresión en Cuadros</a></li>
-                                                <li><a href="/product-sidebar">Restauración Digital</a></li>
+                                               <li><a href="/product-sidebar?servicio=restauracion-digital">Restauración Digital</a></li>
                                             </ul>
                                         </div>
                                         <div class="menu-list">
