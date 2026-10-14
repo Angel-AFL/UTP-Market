@@ -148,12 +148,12 @@
                             <div class="col-lg-12">
                                 <div class="product-sorting-section">
                                     <div class="result">
-                                        <p>Showing <span>1–16 of 66 results</span></p>
+                                        <p>Mostrando <span>1–16 de 66 resultados</span></p>
                                     </div>
                                     <div class="product-sorting">
-                                        <span class="product-sort">Sort by:</span>
+                                        <span class="product-sort">Ordenar por:</span>
                                         <div class="product-list">
-                                            <span class="default">Default</span>
+                                            <span class="default">Predeterminado</span>
                                             <span>
                                                 <svg width="10" height="6" viewBox="0 0 10 6" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -167,7 +167,7 @@
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-wrapper" data-aos="fade-up"
                                     data-servicio="impresion-3d"
-                                    data-categorias="impresion-3d figuras-y-coleccionables"
+                                    data-categorias="impresion-3d prototipado-rapido figuras-y-coleccionables"
                                     data-keywords="figura coleccionable estatuilla impresion 3d filamentos resinas">
                                     <div class="product-img">
                                         <img src="assets/images/homepage-one/product-img/product-img-2.jpeg"
@@ -277,7 +277,9 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 col-sm-6">
-                                <div class="product-wrapper" data-aos="fade-up">
+                                <div class="product-wrapper" data-aos="fade-up"
+                                    data-servicio="impresion-3d"
+                                    data-categorias="impresion-3d figuras-y-coleccionables">
                                     <div class="product-img">
                                         <img src="assets/images/homepage-one/product-img/product-img-1.jpeg"
                                             alt="product-img">
@@ -386,7 +388,9 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 col-sm-6">
-                                <div class="product-wrapper" data-aos="fade-up">
+                                <div class="product-wrapper" data-aos="fade-up"
+                                    data-servicio="impresion-3d"
+                                    data-categorias="impresion-3d figuras-y-coleccionables">
                                     <div class="product-img">
                                         <img src="assets/images/homepage-one/product-img/product-img-3.jpeg"
                                             alt="product-img">
@@ -1505,7 +1509,7 @@ document.addEventListener('DOMContentLoaded', function () {
             w.dataset.servicio || ''
         ].filter(Boolean))
     }));
-    const categoryInputs = [...section.querySelectorAll('.sidebar-list input[type="checkbox"]')]
+    const categoryInputs = [...document.querySelectorAll('.sidebar .sidebar-list input[type="checkbox"]')]
         .filter(input => input.closest('.sidebar-wrapper')?.querySelector('.wrapper-heading')?.textContent.trim() === 'Categorías');
 
     // Mensaje de "sin resultados"
@@ -1514,6 +1518,18 @@ document.addEventListener('DOMContentLoaded', function () {
     empty.style.display = 'none';
     empty.innerHTML = '<p class="text-center py-5">No se encontraron productos con los filtros seleccionados.</p>';
     section.querySelector('.row').appendChild(empty);
+
+    // Nombres legibles de cada categoría (sidebar + servicios y subservicios del menú)
+    const catLabels = <?php
+        $catLabels = categorias();
+        foreach (servicios() as $s) {
+            $catLabels[$s['slug']] = $s['nombre'];
+            foreach ($s['subservicios'] as $sub) {
+                $catLabels[slugify($sub)] = $sub;
+            }
+        }
+        echo json_encode($catLabels, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG);
+    ?>;
 
     function filtrar(query, selectedCategories) {
         const words = norm(query).split(/\s+/).filter(Boolean);
@@ -1530,11 +1546,14 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         if (resultTxt) {
-            resultTxt.textContent = hasFilters
-                ? (words.length
-                    ? `${visibles} resultado(s) para "${query}"`
-                    : `${visibles} producto(s) para el servicio seleccionado`)
-                : `1–${items.length} of ${items.length} results`;
+            if (words.length) {
+                resultTxt.textContent = `${visibles} resultado(s) para "${query}"`;
+            } else if (selectedCategories.length) {
+                const nombres = selectedCategories.map(c => catLabels[c] || c).join(', ');
+                resultTxt.textContent = `${visibles} resultado(s) en "${nombres}"`;
+            } else {
+                resultTxt.textContent = `Mostrando 1–${items.length} de ${items.length} resultados`;
+            }
         }
         empty.style.display = (hasFilters && visibles === 0) ? '' : 'none';
         if (dealBox) dealBox.style.display = hasFilters ? 'none' : '';
@@ -1545,12 +1564,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const service = params.get('servicio') || '';
     const serviceInput = categoryInputs.find(input => input.id === service);
     if (serviceInput) serviceInput.checked = true;
+    // Servicios del menú sin checkbox propio en el sidebar (ej. Refacciones, Filamentos)
+    const hasServiceCheckbox = categoryInputs.some(input => input.id === service);
 
     const input = document.getElementById('search-input');
     const updateResults = () => {
         const selectedCategories = categoryInputs
             .filter(category => category.checked)
             .map(category => category.id);
+        if (service && !hasServiceCheckbox && !selectedCategories.includes(service)) {
+            selectedCategories.push(service);
+        }
         filtrar(input?.value || q, selectedCategories);
     };
 
@@ -1559,7 +1583,7 @@ document.addEventListener('DOMContentLoaded', function () {
         input.addEventListener('input', updateResults);
     }
     categoryInputs.forEach(category => category.addEventListener('change', updateResults));
-    if (q || service || categoryInputs.some(category => category.checked)) updateResults();
+    updateResults();
 });
 </script>
     <!--------------- products-sidebar-section-end--------------->
