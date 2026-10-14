@@ -1500,7 +1500,7 @@
 <div class="col-lg-4 col-sm-6">
     <div class="product-wrapper" data-aos="fade-up" data-servicio="curso-desarrollo" data-keywords="curso programacion inteligencia artificial ia">
         <div class="product-img">
-            <img src="assets/images/homepage-one/product-img/curso-web.jpg" alt="Curso de la IA">
+            <img src="assets/img/cursos/Curso IA.jpeg" alt="Curso de la IA">
             <div class="product-cart-items">
                 <a href="#" class="cart cart-item">
                     <span>
@@ -1542,7 +1542,7 @@
 <div class="col-lg-4 col-sm-6">
     <div class="product-wrapper" data-aos="fade-up" data-servicio="curso-movil" data-keywords="curso introduccion robotica">
         <div class="product-img">
-            <img src="assets/images/homepage-one/product-img/curso-movil.jpg" alt="Curso de Introducción a la Robótica">
+            <img src="assets/img/cursos/Robotica.jpeg" alt="Curso de Introducción a la Robótica">
         </div>
         <div class="product-info">
             <div class="ratings">
@@ -1573,7 +1573,7 @@
 <div class="col-lg-4 col-sm-6">
     <div class="product-wrapper" data-aos="fade-up" data-servicio="curso-videojuegos" data-keywords="curso introduccion iot">
         <div class="product-img">
-            <img src="assets/images/homepage-one/product-img/curso-juegos.jpg" alt="Curso de Introducción de IoT">
+            <img src="assets/img/cursos/IoT.jpeg" alt="Curso de Introducción de IoT">
         </div>
         <div class="product-info">
             <div class="ratings">
