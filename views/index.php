@@ -122,7 +122,7 @@
             <div class="category-section">
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="100">
                     <div class="wrapper-img">
-                        <img src="assets/images/homepage-one/category-img/dresses.webp" alt="Corte Láser">
+                        <img src="assets/images/homepage-one/category-img/dresses.webp" alt="Corte Láser" loading="lazy" width="300" height="200">
                     </div>
                     <div class="wrapper-info">
                         <a href="/product-sidebar" class="wrapper-details">Corte Láser</a>
@@ -130,7 +130,7 @@
                 </div>
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="200">
                     <div class="wrapper-img">
-                        <img src="assets/images/homepage-one/category-img/bags.webp" alt="Impresión 3D">
+                        <img src="assets/images/homepage-one/category-img/bags.webp" alt="Impresión 3D" loading="lazy" width="300" height="200">
                     </div>
                     <div class="wrapper-info">
                         <a href="/product-sidebar" class="wrapper-details">Impresión 3D</a>
@@ -138,7 +138,7 @@
                 </div>
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="300">
                     <div class="wrapper-img">
-                        <img src="assets/images/homepage-one/category-img/sweaters.webp" alt="Fotografía">
+                        <img src="assets/images/homepage-one/category-img/sweaters.webp" alt="Fotografía" loading="lazy" width="300" height="200">
                     </div>
                     <div class="wrapper-info">
                         <a href="/product-sidebar" class="wrapper-details">Fotografía</a>
@@ -146,7 +146,7 @@
                 </div>
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="400">
                     <div class="wrapper-img">
-                        <img src="assets/images/homepage-one/category-img/shoes.webp" alt="Robótica">
+                        <img src="assets/images/homepage-one/category-img/shoes.webp" alt="Robótica" loading="lazy" width="300" height="200">
                     </div>
                     <div class="wrapper-info">
                         <a href="/product-sidebar" class="wrapper-details">Robótica</a>
@@ -154,7 +154,7 @@
                 </div>
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="500">
                     <div class="wrapper-img">
-                        <img src="assets/images/homepage-one/category-img/gift.webp" alt="Sublimación">
+                        <img src="assets/images/homepage-one/category-img/gift.webp" alt="Sublimación" loading="lazy" width="300" height="200">
                     </div>
                     <div class="wrapper-info">
                         <a href="/product-sidebar" class="wrapper-details">Sublimación</a>
@@ -232,7 +232,7 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="product-wrapper" data-aos="fade-up">
                             <div class="product-img">
-                                <img src="assets/images/homepage-one/product-img/crea.jpeg" alt="product-img">
+                                <img src="assets/images/homepage-one/product-img/crea.jpeg" alt="Prototipo 3D personalizado" loading="lazy" width="300" height="300">
                                 <!-- Botones de acción flotantes (se mantienen los SVG originales) -->
                                 <div class="product-cart-items">
                                     <a href="#" class="cart cart-item"><span>...</span></a>
@@ -255,7 +255,7 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="product-wrapper" data-aos="fade-up">
                             <div class="product-img">
-                                <img src="assets/images/homepage-one/product-img/arial.jpeg" alt="product-img">
+                                <img src="assets/images/homepage-one/product-img/arial.jpeg" alt="Fotos estilo polaroid" loading="lazy" width="300" height="300">
                             </div>
                             <div class="product-info">
                                 <div class="product-description">
@@ -274,7 +274,7 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="product-wrapper" data-aos="fade-up">
                             <div class="product-img">
-                                <img src="assets/images/homepage-one/product-img/dope.jpeg" alt="product-img">
+                                <img src="assets/images/homepage-one/product-img/dope.jpeg" alt="Taza sublimada personalizada" loading="lazy" width="300" height="300">
                             </div>
                             <div class="product-info">
                                 <div class="product-description">
@@ -293,7 +293,7 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="product-wrapper" data-aos="fade-up">
                             <div class="product-img">
-                                <img src="assets/images/homepage-one/product-img/corte.jpeg" alt="product-img">
+                                <img src="assets/images/homepage-one/product-img/corte.jpeg" alt="Portacelular de corte láser" loading="lazy" width="300" height="300">
                             </div>
                             <div class="product-info">
                                 <div class="product-description">
@@ -492,35 +492,35 @@
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/dopeprints.jpg" alt="img">
+                            <img src="assets/images/homepage-one/dopeprints.jpg" loading="lazy" alt="img">
                         </a>
                     </div>
                 </div>
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/inovabot.jpg" alt="img">
+                            <img src="assets/images/homepage-one/inovabot.jpg" loading="lazy" alt="img">
                         </a>
                     </div>
                 </div>
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/novacut.jpg" alt="img">
+                            <img src="assets/images/homepage-one/novacut.jpg" loading="lazy" alt="img">
                         </a>
                     </div>
                 </div>
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/creatics.jpg" alt="img">
+                            <img src="assets/images/homepage-one/creatics.jpg" loading="lazy" alt="img">
                         </a>
                     </div>
                 </div>
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/aerial.jpg" alt="img">
+                            <img src="assets/images/homepage-one/aerial.jpg"  loading="lazy" alt="img">
                         </a>
                     </div>
     </section>
