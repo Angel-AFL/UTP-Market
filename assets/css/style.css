@@ -18,7 +18,103 @@
     --color-secondary-rgb: 59, 42, 31;
     --color-white: #ffffff;
 }
+/* ============================================================
+   Menú desplegable "Empresas" (adaptado a style.css de UTP-Market)
+   Pegar AL FINAL de style.css para que gane sobre las reglas
+   anteriores de .category-dropdown / .category-list-item.
+   Usa tus variables: --color-primary, --color-primary-soft, etc.
+   ============================================================ */
 
+/* Contenedor: conserva tu animación por max-height, solo cambia el look */
+.header-nav .category-menu-section .category-dropdown {
+    top: calc(100% + 1rem);
+    background: #ffffff;
+    border-radius: 1.4rem;
+    box-shadow: none;
+}
+/* La sombra solo aparece cuando está abierto (evita la línea con max-height: 0) */
+.header-nav .category-menu-section .category-dropdown.open-dropdown {
+    box-shadow: 0 1.2rem 3.2rem rgba(var(--color-secondary-rgb), 0.18);
+}
+
+/* El padding va en la lista (dentro del overflow:hidden), no en el contenedor,
+   así con max-height: 0 no queda un residuo visible */
+.header-nav .category-menu-section .category-dropdown .category-list {
+    padding: 0.8rem;
+    gap: 0.2rem;
+}
+
+/* Quita el fondo/padding/borde por <li> y el hover vino de fila completa */
+.header-nav .category-menu-section .category-dropdown .category-list .category-list-item {
+    padding: 0;
+    border-top: none;
+    background: transparent;
+}
+.header-nav .category-menu-section .category-dropdown .category-list .category-list-item:hover {
+    background: transparent;
+}
+
+/* Ítem */
+.header-nav .category-menu-section .category-dropdown .category-list .dropdown-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1.2rem;
+    padding: 1rem 1.2rem;
+    border-radius: 1rem;
+    color: var(--color-secondary);
+    transition: background 0.2s, color 0.2s;
+}
+
+.header-nav .category-menu-section .category-dropdown .category-list .dropdown-img {
+    flex: 0 0 auto;
+}
+.header-nav .category-menu-section .category-dropdown .category-list .dropdown-img img {
+    display: block;
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 0.8rem;
+    object-fit: cover;
+}
+
+.header-nav .category-menu-section .category-dropdown .category-list .dropdown-text {
+    flex: 1;
+    font-family: "Inter", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.4;
+    color: inherit;
+}
+
+.header-nav .category-menu-section .category-dropdown .category-list .dropdown-arrow {
+    flex: 0 0 auto;
+    color: var(--color-neutral);
+    transition: transform 0.2s, color 0.2s;
+}
+
+/* Hover / foco con tu granate */
+.header-nav .category-menu-section .category-dropdown .category-list .dropdown-item:hover,
+.header-nav .category-menu-section .category-dropdown .category-list .dropdown-item:focus-visible {
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
+}
+/* Anula tu regla que pone el texto blanco al hacer hover sobre el <li> */
+.header-nav .category-menu-section .category-dropdown .category-list .category-list-item:hover .dropdown-text {
+    color: inherit;
+}
+.header-nav .category-menu-section .category-dropdown .category-list .dropdown-item:hover .dropdown-arrow,
+.header-nav .category-menu-section .category-dropdown .category-list .dropdown-item:focus-visible .dropdown-arrow {
+    color: var(--color-primary);
+    transform: translateX(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .header-nav .category-menu-section .category-dropdown .category-list .dropdown-item,
+    .header-nav .category-menu-section .category-dropdown .category-list .dropdown-arrow {
+        transition: none;
+    }
+}
 @keyframes btnAnimation {
     0% {
         transform: scale(0.8);
