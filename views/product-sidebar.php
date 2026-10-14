@@ -11,8 +11,22 @@
                                         <ul class="sidebar-list">
                                             <?php foreach (categorias() as $catSlug => $catNombre): ?>
                                             <li>
-                                                <input type="checkbox" id="<?= $catSlug ?>" name="<?= $catSlug ?>">
-                                                <label for="<?= $catSlug ?>"><?= $catNombre ?></label>
+                                                <?php if (mb_strtolower(trim($catNombre), 'UTF-8') === 'estampado dtf'): ?>
+                                                    <!-- Solo Estampado DTF redirige al dashboard de la empresa -->
+                                                    <a href="/dope-prints-dashboard"
+                                                       id="<?= htmlspecialchars($catSlug, ENT_QUOTES, 'UTF-8') ?>"
+                                                       style="color: inherit; text-decoration: none;">
+                                                        <?= htmlspecialchars($catNombre, ENT_QUOTES, 'UTF-8') ?>
+                                                    </a>
+                                                <?php else: ?>
+                                                    <!-- Las demás categorías conservan su comportamiento original -->
+                                                    <input type="checkbox"
+                                                           id="<?= htmlspecialchars($catSlug, ENT_QUOTES, 'UTF-8') ?>"
+                                                           name="<?= htmlspecialchars($catSlug, ENT_QUOTES, 'UTF-8') ?>">
+                                                    <label for="<?= htmlspecialchars($catSlug, ENT_QUOTES, 'UTF-8') ?>">
+                                                        <?= htmlspecialchars($catNombre, ENT_QUOTES, 'UTF-8') ?>
+                                                    </label>
+                                                <?php endif; ?>
                                             </li>
                                             <?php endforeach; ?>
                                         </ul>
