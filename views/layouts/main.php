@@ -837,7 +837,7 @@
                                         <div class="menu-list">
                                             <h5 class="menu-title">Impresión 3D</h5>
                                             <ul>
-                                                <li><a href="/product-sidebar">Prototipado Rápido</a></li>
+                                                <li><a href="/product-sidebar?servicio=prototipado-rapido">Prototipado Rápido</a></li>
                                                 <li><a href="/product-sidebar">Figuras y Coleccionables</a></li>
                                                 <li><a href="/product-sidebar">Refacciones y Piezas</a></li>
                                                 <li><a href="/product-sidebar">Filamentos y Resinas</a></li>
@@ -846,7 +846,7 @@
                                         <div class="menu-list">
                                             <h5 class="menu-title">Cortadora Láser</h5>
                                             <ul>
-                                                <li><a href="/product-sidebar">Grabado en Madera</a></li>
+                                                <li><a href="/product-sidebar?servicio=grabado-en-madera">Grabado en Madera</a></li>
                                                 <li><a href="/product-sidebar">Corte en Acrílico</a></li>
                                                 <li><a href="/product-sidebar">Letreros y Señalética</a></li>
                                                 <li><a href="/product-sidebar">Reconocimientos y Trofeos</a></li>

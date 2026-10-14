@@ -167,6 +167,7 @@
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-wrapper" data-aos="fade-up"
                                     data-servicio="impresion-3d"
+                                    data-categorias="impresion-3d figuras-y-coleccionables"
                                     data-keywords="figura coleccionable estatuilla impresion 3d filamentos resinas">
                                     <div class="product-img">
                                         <img src="assets/images/homepage-one/product-img/product-img-2.jpeg"
@@ -1495,47 +1496,70 @@ document.addEventListener('DOMContentLoaded', function () {
     const resultTxt = document.querySelector('.product-sorting-section .result p span');
     const dealBox   = document.querySelector('.product-deal-section')?.closest('[class*="col-"]');
 
-    // Cada producto: su columna, su nombre y palabras clave opcionales (data-keywords)
+    // Cada producto: su columna, nombre, categorías y palabras clave opcionales.
     const items = [...section.querySelectorAll('.product-wrapper')].map(w => ({
         col: w.closest('[class*="col-"]'),
-        text: norm(w.querySelector('.product-details')?.textContent) + ' ' + norm(w.dataset.keywords)
+        text: norm(w.querySelector('.product-details')?.textContent) + ' ' + norm(w.dataset.keywords),
+        categories: new Set([
+            ...(w.dataset.categorias || '').split(/\s+/),
+            w.dataset.servicio || ''
+        ].filter(Boolean))
     }));
+    const categoryInputs = [...section.querySelectorAll('.sidebar-list input[type="checkbox"]')]
+        .filter(input => input.closest('.sidebar-wrapper')?.querySelector('.wrapper-heading')?.textContent.trim() === 'Categorías');
 
     // Mensaje de "sin resultados"
     const empty = document.createElement('div');
     empty.className = 'col-lg-12';
     empty.style.display = 'none';
-    empty.innerHTML = '<p class="text-center py-5">No se encontraron servicios con ese término.</p>';
+    empty.innerHTML = '<p class="text-center py-5">No se encontraron productos con los filtros seleccionados.</p>';
     section.querySelector('.row').appendChild(empty);
 
-    function filtrar(query) {
+    function filtrar(query, selectedCategories) {
         const words = norm(query).split(/\s+/).filter(Boolean);
+        const hasFilters = words.length > 0 || selectedCategories.length > 0;
         let visibles = 0;
 
         items.forEach(it => {
-            const ok = words.every(w => it.text.includes(w));
+            const matchesQuery = words.every(w => it.text.includes(w));
+            const matchesCategory = !selectedCategories.length
+                || selectedCategories.some(category => it.categories.has(category));
+            const ok = matchesQuery && matchesCategory;
             it.col.style.display = ok ? '' : 'none';
             if (ok) visibles++;
         });
 
         if (resultTxt) {
-            resultTxt.textContent = words.length
-                ? `${visibles} resultado(s) para "${query}"`
+            resultTxt.textContent = hasFilters
+                ? (words.length
+                    ? `${visibles} resultado(s) para "${query}"`
+                    : `${visibles} producto(s) para el servicio seleccionado`)
                 : `1–${items.length} of ${items.length} results`;
         }
-        empty.style.display = (words.length && visibles === 0) ? '' : 'none';
-        if (dealBox) dealBox.style.display = words.length ? 'none' : '';
+        empty.style.display = (hasFilters && visibles === 0) ? '' : 'none';
+        if (dealBox) dealBox.style.display = hasFilters ? 'none' : '';
     }
 
-    // Búsqueda que viene del header (?q=...)
-    const q = new URLSearchParams(location.search).get('q') || '';
+    const params = new URLSearchParams(location.search);
+    const q = params.get('q') || '';
+    const service = params.get('servicio') || '';
+    const serviceInput = categoryInputs.find(input => input.id === service);
+    if (serviceInput) serviceInput.checked = true;
+
     const input = document.getElementById('search-input');
+    const updateResults = () => {
+        const selectedCategories = categoryInputs
+            .filter(category => category.checked)
+            .map(category => category.id);
+        filtrar(input?.value || q, selectedCategories);
+    };
+
     if (input) {
         input.value = q;
-        // Filtra en vivo si ya estás en esta página
-        input.addEventListener('input', () => filtrar(input.value));
+        input.addEventListener('input', updateResults);
     }
-    if (q) filtrar(q);
+    categoryInputs.forEach(category => category.addEventListener('change', updateResults));
+    if (q || service || categoryInputs.some(category => category.checked)) updateResults();
 });
 </script>
     <!--------------- products-sidebar-section-end--------------->
