@@ -1497,7 +1497,112 @@
                                     </div>
                                 </div>
                             </div>
+<div class="col-lg-4 col-sm-6">
+    <div class="product-wrapper" data-aos="fade-up" data-servicio="curso-desarrollo" data-keywords="curso programacion inteligencia artificial ia">
+        <div class="product-img">
+            <img src="assets/images/homepage-one/product-img/curso-web.jpg" alt="Curso de la IA">
+            <div class="product-cart-items">
+                <a href="#" class="cart cart-item">
+                    <span>
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="40" height="40" rx="20" fill="white" />
+                            <path d="M12 14.4482V16.5664H12.5466H13.0933V15.3957V14.2204L15.6214 16.7486L18.1496 19.2767L18.5459 18.8759L18.9468 18.4796L16.4186 15.9514L13.8904 13.4232H15.0657H16.2364V12.8766V12.33H14.1182H12V14.4482Z" fill="#181818" />
+                            <path d="M23.4345 12.8766V13.4232H24.6052H25.7805L23.2523 15.9514L20.7241 18.4796L21.125 18.8759L21.5213 19.2767L24.0495 16.7486L26.5776 14.2204V15.3957V16.5664H27.1243H27.6709V14.4482V12.33H25.5527H23.4345V12.8766Z" fill="#181818" />
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </div>
+        <div class="product-info">
+            <div class="ratings">
+                <span>
+                    <svg width="75" height="15" viewBox="0 0 75 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.5 0L9.18386 5.18237H14.6329L10.2245 8.38525L11.9084 13.5676L7.5 10.3647L3.09161 13.5676L4.77547 8.38525L0.367076 5.18237H5.81614L7.5 0Z" fill="#FFA800" />
+                        <path d="M22.5 0L24.1839 5.18237H29.6329L25.2245 8.38525L26.9084 13.5676L22.5 10.3647L18.0916 13.5676L19.7755 8.38525L15.3671 5.18237H20.8161L22.5 0Z" fill="#FFA800" />
+                        <path d="M37.5 0L39.1839 5.18237H44.6329L40.2245 8.38525L41.9084 13.5676L37.5 10.3647L33.0916 13.5676L34.7755 8.38525L30.3671 5.18237H35.8161L37.5 0Z" fill="#FFA800" />
+                        <path d="M52.5 0L54.1839 5.18237H59.6329L55.2245 8.38525L56.9084 13.5676L52.5 10.3647L48.0916 13.5676L49.7755 8.38525L45.3671 5.18237H50.8161L52.5 0Z" fill="#FFA800" />
+                        <path d="M67.5 0L69.1839 5.18237H74.6329L70.2245 8.38525L71.9084 13.5676L67.5 10.3647L63.0916 13.5676L64.7755 8.38525L60.3671 5.18237H65.8161L67.5 0Z" fill="#FFA800" />
+                    </svg>
+                </span>
+            </div>
+            <div class="product-description">
+                <a href="/product-info" class="product-details">Curso De La IA</a>
+                <div class="price">
+                    <span class="price-cut">$120.00</span>
+                    <span class="new-price">$59.99</span>
+                </div>
+            </div>
+        </div>
+        <div class="product-cart-btn">
+            <a href="/cart" class="product-btn">Añadir a la cesta</a>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-4 col-sm-6">
+    <div class="product-wrapper" data-aos="fade-up" data-servicio="curso-movil" data-keywords="curso introduccion robotica">
+        <div class="product-img">
+            <img src="assets/images/homepage-one/product-img/curso-movil.jpg" alt="Curso de Introducción a la Robótica">
+        </div>
+        <div class="product-info">
+            <div class="ratings">
+                <span>
+                    <svg width="75" height="15" viewBox="0 0 75 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.5 0L9.18386 5.18237H14.6329L10.2245 8.38525L11.9084 13.5676L7.5 10.3647L3.09161 13.5676L4.77547 8.38525L0.367076 5.18237H5.81614L7.5 0Z" fill="#FFA800" />
+                        <path d="M22.5 0L24.1839 5.18237H29.6329L25.2245 8.38525L26.9084 13.5676L22.5 10.3647L18.0916 13.5676L19.7755 8.38525L15.3671 5.18237H20.8161L22.5 0Z" fill="#FFA800" />
+                        <path d="M37.5 0L39.1839 5.18237H44.6329L40.2245 8.38525L41.9084 13.5676L37.5 10.3647L33.0916 13.5676L34.7755 8.38525L30.3671 5.18237H35.8161L37.5 0Z" fill="#FFA800" />
+                        <path d="M52.5 0L54.1839 5.18237H59.6329L55.2245 8.38525L56.9084 13.5676L52.5 10.3647L48.0916 13.5676L49.7755 8.38525L45.3671 5.18237H50.8161L52.5 0Z" fill="#FFA800" />
+                        <path d="M67.5 0L69.1839 5.18237H74.6329L70.2245 8.38525L71.9084 13.5676L67.5 10.3647L63.0916 13.5676L64.7755 8.38525L60.3671 5.18237H65.8161L67.5 0Z" fill="#FFA800" />
+                    </svg>
+                </span>
+            </div>
+            <div class="product-description">
+                <a href="/product-info" class="product-details">Curso de Introducción a la Robótica</a>
+                <div class="price">
+                    <span class="price-cut">$99.00</span>
+                    <span class="new-price">$45.00</span>
+                </div>
+            </div>
+        </div>
+        <div class="product-cart-btn">
+            <a href="/cart" class="product-btn">Añadir a la cesta</a>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-4 col-sm-6">
+    <div class="product-wrapper" data-aos="fade-up" data-servicio="curso-videojuegos" data-keywords="curso introduccion iot">
+        <div class="product-img">
+            <img src="assets/images/homepage-one/product-img/curso-juegos.jpg" alt="Curso de Introducción de IoT">
+        </div>
+        <div class="product-info">
+            <div class="ratings">
+                <span>
+                    <svg width="75" height="15" viewBox="0 0 75 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.5 0L9.18386 5.18237H14.6329L10.2245 8.38525L11.9084 13.5676L7.5 10.3647L3.09161 13.5676L4.77547 8.38525L0.367076 5.18237H5.81614L7.5 0Z" fill="#FFA800" />
+                        <path d="M22.5 0L24.1839 5.18237H29.6329L25.2245 8.38525L26.9084 13.5676L22.5 10.3647L18.0916 13.5676L19.7755 8.38525L15.3671 5.18237H20.8161L22.5 0Z" fill="#FFA800" />
+                        <path d="M37.5 0L39.1839 5.18237H44.6329L40.2245 8.38525L41.9084 13.5676L37.5 10.3647L33.0916 13.5676L34.7755 8.38525L30.3671 5.18237H35.8161L37.5 0Z" fill="#FFA800" />
+                        <path d="M52.5 0L54.1839 5.18237H59.6329L55.2245 8.38525L56.9084 13.5676L52.5 10.3647L48.0916 13.5676L49.7755 8.38525L45.3671 5.18237H50.8161L52.5 0Z" fill="#FFA800" />
+                        <path d="M67.5 0L69.1839 5.18237H74.6329L70.2245 8.38525L71.9084 13.5676L67.5 10.3647L63.0916 13.5676L64.7755 8.38525L60.3671 5.18237H65.8161L67.5 0Z" fill="#FFA800" />
+                    </svg>
+                </span>
+            </div>
+            <div class="product-description">
+                <a href="/product-info" class="product-details">Curso de Introducción de IoT</a>
+                <div class="price">
+                    <span class="price-cut">$85.00</span>
+                    <span class="new-price">$39.99</span>
+                </div>
+            </div>
+        </div>
+        <div class="product-cart-btn">
+            <a href="/cart" class="product-btn">Añadir a la cesta</a>
+        </div>
+    </div>
+</div>
                         </div>
+
+ 
                     </div>
                 </div>
             </div>
