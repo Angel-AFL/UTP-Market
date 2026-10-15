@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="icon" href="<?= asset('assets/images/homepage-one/logoarriba.png') ?>">
     <!-- SEO BÁSICO -->
     <title>UTP-MARKET | Mercado de Servicios Universitarios</title>
     <meta name="description" content="Descubre y ofrece servicios en UTP-MARKET: Impresión 3D, corte láser, playeras personalizadas, fotografía, cursos y más para la comunidad universitaria.">
