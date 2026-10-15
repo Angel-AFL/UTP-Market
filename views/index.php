@@ -26,7 +26,7 @@
                                     </h5>
                                     <h1 class="wrapper-details">Proyectos de Robótica
                                         y Automatización</h1>
-                                    <a href="#" class="shop-btn">Saber Más</a>
+                                    <a href="/product-sidebar" class="shop-btn">Saber Más</a>
                                 </div>
                             </div>
                         </div>
@@ -41,7 +41,7 @@
                                     </h5>
                                     <h1 class="wrapper-details">Sublimación y
                                         Fotografía Profesional</h1>
-                                    <a href="#" class="shop-btn">Ver Catálogo</a>
+                                    <a href="/product-sidebar" class="shop-btn">Ver Catálogo</a>
                                 </div>
                             </div>
                         </div>
