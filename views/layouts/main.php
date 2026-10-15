@@ -1,41 +1,37 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 
-
-<!-- Mirrored from quomodothemes.website/html/shopus/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Dec 2024 13:15:33 GMT -->
 <head>
     <meta charset="utf-8">
-    <meta name="keywords"
-        content="ShopUS, bootstrap-5, bootstrap, sass, css, HTML Template, HTML,html, bootstrap template, free template, figma, web design, web development,front end, bootstrap datepicker, bootstrap timepicker, javascript, ecommerce template">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" href="<?= asset('assets/images/homepage-one/logoarriba.png') ?>">
+    <!-- SEO BÁSICO -->
+    <title>UTP-MARKET | Mercado de Servicios Universitarios</title>
+    <meta name="description" content="Descubre y ofrece servicios en UTP-MARKET: Impresión 3D, corte láser, playeras personalizadas, fotografía, cursos y más para la comunidad universitaria.">
+    <meta name="keywords" content="UTP, mercado universitario, impresión 3D, corte láser, playeras personalizadas, fotografía, cursos, servicios UTP">
+    <meta name="author" content="UTP-MARKET">
+    <meta name="robots" content="index, follow">
 
-    <!--title  -->
-    <title>UTP-MARKET</title>
+    <!-- OPEN GRAPH (Para compartir en WhatsApp, Facebook) -->
+    <meta property="og:title" content="UTP-MARKET | Mercado de Servicios Universitarios">
+    <meta property="og:description" content="Descubre servicios de impresión 3D, corte láser, fotografía y más en UTP-MARKET.">
+    <meta property="og:image" content="<?= asset('assets/images/logos/logoutpmarket.png') ?>">
+    <meta property="og:type" content="website">
 
+    <!-- Favicon -->
+    <link rel="icon" href="<?= asset('assets/images/homepage-one/icon.png') ?>">
 
+    <!-- ARCHIVOS CSS -->
     <link rel="stylesheet" href="<?= asset('assets/css/swiper10-bundle.min.css') ?>">
-
-    <!--------------- bootstrap-css ---------------->
     <link rel="stylesheet" href="<?= asset('assets/css/bootstrap-5.3.2.min.css') ?>">
-
-    <!---------------------- Range Slider ------------------->
     <link rel="stylesheet" href="<?= asset('assets/css/nouislider.min.css') ?>">
-
-    <!---------------------- Scroll ------------------->
     <link rel="stylesheet" href="<?= asset('assets/css/aos-3.0.0.css') ?>">
-
-    <!--------------- additional-css ---------------->
     <link rel="stylesheet" href="<?= asset('assets/css/style.css') ?>">
-    
-    <!-- Chatbot CSS -->
     <link rel="stylesheet" href="<?= asset('assets/css/chatbot.css') ?>">
-
 </head>
 
-<body >
+<body>
 
 
     <!--------------- header-section --------------->
@@ -386,10 +382,6 @@
                                 <a href="/product-sidebar">
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
-                                            <span class="dropdown-img">
-                                                <img src="<?= asset('assets/images/homepage-one/category-img/dresses.webp') ?>"
-                                                    alt="dress">
-                                            </span>
                                             <span class="dropdown-text">
                                                 Dresses
                                             </span>
@@ -412,10 +404,6 @@
                                 <a href="/product-sidebar">
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
-                                            <span class="dropdown-img">
-                                                <img src="<?= asset('assets/images/homepage-one/category-img/bags.webp') ?>"
-                                                    alt="Bags">
-                                            </span>
                                             <span class="dropdown-text">
                                                 Bags
                                             </span>
@@ -438,10 +426,6 @@
                                 <a href="/product-sidebar">
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
-                                            <span class="dropdown-img">
-                                                <img src="<?= asset('assets/images/homepage-one/category-img/sweaters.webp') ?>"
-                                                    alt="sweaters">
-                                            </span>
                                             <span class="dropdown-text">
                                                 Sweaters
                                             </span>
@@ -464,10 +448,6 @@
                                 <a href="/product-sidebar">
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
-                                            <span class="dropdown-img">
-                                                <img src="<?= asset('assets/images/homepage-one/category-img/shoes.webp') ?>"
-                                                    alt="sweaters">
-                                            </span>
                                             <span class="dropdown-text">
                                                 Boots
                                             </span>
@@ -490,10 +470,6 @@
                                 <a href="/product-sidebar">
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
-                                            <span class="dropdown-img">
-                                                <img src="<?= asset('assets/images/homepage-one/category-img/gift.webp') ?>"
-                                                    alt="gift">
-                                            </span>
                                             <span class="dropdown-text">
                                                 Gifts
                                             </span>
@@ -516,10 +492,6 @@
                                 <a href="/product-sidebar">
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
-                                            <span class="dropdown-img">
-                                                <img src="<?= asset('assets/images/homepage-one/category-img/sneakers.webp') ?>"
-                                                    alt="sneakers">
-                                            </span>
                                             <span class="dropdown-text">
                                                 Sneakers
                                             </span>
@@ -542,10 +514,6 @@
                                 <a href="/product-sidebar">
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
-                                            <span class="dropdown-img">
-                                                <img src="<?= asset('assets/images/homepage-one/category-img/watch.webp') ?>"
-                                                    alt="watch">
-                                            </span>
                                             <span class="dropdown-text">
                                                 Watches
                                             </span>
@@ -568,10 +536,6 @@
                                 <a href="/product-sidebar">
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
-                                            <span class="dropdown-img">
-                                                <img src="<?= asset('assets/images/homepage-one/category-img/ring.webp') ?>"
-                                                    alt="ring">
-                                            </span>
                                             <span class="dropdown-text">
                                                 Gold Ring
                                             </span>
@@ -594,9 +558,6 @@
                                 <a href="/product-sidebar">
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
-                                            <span class="dropdown-img">
-                                                <img src="<?= asset('assets/images/homepage-one/category-img/cap.webp') ?>" alt="cap">
-                                            </span>
                                             <span class="dropdown-text">
                                                 Cap
                                             </span>
@@ -619,10 +580,6 @@
                                 <a href="/product-sidebar">
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
-                                            <span class="dropdown-img">
-                                                <img src="<?= asset('assets/images/homepage-one/category-img/glass.webp') ?>"
-                                                    alt="glass">
-                                            </span>
                                             <span class="dropdown-text">
                                                 Sunglasses
                                             </span>
@@ -645,10 +602,6 @@
                                 <a href="/product-sidebar">
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
-                                            <span class="dropdown-img">
-                                                <img src="<?= asset('assets/images/homepage-one/category-img/baby.webp') ?>"
-                                                    alt="baby">
-                                            </span>
                                             <span class="dropdown-text">
                                                 Baby Shop
                                             </span>
@@ -690,91 +643,98 @@
                             <span class="list-text">
 Empresas                            </span>
                         </button>
-                      <div class="category-dropdown position-absolute" id="subMenu">
-    <ul class="category-list" translate="no">
-
-        <li class="category-list-item">
-            <a href="/aerial-studio">
-                <div class="dropdown-item d-flex justify-content-between align-items-center">
-                    <div class="dropdown-list-item d-flex">
-                        <span class="dropdown-text">Aerial Studio</span>
-                    </div>
-                    <div class="drop-down-list-icon">
-                        <svg width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="1.5" y="0.818359" width="5.78538" height="1.28564" transform="rotate(45 1.5 0.818359)" fill="#1D1D1D" />
-                            <rect x="5.58984" y="4.90918" width="5.78538" height="1.28564" transform="rotate(135 5.58984 4.90918)" fill="#1D1D1D" />
-                        </svg>
-                    </div>
-                </div>
-            </a>
-        </li>
-
-        <li class="category-list-item">
-            <a href="/product-sidebar">
-                <div class="dropdown-item d-flex justify-content-between align-items-center">
-                    <div class="dropdown-list-item d-flex">
-                        <span class="dropdown-text">Creatics</span>
-                    </div>
-                    <div class="drop-down-list-icon">
-                        <svg width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="1.5" y="0.818359" width="5.78538" height="1.28564" transform="rotate(45 1.5 0.818359)" fill="#1D1D1D" />
-                            <rect x="5.58984" y="4.90918" width="5.78538" height="1.28564" transform="rotate(135 5.58984 4.90918)" fill="#1D1D1D" />
-                        </svg>
-                    </div>
-                </div>
-            </a>
-        </li>
-
-        <li class="category-list-item">
-            <a href="/product-sidebar">
-                <div class="dropdown-item d-flex justify-content-between align-items-center">
-                    <div class="dropdown-list-item d-flex">
-                        <span class="dropdown-text">Innovabot</span>
-                    </div>
-                    <div class="drop-down-list-icon">
-                        <svg width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="1.5" y="0.818359" width="5.78538" height="1.28564" transform="rotate(45 1.5 0.818359)" fill="#1D1D1D" />
-                            <rect x="5.58984" y="4.90918" width="5.78538" height="1.28564" transform="rotate(135 5.58984 4.90918)" fill="#1D1D1D" />
-                        </svg>
-                    </div>
-                </div>
-            </a>
-        </li>
-
-        <li class="category-list-item">
-            <a href="/product-sidebar">
-                <div class="dropdown-item d-flex justify-content-between align-items-center">
-                    <div class="dropdown-list-item d-flex">
-                        <span class="dropdown-text">DopePrints</span>
-                    </div>
-                    <div class="drop-down-list-icon">
-                        <svg width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="1.5" y="0.818359" width="5.78538" height="1.28564" transform="rotate(45 1.5 0.818359)" fill="#1D1D1D" />
-                            <rect x="5.58984" y="4.90918" width="5.78538" height="1.28564" transform="rotate(135 5.58984 4.90918)" fill="#1D1D1D" />
-                        </svg>
-                    </div>
-                </div>
-            </a>
-        </li>
-
-        <li class="category-list-item">
-            <a href="/product-sidebar">
-                <div class="dropdown-item d-flex justify-content-between align-items-center">
-                    <div class="dropdown-list-item d-flex">
-                        <span class="dropdown-text">NovaCut</span>
-                    </div>
-                    <div class="drop-down-list-icon">
-                        <svg width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="1.5" y="0.818359" width="5.78538" height="1.28564" transform="rotate(45 1.5 0.818359)" fill="#1D1D1D" />
-                            <rect x="5.58984" y="4.90918" width="5.78538" height="1.28564" transform="rotate(135 5.58984 4.90918)" fill="#1D1D1D" />
-                        </svg>
-                    </div>
-                </div>
-            </a>
-        </li>
-
-    </ul>
-</div>
+                        <div class="category-dropdown position-absolute" id="subMenu">
+                            <ul class="category-list">
+                                <li class="category-list-item">
+                                    <a href="/product-sidebar">
+                                        <div class="dropdown-item">
+                                            <div class="dropdown-list-item">
+                                                <span class="dropdown-text">
+                                                    Fotografia
+                                                </span>
+                                            </div>
+                                            <div class="drop-down-list-icon">
+                                                <span>
+                                                    <svg width="6" height="9" viewBox="0 0 6 9" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <rect x="1.5" y="0.818359" width="5.78538" height="1.28564"
+                                                            transform="rotate(45 1.5 0.818359)" fill="#1D1D1D" />
+                                                        <rect x="5.58984" y="4.90918" width="5.78538" height="1.28564"
+                                                            transform="rotate(135 5.58984 4.90918)" fill="#1D1D1D" />
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="category-list-item">
+                                    <a href="/product-sidebar">
+                                        <div class="dropdown-item d-flex justify-content-between align-items-center">
+                                            <div class="dropdown-list-item d-flex">
+                                                <span class="dropdown-text">
+                                                    Impresion 3D
+                                                </span>
+                                            </div>
+                                            <div class="drop-down-list-icon">
+                                                <span>
+                                                    <svg width="6" height="9" viewBox="0 0 6 9" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <rect x="1.5" y="0.818359" width="5.78538" height="1.28564"
+                                                            transform="rotate(45 1.5 0.818359)" />
+                                                        <rect x="5.58984" y="4.90918" width="5.78538" height="1.28564"
+                                                            transform="rotate(135 5.58984 4.90918)" />
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="category-list-item">
+                                    <a href="/product-sidebar">
+                                        <div class="dropdown-item d-flex justify-content-between align-items-center">
+                                            <div class="dropdown-list-item d-flex">
+                                                <span class="dropdown-text">
+                                                    Cursos
+                                                </span>
+                                            </div>
+                                            <div class="drop-down-list-icon">
+                                                <span>
+                                                    <svg width="6" height="9" viewBox="0 0 6 9" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <rect x="1.5" y="0.818359" width="5.78538" height="1.28564"
+                                                            transform="rotate(45 1.5 0.818359)" />
+                                                        <rect x="5.58984" y="4.90918" width="5.78538" height="1.28564"
+                                                            transform="rotate(135 5.58984 4.90918)" />
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="category-list-item">
+                                    <a href="/product-sidebar">
+                                        <div class="dropdown-item d-flex justify-content-between align-items-center">
+                                            <div class="dropdown-list-item d-flex">
+                                                <span class="dropdown-text">
+                                                    Cortadora Laser
+                                                </span>
+                                            </div>
+                                            <div class="drop-down-list-icon">
+                                                <span>
+                                                    <svg width="6" height="9" viewBox="0 0 6 9" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <rect x="1.5" y="0.818359" width="5.78538" height="1.28564"
+                                                            transform="rotate(45 1.5 0.818359)" />
+                                                        <rect x="5.58984" y="4.90918" width="5.78538" height="1.28564"
+                                                            transform="rotate(135 5.58984 4.90918)" />
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="header-nav-menu">
                         <ul class="menu-list">
@@ -953,8 +913,8 @@ Empresas                            </span>
                                 </span>
                             </div>
                             <div class="service-content">
-                                <h5 class="service-info service-title">Free Shipping</h5>
-                                <p class="service-info service-details">When ordering over $100</p>
+                                <h5 class="service-info service-title">Envío gratis</h5>
+                                <p class="service-info service-details">en pedidos mayores a $100</p>
                             </div>
                         </div>
                     </div>
@@ -973,8 +933,8 @@ Empresas                            </span>
                                 </span>
                             </div>
                             <div class="service-content">
-                                <h5 class="service-info service-title">Free Return</h5>
-                                <p class="service-info service-details">Get Return within 30 days</p>
+                                <h5 class="service-info service-title">Devolución gratuita</h5>
+                                <p class="service-info service-details">Obtén devolución dentro de 30 días</p>
                             </div>
                         </div>
                     </div>
@@ -998,8 +958,8 @@ Empresas                            </span>
                                 </span>
                             </div>
                             <div class="service-content">
-                                <h5 class="service-info service-title">Secure Payment</h5>
-                                <p class="service-info service-details">100% Secure Online Payment</p>
+                                <h5 class="service-info service-title">Pago Seguro</h5>
+                                <p class="service-info service-details">100% Pago Online Seguro</p>
                             </div>
                         </div>
                     </div>
@@ -1024,8 +984,8 @@ Empresas                            </span>
                                 </span>
                             </div>
                             <div class="service-content">
-                                <h5 class="service-info service-title">Best Quality</h5>
-                                <p class="service-info service-details">Original Product Guarenteed</p>
+                                <h5 class="service-info service-title">Mejor Calidad</h5>
+                                <p class="service-info service-details">Producto Original Garantizado</p>
                             </div>
                         </div>
                     </div>
@@ -1036,13 +996,13 @@ Empresas                            </span>
                     <div class="col-lg-3 col-sm-6">
                         <div class="footer-order">
                             <div class="logo">
-                                <img src="<?= asset('assets/images/logos/footer-logo.webp') ?>" alt="logo">
+                                <img src="<?= asset('assets/images/logos/logoutpmarket.png') ?>" alt="logo" width="300" height="100">
                             </div>
                             <div class="footer-link order-link">
                                 <ul>
-                                    <li><a href="/order">Track Order</a></li>
-                                    <li><a href="/cart">Delivery & Returns</a></li>
-                                    <li><a href="/about">Warranty</a></li>
+                                    <li><a href="/order">Seguimiento de Pedido</a></li>
+                                    <li><a href="/terms">Entrega y Devoluciones</a></li>
+                                    <li><a href="/terms">Garantía</a></li>
                                 </ul>
                             </div>
 
@@ -1051,14 +1011,14 @@ Empresas                            </span>
                     <div class="col-lg-3 col-sm-6">
                         <div class="about-us">
                             <h4 class="footer-heading footer-title">
-                                About Us
+                                Sobre nosotros
                             </h4>
                             <div class="footer-link about-link">
                                 <ul>
-                                    <li><a href="/about">Rave’s Story</a></li>
-                                    <li><a href="/about">Work With Us</a></li>
-                                    <li><a href="/about">Coporate News</a></li>
-                                    <li><a href="/about">Investors</a></li>
+                                    <li><a href="/about">Nuestra historia</a></li>
+                                    <li><a href="/about">Trabaja con nosotros</a></li>
+                                    <li><a href="/blogs-details">Blog</a></li>
+                                    <li><a href="/about">Inversores</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -1066,14 +1026,14 @@ Empresas                            </span>
                     <div class="col-lg-3 col-sm-6">
                         <div class="links">
                             <h4 class="footer-heading footer-title">
-                                Useful Links
+                                Links útiles
                             </h4>
                             <div class="footer-link useful-link">
                                 <ul>
-                                    <li><a href="/about">Secure Payment</a></li>
-                                    <li><a href="/privacy">Privacy Policy</a></li>
-                                    <li><a href="/terms">Terms of Use</a></li>
-                                    <li><a href="/product-sidebar">Archived Products</a></li>
+                                    <li><a href="/about">Pago Seguro</a></li>
+                                    <li><a href="/privacy">Política de Privacidad</a></li>
+                                    <li><a href="/terms">Términos de Uso</a></li>
+                                    <li><a href="/product-sidebar">Productos Archivados</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -1081,7 +1041,7 @@ Empresas                            </span>
                     <div class="col-lg-3 col-sm-6">
                         <div class="contact-info">
                             <h4 class="footer-heading footer-title">
-                                Contact Info
+                                Información de contacto
                             </h4>
                             <div class="footer-link contact-link">
                                 <div class="address">
@@ -1108,8 +1068,8 @@ Empresas                            </span>
                                         </span>
                                     </div>
                                     <div class="details">
-                                        <h4 class="footer-heading">Address:</h4>
-                                        <p>4517 Washington Ave. Manchester, Kentucky 39495</p>
+                                        <h4 class="footer-heading">Dirección:</h4>
+                                        <p>Universidad Tecnológica del Poniente, Centro, 97800 Maxcanú, Yuc.</p>
                                     </div>
                                 </div>
                                 <div class="phone address">
@@ -1133,7 +1093,7 @@ Empresas                            </span>
                                         </span>
                                     </div>
                                     <div class="details">
-                                        <h4 class="footer-heading">Phone:</h4>
+                                        <h4 class="footer-heading">Teléfono:</h4>
                                         <p>+880171889547</p>
                                     </div>
                                 </div>
