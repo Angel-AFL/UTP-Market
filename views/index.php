@@ -507,41 +507,49 @@
                 <h5>Empresas</h5>
                 <a href="/product-sidebar" class="view">Ver Todo</a>
             </div>
-            <div class="brand-section">
-                <div class="product-wrapper">
-                    <div class="wrapper-img">
-                        <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/dopeprints.jpg" loading="lazy" alt="img">
-                        </a>
+
+            <div class="brand-carousel">
+                <button class="brand-nav prev" aria-label="Anterior">
+                    <i class="ri-arrow-left-s-line"></i>
+                </button>
+
+                <div class="brand-track-wrap">
+                    <div class="brand-track" id="brandTrack">
+                        <div class="brand-item">
+                            <a href="/product-sidebar">
+                                <img src="assets/images/homepage-one/dopeprints.jpg" alt="Dopeprints">
+                            </a>
+                        </div>
+                        <div class="brand-item">
+                            <a href="/product-sidebar">
+                                <img src="assets/images/homepage-one/inovabot.jpg" alt="Inovabot">
+                            </a>
+                        </div>
+                        <div class="brand-item">
+                            <a href="/product-sidebar">
+                                <img src="assets/images/homepage-one/novacut.jpg" alt="Novacut">
+                            </a>
+                        </div>
+                        <div class="brand-item">
+                            <a href="/product-sidebar">
+                                <img src="assets/images/homepage-one/creatics.jpg" alt="Creatics">
+                            </a>
+                        </div>
+                        <div class="brand-item">
+                            <a href="/product-sidebar">
+                                <img src="assets/images/homepage-one/aerial.jpg" alt="Aerial">
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <div class="product-wrapper">
-                    <div class="wrapper-img">
-                        <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/inovabot.jpg" loading="lazy" alt="img">
-                        </a>
-                    </div>
-                </div>
-                <div class="product-wrapper">
-                    <div class="wrapper-img">
-                        <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/novacut.jpg" loading="lazy" alt="img">
-                        </a>
-                    </div>
-                </div>
-                <div class="product-wrapper">
-                    <div class="wrapper-img">
-                        <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/creatics.jpg" loading="lazy" alt="img">
-                        </a>
-                    </div>
-                </div>
-                <div class="product-wrapper">
-                    <div class="wrapper-img">
-                        <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/aerial.jpg"  loading="lazy" alt="img">
-                        </a>
-                    </div>
+
+                <button class="brand-nav next" aria-label="Siguiente">
+                    <i class="ri-arrow-right-s-line"></i>
+                </button>
+            </div>
+
+            <div class="brand-dots" id="brandDots"></div>
+        </div>
     </section>
     <!-- brand-section-end -->
 

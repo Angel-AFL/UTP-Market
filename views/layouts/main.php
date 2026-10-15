@@ -33,17 +33,16 @@
 
 <body>
 
-
     <!--------------- header-section --------------->
     <header id="header" class="header">
     <?php require __DIR__ . '/../partials/header-top.php'; ?>
     <?php require __DIR__ . '/../partials/header-bottom.php'; ?>
     </header>
 
-<?= $content ?? "" ?>
+    <?= $content ?? "" ?>
 
-<!--------------- footer-section--------------->
-   <section class="product footer">
+    <!--------------- footer-section--------------->
+    <section class="product footer">
         <div class="container">
             <div class="footer-service-section">
                 <div class="row gy-4">
