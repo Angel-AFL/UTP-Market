@@ -238,15 +238,19 @@
                                     <a href="#" class="cart cart-item"><span>...</span></a>
                                 </div>
                             </div>
-                            <div class="product-info">
-                                <div class="product-description">
-                                    <a href="/product-info" class="product-details">Prototipo 3D Personalizado</a>
-                                    <div class="price">
-                                        <span class="price-cut"></span>
-                                        <span class="new-price"></span>
-                                    </div>
+                        <div class="product-info">
+                            <div class="product-description">
+                                <a href="/product-info" class="product-details">Llaveros en 3D</a>
+                                <div class="price">
+                                    <span class="price-cut"></span>
+                                    <span class="new-price">$35</span>
+                                    <a href="/detalle-producto?slug=llaveros"
+                                    class="product-details-btn">
+                                        Ver detalles <span aria-hidden="true">→</span>
+                                    </a>
                                 </div>
                             </div>
+                        </div>
                             <div class="product-cart-btn">
                                 <a href="/cart" class="product-btn">Añadir al Carrito</a>
                             </div>
@@ -262,7 +266,12 @@
                                     <a href="/product-info" class="product-details">Fotos estilo  polaroid</a>
                                     <div class="price">
                                         <span class="price-cut"></span>
-                                        <span class="new-price"></span>
+                                        <span class="new-price">$50</span>
+
+                                    <a href="/detalle-producto?slug=fotos-estilo-polaroid"
+                                    class="product-details-btn">
+                                        Ver detalles <span aria-hidden="true">→</span>
+                                    </a>
                                     </div>
                                 </div>
                             </div>
@@ -278,10 +287,15 @@
                             </div>
                             <div class="product-info">
                                 <div class="product-description">
-                                    <a href="/product-info" class="product-details">Taza Sublimada Personalizada</a>
+                                    <a href="/product-info" class="product-details">Taza Sublimada</a>
                                     <div class="price">
                                         <span class="price-cut"></span>
-                                        <span class="new-price"></span>
+                                        <span class="new-price">$80</span>
+
+                                    <a href="/detalle-producto?slug=taza-sublimada-personalizada"
+                                    class="product-details-btn">
+                                        Ver detalles <span aria-hidden="true">→</span>
+                                    </a>
                                     </div>
                                 </div>
                             </div>
@@ -300,7 +314,12 @@
                                     <a href="/product-info" class="product-details">Portacelular Corte Láser</a>
                                     <div class="price">
                                         <span class="price-cut"></span>
-                                        <span class="new-price"></span>
+                                        <span class="new-price">$40</span>
+
+                                        <a href="/detalle-producto?slug=portacelular-corte-laser"
+                                        class="product-details-btn">
+                                            Ver detalles <span aria-hidden="true">→</span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
