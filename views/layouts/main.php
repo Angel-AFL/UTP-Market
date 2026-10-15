@@ -20,7 +20,7 @@
     <meta property="og:type" content="website">
 
     <!-- Favicon -->
-    <link rel="icon" href="<?= asset('assets/images/homepage-one/icon.png') ?>">
+    <link rel="icon" href="<?= asset('assets/images/homepage-one/logoarriba.png') ?>">
 
     <!-- ARCHIVOS CSS -->
     <link rel="stylesheet" href="<?= asset('assets/css/swiper10-bundle.min.css') ?>">
