@@ -846,8 +846,13 @@
                                         <div class="menu-list">
                                             <h5 class="menu-title">Cortadora Láser</h5>
                                             <ul>
-                                                <li><a href="/product-sidebar?servicio=grabado-en-madera">Grabado en Madera</a></li>
-                                                <li><a href="/product-sidebar">Corte en Acrílico</a></li>
+                                                <li>
+    <a href="<?= url('grabado-en-madera.php') ?>">
+        Grabado en Madera
+    </a>
+</li>
+                                               <li>
+    <a href="<?= htmlspecialchars( url('corte-en-acrilico.php'),ENT_QUOTES,'UTF-8') ?>">Corte en Acrílico</a></li>
                                                 <li><a href="/product-sidebar">Letreros y Señalética</a></li>
                                                 <li><a href="/product-sidebar">Reconocimientos y Trofeos</a></li>
                                             </ul>
@@ -867,7 +872,7 @@
                                                 <li><a href="/product-sidebar">Fotografía de Producto</a></li>
                                                 <li><a href="/product-sidebar">Sesiones de Estudio</a></li>
                                                 <li><a href="/product-sidebar">Impresión en Cuadros</a></li>
-                                                <li><a href="/product-sidebar">Restauración Digital</a></li>
+                                               <li><a href="/product-sidebar?servicio=restauracion-digital">Restauración Digital</a></li>
                                             </ul>
                                         </div>
                                         <div class="menu-list">
