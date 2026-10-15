@@ -851,7 +851,8 @@
         Grabado en Madera
     </a>
 </li>
-                                                <li><a href="/product-sidebar">Corte en Acrílico</a></li>
+                                               <li>
+    <a href="<?= htmlspecialchars( url('corte-en-acrilico.php'),ENT_QUOTES,'UTF-8') ?>">Corte en Acrílico</a></li>
                                                 <li><a href="/product-sidebar">Letreros y Señalética</a></li>
                                                 <li><a href="/product-sidebar">Reconocimientos y Trofeos</a></li>
                                             </ul>

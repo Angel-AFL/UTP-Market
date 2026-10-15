@@ -6,54 +6,28 @@
 
 $imagenPrincipal = ''; // Imagen grande de portada (foto del láser grabando)
 
-$pasos = [
-    [
-        'titulo'      => 'Diseño del archivo',
-        'descripcion' => 'Preparamos tu nombre, logotipo o frase en un archivo vectorial o de imagen, ajustando tamaño y posición sobre la pieza.',
-        'imagen'      => 'assets/images/grabado/paso1.png',
-    ],
-    [
-        'titulo'      => 'Selección y preparación de la madera',
-        'descripcion' => 'Elegimos el tipo de madera (MDF, pino, triplay, bambú, etc.) y limpiamos la superficie para obtener un grabado uniforme.',
-        'imagen'      => 'assets/images/grabado/paso2.png',
-    ],
-    [
-        'titulo'      => 'Configuración del láser',
-        'descripcion' => 'Ajustamos potencia, velocidad y enfoque según el material y el nivel de detalle del diseño.',
-        'imagen'      => '',
-    ],
-    [
-        'titulo'      => 'Grabado láser',
-        'descripcion' => 'El rayo láser quema la superficie siguiendo el diseño, dejando un grabado preciso, permanente y con tono oscuro.',
-        'imagen'      => '',
-    ],
-    [
-        'titulo'      => 'Limpieza y acabado',
-        'descripcion' => 'Retiramos residuos y, si lo deseas, aplicamos barniz o sellador para proteger y resaltar la pieza.',
-        'imagen'      => '',
-    ],
-];
+
 
 $productosMadera = [
     [
         'nombre'      => 'Letreros personalizados',
         'descripcion' => 'Letreros de madera con nombres, frases o logotipos para tu negocio y eventos.',
-        'imagen'      => '',
+        'imagen'      => 'assets/images/grabado/letrero.jpeg',
     ],
     [
         'nombre'      => 'Llaveros grabados',
         'descripcion' => 'Llaveros de madera personalizados con iniciales, nombres o diseños especiales.',
-        'imagen'      => '',
+        'imagen'      => 'assets/images/grabado/llaveros.jpeg',
     ],
     [
         'nombre'      => 'Reconocimientos en madera',
         'descripcion' => 'Piezas grabadas para reconocer logros académicos, deportivos o laborales.',
-        'imagen'      => '',
+        'imagen'      => 'assets/images/grabado/reconocimiento.jpeg',
     ],
     [
         'nombre'      => 'Recuerdos para eventos',
         'descripcion' => 'Detalles personalizados para cumpleaños, bodas, bautizos y otras celebraciones.',
-        'imagen'      => '',
+        'imagen'      => 'assets/images/grabado/recuerdos.jpeg',
     ],
 ];
 
@@ -121,29 +95,7 @@ $mostrarImagen = function (string $ruta, string $alt, string $textoPlaceholder, 
         </div>
 
         <!-- PROCESO -->
-        <div class="mb-5">
-            <span class="madera-etiqueta">Proceso</span>
-            <h2 class="madera-h2">¿Cómo se hace el grabado láser en madera?</h2>
-
-            <div class="madera-pasos">
-                <?php foreach ($pasos as $i => $paso): ?>
-                    <div class="row align-items-center g-4 madera-paso <?= $i % 2 === 1 ? 'flex-lg-row-reverse' : '' ?>">
-                        <div class="col-lg-6">
-                            <?php $mostrarImagen($paso['imagen'], $paso['titulo'], 'Imagen del paso ' . ($i + 1), 'madera-paso-img'); ?>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="madera-numero"><?= $i + 1 ?></div>
-                            <h3 class="madera-paso-titulo">
-                                <?= htmlspecialchars($paso['titulo'], ENT_QUOTES, 'UTF-8') ?>
-                            </h3>
-                            <p class="mb-0">
-                                <?= htmlspecialchars($paso['descripcion'], ENT_QUOTES, 'UTF-8') ?>
-                            </p>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </div>
+       
 
         <!-- GALERÍA -->
         <div class="mb-5">
@@ -197,17 +149,32 @@ $mostrarImagen = function (string $ruta, string $alt, string $textoPlaceholder, 
 </section>
 
 <style>
+    /* Paleta rojo vino */
+    :root {
+        --vino-principal: #722F37;
+        --vino-oscuro:    #4A1520;
+        --vino-medio:     #5E2029;
+        --vino-suave:     #F6E7E9;
+        --vino-fondo:     #FBF1F2;
+        --vino-borde:     #E6D0D3;
+        --vino-dash:      #D9AEB4;
+    }
+
     .madera-volver {
         color: #666;
         text-decoration: none;
+    }
+
+    .madera-volver:hover {
+        color: var(--vino-principal);
     }
 
     .madera-etiqueta {
         display: inline-block;
         padding: 5px 14px;
         border-radius: 999px;
-        background: #f3e6d4;
-        color: #765331;
+        background: var(--vino-suave);
+        color: var(--vino-principal);
         font-size: 13px;
         font-weight: 600;
         letter-spacing: .04em;
@@ -216,14 +183,14 @@ $mostrarImagen = function (string $ruta, string $alt, string $textoPlaceholder, 
 
     .madera-h1 {
         margin-top: 16px;
-        color: #3f2a14;
+        color: var(--vino-oscuro);
         font-size: clamp(32px, 5vw, 46px);
         line-height: 1.15;
     }
 
     .madera-h2 {
         margin: 12px 0 28px;
-        color: #3f2a14;
+        color: var(--vino-oscuro);
         font-size: clamp(24px, 3.5vw, 32px);
     }
 
@@ -253,9 +220,9 @@ $mostrarImagen = function (string $ruta, string $alt, string $textoPlaceholder, 
         justify-content: center;
         gap: 8px;
         padding: 24px;
-        border: 2px dashed #d9c3a3;
-        background: #f3e6d4;
-        color: #765331;
+        border: 2px dashed var(--vino-dash);
+        background: var(--vino-suave);
+        color: var(--vino-principal);
         font-size: 16px;
         font-weight: 600;
         text-align: center;
@@ -276,13 +243,14 @@ $mostrarImagen = function (string $ruta, string $alt, string $textoPlaceholder, 
     .madera-ventaja {
         height: 100%;
         padding: 22px;
-        border: 1px solid #e8ddce;
+        border: 1px solid var(--vino-borde);
+        border-top: 4px solid var(--vino-principal);
         border-radius: 16px;
         background: #fff;
     }
 
     .madera-ventaja h4 {
-        color: #644326;
+        color: var(--vino-medio);
         font-size: 18px;
     }
 
@@ -305,7 +273,7 @@ $mostrarImagen = function (string $ruta, string $alt, string $textoPlaceholder, 
         height: 44px;
         margin-bottom: 12px;
         border-radius: 50%;
-        background: #8a5a2b;
+        background: var(--vino-principal);
         color: #fff;
         font-size: 20px;
         font-weight: 700;
@@ -313,7 +281,7 @@ $mostrarImagen = function (string $ruta, string $alt, string $textoPlaceholder, 
 
     .madera-paso-titulo {
         margin-bottom: 10px;
-        color: #644326;
+        color: var(--vino-medio);
         font-size: 24px;
     }
 
@@ -327,14 +295,20 @@ $mostrarImagen = function (string $ruta, string $alt, string $textoPlaceholder, 
     .madera-card {
         height: 100%;
         overflow: hidden;
-        border: 1px solid #e8ddce;
+        border: 1px solid var(--vino-borde);
         border-radius: 16px;
         background: #fff;
-        box-shadow: 0 5px 18px rgba(80, 53, 27, 0.06);
+        box-shadow: 0 5px 18px rgba(114, 47, 55, 0.08);
+        transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .madera-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 26px rgba(114, 47, 55, 0.18);
     }
 
     .madera-titulo {
-        color: #644326;
+        color: var(--vino-medio);
         font-size: 20px;
     }
 
@@ -346,12 +320,13 @@ $mostrarImagen = function (string $ruta, string $alt, string $textoPlaceholder, 
     /* Nota final */
     .madera-nota {
         padding: 32px;
+        border-left: 6px solid var(--vino-principal);
         border-radius: 16px;
-        background: #faf4eb;
+        background: var(--vino-fondo);
     }
 
     .madera-nota h3 {
-        color: #644326;
+        color: var(--vino-medio);
     }
 
     .madera-nota p {
