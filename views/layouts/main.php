@@ -1,41 +1,36 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 
-
-<!-- Mirrored from quomodothemes.website/html/shopus/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Dec 2024 13:15:33 GMT -->
 <head>
     <meta charset="utf-8">
-    <meta name="keywords"
-        content="ShopUS, bootstrap-5, bootstrap, sass, css, HTML Template, HTML,html, bootstrap template, free template, figma, web design, web development,front end, bootstrap datepicker, bootstrap timepicker, javascript, ecommerce template">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- SEO BÁSICO -->
+    <title>UTP-MARKET | Mercado de Servicios Universitarios</title>
+    <meta name="description" content="Descubre y ofrece servicios en UTP-MARKET: Impresión 3D, corte láser, playeras personalizadas, fotografía, cursos y más para la comunidad universitaria.">
+    <meta name="keywords" content="UTP, mercado universitario, impresión 3D, corte láser, playeras personalizadas, fotografía, cursos, servicios UTP">
+    <meta name="author" content="UTP-MARKET">
+    <meta name="robots" content="index, follow">
+
+    <!-- OPEN GRAPH (Para compartir en WhatsApp, Facebook) -->
+    <meta property="og:title" content="UTP-MARKET | Mercado de Servicios Universitarios">
+    <meta property="og:description" content="Descubre servicios de impresión 3D, corte láser, fotografía y más en UTP-MARKET.">
+    <meta property="og:image" content="<?= asset('assets/images/logos/logoutpmarket.png') ?>">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
     <link rel="icon" href="<?= asset('assets/images/homepage-one/icon.png') ?>">
 
-    <!--title  -->
-    <title>UTP-MARKET</title>
-
-
+    <!-- ARCHIVOS CSS -->
     <link rel="stylesheet" href="<?= asset('assets/css/swiper10-bundle.min.css') ?>">
-
-    <!--------------- bootstrap-css ---------------->
     <link rel="stylesheet" href="<?= asset('assets/css/bootstrap-5.3.2.min.css') ?>">
-
-    <!---------------------- Range Slider ------------------->
     <link rel="stylesheet" href="<?= asset('assets/css/nouislider.min.css') ?>">
-
-    <!---------------------- Scroll ------------------->
     <link rel="stylesheet" href="<?= asset('assets/css/aos-3.0.0.css') ?>">
-
-    <!--------------- additional-css ---------------->
     <link rel="stylesheet" href="<?= asset('assets/css/style.css') ?>">
-    
-    <!-- Chatbot CSS -->
     <link rel="stylesheet" href="<?= asset('assets/css/chatbot.css') ?>">
-
 </head>
 
-<body >
+<body>
 
 
     <!--------------- header-section --------------->
