@@ -381,10 +381,6 @@
                                 <a href="/product-sidebar">
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
-                                            <span class="dropdown-img">
-                                                <img src="<?= asset('assets/images/homepage-one/category-img/dresses.webp') ?>"
-                                                    alt="dress">
-                                            </span>
                                             <span class="dropdown-text">
                                                 Dresses
                                             </span>
@@ -407,10 +403,6 @@
                                 <a href="/product-sidebar">
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
-                                            <span class="dropdown-img">
-                                                <img src="<?= asset('assets/images/homepage-one/category-img/bags.webp') ?>"
-                                                    alt="Bags">
-                                            </span>
                                             <span class="dropdown-text">
                                                 Bags
                                             </span>
@@ -433,10 +425,6 @@
                                 <a href="/product-sidebar">
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
-                                            <span class="dropdown-img">
-                                                <img src="<?= asset('assets/images/homepage-one/category-img/sweaters.webp') ?>"
-                                                    alt="sweaters">
-                                            </span>
                                             <span class="dropdown-text">
                                                 Sweaters
                                             </span>
@@ -459,10 +447,6 @@
                                 <a href="/product-sidebar">
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
-                                            <span class="dropdown-img">
-                                                <img src="<?= asset('assets/images/homepage-one/category-img/shoes.webp') ?>"
-                                                    alt="sweaters">
-                                            </span>
                                             <span class="dropdown-text">
                                                 Boots
                                             </span>
@@ -485,10 +469,6 @@
                                 <a href="/product-sidebar">
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
-                                            <span class="dropdown-img">
-                                                <img src="<?= asset('assets/images/homepage-one/category-img/gift.webp') ?>"
-                                                    alt="gift">
-                                            </span>
                                             <span class="dropdown-text">
                                                 Gifts
                                             </span>
@@ -511,10 +491,6 @@
                                 <a href="/product-sidebar">
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
-                                            <span class="dropdown-img">
-                                                <img src="<?= asset('assets/images/homepage-one/category-img/sneakers.webp') ?>"
-                                                    alt="sneakers">
-                                            </span>
                                             <span class="dropdown-text">
                                                 Sneakers
                                             </span>
@@ -537,10 +513,6 @@
                                 <a href="/product-sidebar">
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
-                                            <span class="dropdown-img">
-                                                <img src="<?= asset('assets/images/homepage-one/category-img/watch.webp') ?>"
-                                                    alt="watch">
-                                            </span>
                                             <span class="dropdown-text">
                                                 Watches
                                             </span>
@@ -563,10 +535,6 @@
                                 <a href="/product-sidebar">
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
-                                            <span class="dropdown-img">
-                                                <img src="<?= asset('assets/images/homepage-one/category-img/ring.webp') ?>"
-                                                    alt="ring">
-                                            </span>
                                             <span class="dropdown-text">
                                                 Gold Ring
                                             </span>
@@ -589,9 +557,6 @@
                                 <a href="/product-sidebar">
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
-                                            <span class="dropdown-img">
-                                                <img src="<?= asset('assets/images/homepage-one/category-img/cap.webp') ?>" alt="cap">
-                                            </span>
                                             <span class="dropdown-text">
                                                 Cap
                                             </span>
@@ -614,10 +579,6 @@
                                 <a href="/product-sidebar">
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
-                                            <span class="dropdown-img">
-                                                <img src="<?= asset('assets/images/homepage-one/category-img/glass.webp') ?>"
-                                                    alt="glass">
-                                            </span>
                                             <span class="dropdown-text">
                                                 Sunglasses
                                             </span>
@@ -640,10 +601,6 @@
                                 <a href="/product-sidebar">
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
-                                            <span class="dropdown-img">
-                                                <img src="<?= asset('assets/images/homepage-one/category-img/baby.webp') ?>"
-                                                    alt="baby">
-                                            </span>
                                             <span class="dropdown-text">
                                                 Baby Shop
                                             </span>
@@ -692,10 +649,6 @@
                                     <a href="/product-sidebar">
                                         <div class="dropdown-item">
                                             <div class="dropdown-list-item">
-                                                <span class="dropdown-img">
-                                                    <img src="<?= asset('assets/images/homepage-one/category-img/dresses.webp') ?>"
-                                                        alt="dress">
-                                                </span>
                                                 <span class="dropdown-text">
                                                     Fotografia
                                                 </span>
@@ -718,10 +671,6 @@
                                     <a href="/product-sidebar">
                                         <div class="dropdown-item d-flex justify-content-between align-items-center">
                                             <div class="dropdown-list-item d-flex">
-                                                <span class="dropdown-img">
-                                                    <img src="<?= asset('assets/img/categorias/3d.png') ?>"
-                                                        alt="Bags">
-                                                </span>
                                                 <span class="dropdown-text">
                                                     Impresion 3D
                                                 </span>
@@ -744,10 +693,6 @@
                                     <a href="/product-sidebar">
                                         <div class="dropdown-item d-flex justify-content-between align-items-center">
                                             <div class="dropdown-list-item d-flex">
-                                                <span class="dropdown-img">
-                                                    <img src="<?= asset('assets/images/homepage-one/category-img/sweaters.webp') ?>"
-                                                        alt="sweaters">
-                                                </span>
                                                 <span class="dropdown-text">
                                                     Cursos
                                                 </span>
@@ -770,10 +715,6 @@
                                     <a href="/product-sidebar">
                                         <div class="dropdown-item d-flex justify-content-between align-items-center">
                                             <div class="dropdown-list-item d-flex">
-                                                <span class="dropdown-img">
-                                                    <img src="<?= asset('assets/images/homepage-one/category-img/shoes.webp') ?>"
-                                                        alt="sweaters">
-                                                </span>
                                                 <span class="dropdown-text">
                                                     Cortadora Laser
                                                 </span>
