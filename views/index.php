@@ -481,50 +481,148 @@
     </section>-->
     <!--------------- category-section-end--------------->
 
-    <!--------------- brand-section--------------->
+    <!-- brand-section -->
     <section class="product brand" data-aos="fade-up">
         <div class="container">
             <div class="section-title">
                 <h5>Empresas</h5>
                 <a href="/product-sidebar" class="view">Ver Todo</a>
             </div>
-            <div class="brand-section">
-                <div class="product-wrapper">
-                    <div class="wrapper-img">
-                        <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/dopeprints.jpg" alt="img">
-                        </a>
+
+            <div class="brand-carousel">
+                <button class="brand-nav prev" aria-label="Anterior">
+                    <i class="ri-arrow-left-s-line"></i>
+                </button>
+
+                <div class="brand-track-wrap">
+                    <div class="brand-track" id="brandTrack">
+                        <div class="brand-item">
+                            <a href="/product-sidebar">
+                                <img src="assets/images/homepage-one/dopeprints.jpg" alt="Dopeprints">
+                            </a>
+                        </div>
+                        <div class="brand-item">
+                            <a href="/product-sidebar">
+                                <img src="assets/images/homepage-one/inovabot.jpg" alt="Inovabot">
+                            </a>
+                        </div>
+                        <div class="brand-item">
+                            <a href="/product-sidebar">
+                                <img src="assets/images/homepage-one/novacut.jpg" alt="Novacut">
+                            </a>
+                        </div>
+                        <div class="brand-item">
+                            <a href="/product-sidebar">
+                                <img src="assets/images/homepage-one/creatics.jpg" alt="Creatics">
+                            </a>
+                        </div>
+                        <div class="brand-item">
+                            <a href="/product-sidebar">
+                                <img src="assets/images/homepage-one/aerial.jpg" alt="Aerial">
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <div class="product-wrapper">
-                    <div class="wrapper-img">
-                        <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/inovabot.jpg" alt="img">
-                        </a>
-                    </div>
-                </div>
-                <div class="product-wrapper">
-                    <div class="wrapper-img">
-                        <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/novacut.jpg" alt="img">
-                        </a>
-                    </div>
-                </div>
-                <div class="product-wrapper">
-                    <div class="wrapper-img">
-                        <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/creatics.jpg" alt="img">
-                        </a>
-                    </div>
-                </div>
-                <div class="product-wrapper">
-                    <div class="wrapper-img">
-                        <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/aerial.jpg" alt="img">
-                        </a>
-                    </div>
+
+                <button class="brand-nav next" aria-label="Siguiente">
+                    <i class="ri-arrow-right-s-line"></i>
+                </button>
+            </div>
+
+            <div class="brand-dots" id="brandDots"></div>
+        </div>
     </section>
-    <!--------------- brand-section-end--------------->
+    <!-- brand-section-end -->
+
+    <!-- ===== Script del carrusel Empresas ===== -->
+    <script>
+    (function () {
+        const track    = document.getElementById('brandTrack');
+        const dotsWrap = document.getElementById('brandDots');
+        const prevBtn  = document.querySelector('.brand-nav.prev');
+        const nextBtn  = document.querySelector('.brand-nav.next');
+
+        if (!track) return;
+
+        const items = Array.from(track.children);
+        let index = 0;
+
+        function getVisible() {
+            const w = window.innerWidth;
+            if (w <= 575) return 1;
+            if (w <= 991) return 2;
+            return 3;
+        }
+
+        function maxIndex() {
+            return Math.max(0, items.length - getVisible());
+        }
+
+        function buildDots() {
+            dotsWrap.innerHTML = '';
+            const total = maxIndex() + 1;
+            for (let i = 0; i < total; i++) {
+                const btn = document.createElement('button');
+                btn.addEventListener('click', () => {
+                    index = i;
+                    update();
+                });
+                dotsWrap.appendChild(btn);
+            }
+        }
+
+        function update() {
+            const itemWidth = items[0].getBoundingClientRect().width;
+            const gap = parseFloat(getComputedStyle(track).gap) || 0;
+
+            if (index > maxIndex()) index = maxIndex();
+            if (index < 0) index = 0;
+
+            const offset = index * (itemWidth + gap);
+            track.style.transform = 'translateX(-' + offset + 'px)';
+
+            prevBtn.disabled = index <= 0;
+            nextBtn.disabled = index >= maxIndex();
+
+            dotsWrap.querySelectorAll('button').forEach(function (d, i) {
+                d.classList.toggle('active', i === index);
+            });
+        }
+
+        prevBtn.addEventListener('click', function () { index--; update(); });
+        nextBtn.addEventListener('click', function () { index++; update(); });
+
+        // Autoplay
+        let autoplay = setInterval(function () {
+            index = index >= maxIndex() ? 0 : index + 1;
+            update();
+        }, 4000);
+
+        const carousel = document.querySelector('.brand-carousel');
+        carousel.addEventListener('mouseenter', function () { clearInterval(autoplay); });
+        carousel.addEventListener('mouseleave', function () {
+            autoplay = setInterval(function () {
+                index = index >= maxIndex() ? 0 : index + 1;
+                update();
+            }, 4000);
+        });
+
+        // Recalcular al redimensionar
+        let resizeTimer;
+        window.addEventListener('resize', function () {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function () {
+                index = 0;
+                buildDots();
+                update();
+            }, 200);
+        });
+
+        // Init
+        buildDots();
+        update();
+    })();
+    </script>
 
     <!--------------- arrival-section--------------->
     <!--<section class="product arrival">
