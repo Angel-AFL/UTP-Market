@@ -39,49 +39,26 @@
                                     <ul class="sidebar-list">
                                         <li>
                                             <input type="checkbox" id="thread" name="thread">
-                                            <label for="thread">Refined Threads
+                                            <label for="thread">UTP-Market
                                             </label>
                                         </li>
                                         <li>
                                             <input type="checkbox" id="ethereal" name="ethereal">
-                                            <label for="ethereal">Ethereal Chic</label>
+                                            <label for="ethereal">Personalizado</label>
                                         </li>
                                         <li>
                                             <input type="checkbox" id="yellow" name="yellow">
-                                            <label for="yellow">Yellow</label>
+                                            <label for="yellow">Lecho a mano</label>
                                         </li>
                                         <li>
                                             <input type="checkbox" id="esctasy" name="esctasy">
-                                            <label for="esctasy">Esctasy</label>
+                                            <label for="esctasy">Edieción especial</label>
                                         </li>
                                         <li>
                                             <input type="checkbox" id="urban" name="urban">
-                                            <label for="urban">Urban Hive</label>
+                                            <label for="urban">Coleccion UtP</label>
                                         </li>
-                                        <li>
-                                            <input type="checkbox" id="velvet" name="velvet">
-                                            <label for="velvet">Velvet Vista</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="boldly" name="boldly">
-                                            <label for="boldly">Boldly Blue</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="minted" name="minted">
-                                            <label for="minted">Minted Mode</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="ensemble" name="ensemble">
-                                            <label for="ensemble">Eclectic Ensemble</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="attire" name="attire">
-                                            <label for="attire">BraveAlchemy Attire</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="couture" name="couture">
-                                            <label for="couture">Cascade Couture</label>
-                                        </li>
+                                        
                                     </ul>
                                 </div>
                             </div>
@@ -822,7 +799,7 @@
                             </div>
                             <div class="col-lg-12">
                                 <div class="product-deal-section" data-aos="fade-up">
-                                    <h5 class="wrapper-heading">Get the best deal for Headphones</h5>
+                                    <h5 class="wrapper-heading">Consigue las mejores ofertas en grabado</h5>
                                     <a href="/seller-sidebar" class="shop-btn">Shop Now</a>
                                 </div>
                             </div>
