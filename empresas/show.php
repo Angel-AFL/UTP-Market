@@ -82,7 +82,7 @@ require __DIR__ . '/_layout.php';
             </div>
         </div>
     </div>
-
+dd
     <div class="col-lg-4">
         <div class="img-upload-section">
             <div class="logo-wrapper">
