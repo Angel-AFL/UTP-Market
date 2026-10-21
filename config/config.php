@@ -128,7 +128,7 @@ final class Supabase
      */
     public static function url(): string
     {
-        return rtrim((string) env('SUPABASE_URL', ''), '/');
+        return rtrim((string) (env('PUBLIC_SUPABASE_URL') ?: env('SUPABASE_URL', '')), '/');
     }
 
     /**
@@ -139,6 +139,7 @@ final class Supabase
         return (string) (
             env('SUPABASE_SERVICE_ROLE_KEY')
             ?: env('SUPABASE_SECRET_KEY')
+            ?: env('PUBLIC_SUPABASE_PUBLISHABLE_KEY')
             ?: env('SUPABASE_ANON_KEY')
             ?: env('SUPABASE_KEY')
             ?: ''
@@ -292,4 +293,3 @@ final class Supabase
         return is_array($datos) ? $datos : [];
     }
 }
-
