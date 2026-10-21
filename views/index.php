@@ -26,7 +26,7 @@
                                     </h5>
                                     <h1 class="wrapper-details">Proyectos de Robótica
                                         y Automatización</h1>
-                                    <a href="#" class="shop-btn">Saber Más</a>
+                                    <a href="/product-sidebar" class="shop-btn">Saber Más</a>
                                 </div>
                             </div>
                         </div>
@@ -41,7 +41,7 @@
                                     </h5>
                                     <h1 class="wrapper-details">Sublimación y
                                         Fotografía Profesional</h1>
-                                    <a href="#" class="shop-btn">Ver Catálogo</a>
+                                    <a href="/product-sidebar" class="shop-btn">Ver Catálogo</a>
                                 </div>
                             </div>
                         </div>
@@ -122,7 +122,7 @@
             <div class="category-section">
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="100">
                     <div class="wrapper-img">
-                        <img src="assets/images/homepage-one/category-img/dresses.webp" alt="Corte Láser">
+                        <img src="assets/images/homepage-one/category-img/dresses.webp" alt="Corte Láser" loading="lazy" width="300" height="200">
                     </div>
                     <div class="wrapper-info">
                         <a href="/product-sidebar" class="wrapper-details">Corte Láser</a>
@@ -130,7 +130,7 @@
                 </div>
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="200">
                     <div class="wrapper-img">
-                        <img src="assets/images/homepage-one/category-img/bags.webp" alt="Impresión 3D">
+                        <img src="assets/images/homepage-one/category-img/bags.webp" alt="Impresión 3D" loading="lazy" width="300" height="200">
                     </div>
                     <div class="wrapper-info">
                         <a href="/product-sidebar" class="wrapper-details">Impresión 3D</a>
@@ -138,7 +138,7 @@
                 </div>
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="300">
                     <div class="wrapper-img">
-                        <img src="assets/images/homepage-one/category-img/sweaters.webp" alt="Fotografía">
+                        <img src="assets/images/homepage-one/category-img/sweaters.webp" alt="Fotografía" loading="lazy" width="300" height="200">
                     </div>
                     <div class="wrapper-info">
                         <a href="/product-sidebar" class="wrapper-details">Fotografía</a>
@@ -146,7 +146,7 @@
                 </div>
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="400">
                     <div class="wrapper-img">
-                        <img src="assets/images/homepage-one/category-img/shoes.webp" alt="Robótica">
+                        <img src="assets/images/homepage-one/category-img/shoes.webp" alt="Robótica" loading="lazy" width="300" height="200">
                     </div>
                     <div class="wrapper-info">
                         <a href="/product-sidebar" class="wrapper-details">Robótica</a>
@@ -154,7 +154,7 @@
                 </div>
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="500">
                     <div class="wrapper-img">
-                        <img src="assets/images/homepage-one/category-img/gift.webp" alt="Sublimación">
+                        <img src="assets/images/homepage-one/category-img/gift.webp" alt="Sublimación" loading="lazy" width="300" height="200">
                     </div>
                     <div class="wrapper-info">
                         <a href="/product-sidebar" class="wrapper-details">Sublimación</a>
@@ -232,21 +232,25 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="product-wrapper" data-aos="fade-up">
                             <div class="product-img">
-                                <img src="assets/images/homepage-one/product-img/crea.jpeg" alt="product-img">
+                                <img src="assets/images/homepage-one/product-img/crea.jpeg" alt="Prototipo 3D personalizado" loading="lazy" width="300" height="300">
                                 <!-- Botones de acción flotantes (se mantienen los SVG originales) -->
                                 <div class="product-cart-items">
                                     <a href="#" class="cart cart-item"><span>...</span></a>
                                 </div>
                             </div>
-                            <div class="product-info">
-                                <div class="product-description">
-                                    <a href="/product-info" class="product-details">Prototipo 3D Personalizado</a>
-                                    <div class="price">
-                                        <span class="price-cut"></span>
-                                        <span class="new-price"></span>
-                                    </div>
+                        <div class="product-info">
+                            <div class="product-description">
+                                <a href="/product-info" class="product-details">Llaveros en 3D</a>
+                                <div class="price">
+                                    <span class="price-cut"></span>
+                                    <span class="new-price">$35</span>
+                                    <a href="/detalle-producto?slug=llaveros"
+                                    class="product-details-btn">
+                                        Ver detalles <span aria-hidden="true">→</span>
+                                    </a>
                                 </div>
                             </div>
+                        </div>
                             <div class="product-cart-btn">
                                 <a href="/cart" class="product-btn">Añadir al Carrito</a>
                             </div>
@@ -255,14 +259,19 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="product-wrapper" data-aos="fade-up">
                             <div class="product-img">
-                                <img src="assets/images/homepage-one/product-img/arial.jpeg" alt="product-img">
+                                <img src="assets/images/homepage-one/product-img/arial.jpeg" alt="Fotos estilo polaroid" loading="lazy" width="300" height="300">
                             </div>
                             <div class="product-info">
                                 <div class="product-description">
                                     <a href="/product-info" class="product-details">Fotos estilo  polaroid</a>
                                     <div class="price">
                                         <span class="price-cut"></span>
-                                        <span class="new-price"></span>
+                                        <span class="new-price">$50</span>
+
+                                    <a href="/detalle-producto?slug=fotos-estilo-polaroid"
+                                    class="product-details-btn">
+                                        Ver detalles <span aria-hidden="true">→</span>
+                                    </a>
                                     </div>
                                 </div>
                             </div>
@@ -274,14 +283,19 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="product-wrapper" data-aos="fade-up">
                             <div class="product-img">
-                                <img src="assets/images/homepage-one/product-img/dope.jpeg" alt="product-img">
+                                <img src="assets/images/homepage-one/product-img/dope.jpeg" alt="Taza sublimada personalizada" loading="lazy" width="300" height="300">
                             </div>
                             <div class="product-info">
                                 <div class="product-description">
-                                    <a href="/product-info" class="product-details">Taza Sublimada Personalizada</a>
+                                    <a href="/product-info" class="product-details">Taza Sublimada</a>
                                     <div class="price">
                                         <span class="price-cut"></span>
-                                        <span class="new-price"></span>
+                                        <span class="new-price">$80</span>
+
+                                    <a href="/detalle-producto?slug=taza-sublimada-personalizada"
+                                    class="product-details-btn">
+                                        Ver detalles <span aria-hidden="true">→</span>
+                                    </a>
                                     </div>
                                 </div>
                             </div>
@@ -293,14 +307,19 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="product-wrapper" data-aos="fade-up">
                             <div class="product-img">
-                                <img src="assets/images/homepage-one/product-img/corte.jpeg" alt="product-img">
+                                <img src="assets/images/homepage-one/product-img/corte.jpeg" alt="Portacelular de corte láser" loading="lazy" width="300" height="300">
                             </div>
                             <div class="product-info">
                                 <div class="product-description">
                                     <a href="/product-info" class="product-details">Portacelular Corte Láser</a>
                                     <div class="price">
                                         <span class="price-cut"></span>
-                                        <span class="new-price"></span>
+                                        <span class="new-price">$40</span>
+
+                                        <a href="/detalle-producto?slug=portacelular-corte-laser"
+                                        class="product-details-btn">
+                                            Ver detalles <span aria-hidden="true">→</span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -481,50 +500,148 @@
     </section>-->
     <!--------------- category-section-end--------------->
 
-    <!--------------- brand-section--------------->
+    <!-- brand-section -->
     <section class="product brand" data-aos="fade-up">
         <div class="container">
             <div class="section-title">
                 <h5>Empresas</h5>
                 <a href="/product-sidebar" class="view">Ver Todo</a>
             </div>
-            <div class="brand-section">
-                <div class="product-wrapper">
-                    <div class="wrapper-img">
-                        <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/dopeprints.jpg" alt="img">
-                        </a>
+
+            <div class="brand-carousel">
+                <button class="brand-nav prev" aria-label="Anterior">
+                    <i class="ri-arrow-left-s-line"></i>
+                </button>
+
+                <div class="brand-track-wrap">
+                    <div class="brand-track" id="brandTrack">
+                        <div class="brand-item">
+                            <a href="/product-sidebar">
+                                <img src="assets/images/homepage-one/dopeprints.jpg" alt="Dopeprints">
+                            </a>
+                        </div>
+                        <div class="brand-item">
+                            <a href="/product-sidebar">
+                                <img src="assets/images/homepage-one/inovabot.jpg" alt="Inovabot">
+                            </a>
+                        </div>
+                        <div class="brand-item">
+                            <a href="/product-sidebar">
+                                <img src="assets/images/homepage-one/novacut.jpg" alt="Novacut">
+                            </a>
+                        </div>
+                        <div class="brand-item">
+                            <a href="/product-sidebar">
+                                <img src="assets/images/homepage-one/creatics.jpg" alt="Creatics">
+                            </a>
+                        </div>
+                        <div class="brand-item">
+                            <a href="/product-sidebar">
+                                <img src="assets/images/homepage-one/aerial.jpg" alt="Aerial">
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <div class="product-wrapper">
-                    <div class="wrapper-img">
-                        <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/inovabot.jpg" alt="img">
-                        </a>
-                    </div>
-                </div>
-                <div class="product-wrapper">
-                    <div class="wrapper-img">
-                        <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/novacut.jpg" alt="img">
-                        </a>
-                    </div>
-                </div>
-                <div class="product-wrapper">
-                    <div class="wrapper-img">
-                        <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/creatics.jpg" alt="img">
-                        </a>
-                    </div>
-                </div>
-                <div class="product-wrapper">
-                    <div class="wrapper-img">
-                        <a href="/product-sidebar">
-                            <img src="assets/images/homepage-one/aerial.jpg" alt="img">
-                        </a>
-                    </div>
+
+                <button class="brand-nav next" aria-label="Siguiente">
+                    <i class="ri-arrow-right-s-line"></i>
+                </button>
+            </div>
+
+            <div class="brand-dots" id="brandDots"></div>
+        </div>
     </section>
-    <!--------------- brand-section-end--------------->
+    <!-- brand-section-end -->
+
+    <!-- ===== Script del carrusel Empresas ===== -->
+    <script>
+    (function () {
+        const track    = document.getElementById('brandTrack');
+        const dotsWrap = document.getElementById('brandDots');
+        const prevBtn  = document.querySelector('.brand-nav.prev');
+        const nextBtn  = document.querySelector('.brand-nav.next');
+
+        if (!track) return;
+
+        const items = Array.from(track.children);
+        let index = 0;
+
+        function getVisible() {
+            const w = window.innerWidth;
+            if (w <= 575) return 1;
+            if (w <= 991) return 2;
+            return 3;
+        }
+
+        function maxIndex() {
+            return Math.max(0, items.length - getVisible());
+        }
+
+        function buildDots() {
+            dotsWrap.innerHTML = '';
+            const total = maxIndex() + 1;
+            for (let i = 0; i < total; i++) {
+                const btn = document.createElement('button');
+                btn.addEventListener('click', () => {
+                    index = i;
+                    update();
+                });
+                dotsWrap.appendChild(btn);
+            }
+        }
+
+        function update() {
+            const itemWidth = items[0].getBoundingClientRect().width;
+            const gap = parseFloat(getComputedStyle(track).gap) || 0;
+
+            if (index > maxIndex()) index = maxIndex();
+            if (index < 0) index = 0;
+
+            const offset = index * (itemWidth + gap);
+            track.style.transform = 'translateX(-' + offset + 'px)';
+
+            prevBtn.disabled = index <= 0;
+            nextBtn.disabled = index >= maxIndex();
+
+            dotsWrap.querySelectorAll('button').forEach(function (d, i) {
+                d.classList.toggle('active', i === index);
+            });
+        }
+
+        prevBtn.addEventListener('click', function () { index--; update(); });
+        nextBtn.addEventListener('click', function () { index++; update(); });
+
+        // Autoplay
+        let autoplay = setInterval(function () {
+            index = index >= maxIndex() ? 0 : index + 1;
+            update();
+        }, 4000);
+
+        const carousel = document.querySelector('.brand-carousel');
+        carousel.addEventListener('mouseenter', function () { clearInterval(autoplay); });
+        carousel.addEventListener('mouseleave', function () {
+            autoplay = setInterval(function () {
+                index = index >= maxIndex() ? 0 : index + 1;
+                update();
+            }, 4000);
+        });
+
+        // Recalcular al redimensionar
+        let resizeTimer;
+        window.addEventListener('resize', function () {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function () {
+                index = 0;
+                buildDots();
+                update();
+            }, 200);
+        });
+
+        // Init
+        buildDots();
+        update();
+    })();
+    </script>
 
     <!--------------- arrival-section--------------->
     <!--<section class="product arrival">
