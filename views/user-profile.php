@@ -248,13 +248,245 @@
                         </div>
 
                         <!-- NUEVA VISTA / TAB-PANE PARA CRUD DE PRODUCTOS -->
+                        <!-- NUEVA VISTA / TAB-PANE PARA CRUD DE PRODUCTOS -->
                         <div class="tab-pane fade" id="v-pills-products" role="tabpanel"
-                            aria-labelledby="v-pills-products-tab" tabindex="0">
-                            <div class="cart-section">
-                                <div class="d-flex justify-content-between align-items-center mb-4">
-                                    <h5 class="heading">Product Management </h5>
-                                    <a href="#" class="shop-btn" onclick="modalAction('.product-modal')">Add New Product</a>
-                                </div>
+    aria-labelledby="v-pills-products-tab" tabindex="0">
+    <div class="cart-section">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h5 class="heading">Product Management </h5>
+            <button type="button" class="shop-btn" data-ap-open>Add New Product</button>
+        </div>
+        <?php include __DIR__ . '/agregar_producto.php'; ?>
+
+
+<!-- Filtros independientes: búsqueda por nombre y categoría visual -->
+<section class="filtros-productos" id="filtros-busqueda-productos">
+
+    <div class="filtro-campo filtro-busqueda">
+        <label for="buscar-producto">
+            <span aria-hidden="true">⌕</span>
+            Buscar producto por nombre
+        </label>
+
+        <input
+            type="search"
+            id="buscar-producto"
+            class="control-filtro"
+            placeholder="Escribe el nombre del producto..."
+            autocomplete="off"
+        >
+    </div>
+
+    <div class="filtro-campo filtro-categoria">
+        <label for="categoria-producto">
+            <span aria-hidden="true">◇</span>
+            Categoría
+        </label>
+
+        <select id="categoria-producto" class="control-filtro">
+            <option value="">Todas las categorías</option>
+        </select>
+    </div>
+
+    <p id="mensaje-busqueda-productos"
+       class="mensaje-filtro"
+       role="status"
+       aria-live="polite">
+        Escribe un nombre para buscar productos.
+    </p>
+
+</section>
+
+<style>
+    .filtros-productos {
+        display: grid;
+        grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr);
+        gap: 22px;
+        padding: 24px;
+        margin: 22px 0;
+        background: #f8f9ff;
+        border: 1px solid #e5e9fb;
+        border-radius: 18px;
+        box-sizing: border-box;
+    }
+
+    .filtro-campo {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        min-width: 0;
+    }
+
+    .filtro-campo label {
+        color: #564d24;
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: .1px;
+    }
+
+    .filtro-campo label span {
+        color: #b67f1a;
+        margin-right: 7px;
+        font-size: 19px;
+    }
+
+    .control-filtro {
+        width: 100%;
+        min-height: 49px;
+        padding: 12px 15px;
+        background: #fff;
+        border: 1px solid #dce2f2;
+        border-radius: 12px;
+        color: #615724;
+        font: inherit;
+        font-size: 14px;
+        outline: none;
+        box-sizing: border-box;
+        transition: border-color .2s, box-shadow .2s;
+    }
+
+    .control-filtro::placeholder {
+        color: #929bb0;
+    }
+
+    .control-filtro:focus {
+        border-color: #f1bb63;
+        box-shadow: 0 0 0 4px rgba(154, 112, 45, 0.12);
+    }
+
+    .mensaje-filtro {
+        grid-column: 1 / -1;
+        margin: 0;
+        padding: 12px 15px;
+        border-radius: 10px;
+        background: #edf2ff;
+        color: #8d7b52;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    /* ==========================================================
+       ESTILOS PREMIUM PARA EL MODAL DE VISUALIZACIÓN ("VER")
+       ========================================================== */
+    .view-product-modal .modal-main {
+        max-width: 580px;
+        width: 92%;
+        background: #ffffff;
+        border-radius: 24px;
+        padding: 35px;
+        box-shadow: 0 20px 40px rgba(45, 55, 72, 0.12);
+        border: 1px solid #edf2f7;
+    }
+
+    .view-product-header {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        margin-bottom: 25px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .view-product-thumb {
+        width: 90px;
+        height: 90px;
+        border-radius: 16px;
+        object-fit: cover;
+        border: 2px solid #f8fafc;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .view-product-title-area h4 {
+        margin: 0 0 6px 0;
+        font-size: 20px;
+        font-weight: 700;
+        color: #1e293b;
+    }
+
+    .view-product-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        background: #ecfdf5;
+        color: #059669;
+        font-size: 12px;
+        font-weight: 600;
+        border-radius: 20px;
+    }
+
+    .view-details-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .view-detail-card {
+        background: #f8fafc;
+        padding: 14px;
+        border-radius: 14px;
+        border: 1px solid #f1f5f9;
+        text-align: center;
+    }
+
+    .view-detail-card span.label {
+        display: block;
+        font-size: 11px;
+        color: #64748b;
+        margin-bottom: 6px;
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+
+    .view-detail-card span.value {
+        font-size: 16px;
+        color: #0f172a;
+        font-weight: 700;
+    }
+
+    .view-detail-box {
+        background: #f8fafc;
+        padding: 18px;
+        border-radius: 14px;
+        border: 1px solid #f1f5f9;
+        margin-bottom: 25px;
+    }
+
+    .view-detail-box span.label {
+        display: block;
+        font-size: 11px;
+        color: #64748b;
+        margin-bottom: 6px;
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+
+    .view-detail-box p {
+        margin: 0;
+        font-size: 14px;
+        color: #334155;
+        line-height: 1.6;
+    }
+
+    @media (max-width: 650px) {
+        .filtros-productos {
+            grid-template-columns: 1fr;
+            padding: 16px;
+            gap: 16px;
+        }
+        .mensaje-filtro {
+            grid-column: auto;
+        }
+        .view-details-grid {
+            grid-template-columns: 1fr;
+        }
+        .view-product-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+</style>
 
                                 <!-- Modal para Crear/Editar Producto -->
                                 <div class="modal-wrapper product-modal">
@@ -288,6 +520,58 @@
                                             </div>
                                             <div class="login-btn text-center">
                                                 <a href="#" onclick="modalAction('.product-modal')" class="shop-btn">Save Product</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- NUEVO MODAL: Visualizar Producto Detallado (View Modal) -->
+                                <div class="modal-wrapper view-product-modal">
+                                    <div onclick="modalAction('.view-product-modal')" class="anywhere-away"></div>
+                                    <div class="login-section account-section modal-main">
+                                        <div class="review-form">
+                                            <div class="review-content">
+                                                <h5 class="comment-title">Product Information</h5>
+                                                <div class="close-btn">
+                                                    <img src="assets/images/homepage-one/close-btn.png"
+                                                        onclick="modalAction('.view-product-modal')" alt="close-btn">
+                                                </div>
+                                            </div>
+
+                                            <!-- Cabecera con Imagen y Nombre Principal -->
+                                            <div class="view-product-header">
+                                                <img src="assets/images/homepage-one/product-img/product-img-1.webp" alt="Product" class="view-product-thumb" id="view-prod-img">
+                                                <div class="view-product-title-area">
+                                                    <h4 id="view-prod-name">Classic Design Skirt</h4>
+                                                    <span class="view-product-badge" id="view-prod-status">Active</span>
+                                                </div>
+                                            </div>
+
+                                            <!-- Tarjetas de Datos: Precio, Stock y Categoría -->
+                                            <div class="view-details-grid">
+                                                <div class="view-detail-card">
+                                                    <span class="label">Price</span>
+                                                    <span class="value" id="view-prod-price">$20.00</span>
+                                                </div>
+                                                <div class="view-detail-card">
+                                                    <span class="label">Stock</span>
+                                                    <span class="value" id="view-prod-stock">15</span>
+                                                </div>
+                                                <div class="view-detail-card">
+                                                    <span class="label">Category</span>
+                                                    <span class="value" id="view-prod-cat">Apparel</span>
+                                                </div>
+                                            </div>
+
+                                            <!-- Cuadro de Descripción -->
+                                            <div class="view-detail-box">
+                                                <span class="label">Description</span>
+                                                <p id="view-prod-desc">Classic design skirt made with premium quality fabric, perfect for a coquette and modern daily look.</p>
+                                            </div>
+
+                                            <!-- Botón de Cierre Estilizado -->
+                                            <div class="login-btn text-center">
+                                                <a href="#" onclick="modalAction('.view-product-modal')" class="shop-btn" style="background: #f1f5f9; color: #475569; border-radius: 12px; font-weight: 600;">Close</a>
                                             </div>
                                         </div>
                                     </div>
@@ -349,9 +633,15 @@
                                             </td>
                                             <td class="table-wrapper">
                                                 <div class="table-wrapper-center" style="display: flex; gap: 10px; justify-content: center;">
+                                                    <!-- Botón Ver (Visualizar) -->
+                                                    <a href="#" onclick="modalAction('.view-product-modal')" title="View">
+                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                                    </a>
+                                                    <!-- Botón Editar -->
                                                     <a href="#" onclick="modalAction('.product-modal')" title="Edit">
                                                         <svg width="14" height="14" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 2L16 7M2 16H7L16.5 6.5C17.3284 5.67157 17.3284 4.32843 16.5 3.5V3.5C15.6716 2.67157 14.3284 2.67157 13.5 3.5L4 13V16H2V14Z" stroke="#2D3748" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                                                     </a>
+                                                    <!-- Botón Eliminar -->
                                                     <a href="#" title="Delete">
                                                         <svg width="14" height="14" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.7879 5.95508C14.7102 6.91333 14.6353 7.84896 14.5582 8.7853C14.3801 10.9315 14.2028 13.0776 14.0219 15.2238C13.9604 15.9503 13.9208 16.6802 13.8176 17.4018C13.7074 18.1756 13.0827 18.719 12.3039 18.7225C9.39528 18.7352 6.48733 18.7367 3.57867 18.7218C2.71582 18.7176 2.09748 18.0823 2.01904 17.158C1.79291 14.4959 1.58161 11.8332 1.36254 9.17114C1.28269 8.19735 1.19859 7.22426 1.11733 6.25117C1.10955 6.15931 1.10673 6.06744 1.10107 5.95578C5.66688 5.95508 10.2171 5.95508 14.7879 5.95508Z" fill="#EB5757"/></svg>
                                                     </a>
