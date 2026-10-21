@@ -247,16 +247,14 @@
                             <!-- [Contenido de Payment omitido por brevedad, se mantiene igual] -->
                         </div>
 
-                        <!-- NUEVA VISTA / TAB-PANE PARA CRUD DE PRODUCTOS -->
-                        <div class="tab-pane fade" id="v-pills-products" role="tabpanel"
-    aria-labelledby="v-pills-products-tab" tabindex="0">
-    <div class="cart-section">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h5 class="heading">Product Management </h5>
-            <button type="button" class="shop-btn" data-ap-open>Add New Product</button>
-        </div>
-        <?php include __DIR__ . '/agregar_producto.php'; ?>
-
+                        <!-- VISTA / TAB-PANE PARA CRUD DE PRODUCTOS -->
+                        <div class="tab-pane fade" id="v-pills-products" role="tabpanel" aria-labelledby="v-pills-products-tab" tabindex="0">
+                            <div class="cart-section">
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <h5 class="heading">Product Management</h5>
+                                    <button type="button" class="shop-btn" data-ap-open>Add New Product</button>
+                                </div>
+                                <?php include __DIR__ . '/agregar_producto.php'; ?>
 
                                 <!-- Modal para Crear/Editar Producto -->
                                 <div class="modal-wrapper product-modal">
@@ -266,8 +264,7 @@
                                             <div class="review-content">
                                                 <h5 class="comment-title">Product Details</h5>
                                                 <div class="close-btn">
-                                                    <img src="assets/images/homepage-one/close-btn.png"
-                                                        onclick="modalAction('.product-modal')" alt="close-btn">
+                                                    <img src="assets/images/homepage-one/close-btn.png" onclick="modalAction('.product-modal')" alt="close-btn">
                                                 </div>
                                             </div>
                                             <div class="review-form-name address-form">
@@ -290,6 +287,45 @@
                                             </div>
                                             <div class="login-btn text-center">
                                                 <a href="#" onclick="modalAction('.product-modal')" class="shop-btn">Save Product</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Modal para Ver Producto (Detalles) -->
+                                <div class="modal-wrapper view-product-modal">
+                                    <div onclick="modalAction('.view-product-modal')" class="anywhere-away"></div>
+                                    <div class="login-section account-section modal-main">
+                                        <div class="review-form">
+                                            <div class="review-content">
+                                                <h5 class="comment-title">View Product</h5>
+                                                <div class="close-btn">
+                                                    <img src="assets/images/homepage-one/close-btn.png" onclick="modalAction('.view-product-modal')" alt="close-btn">
+                                                </div>
+                                            </div>
+                                            <div class="text-center mb-3">
+                                                <img src="assets/images/homepage-one/product-img/product-img-1.webp" alt="Product Image" style="max-height: 150px; border-radius: 8px; object-fit: cover;">
+                                            </div>
+                                            <div class="review-form-name address-form mb-2">
+                                                <label class="form-label font-weight-bold">Product Name:</label>
+                                                <p class="text-muted" id="view-prodname">Classic Design Skirt</p>
+                                            </div>
+                                            <div class="account-inner-form mb-2">
+                                                <div class="review-form-name">
+                                                    <label class="form-label font-weight-bold">Price:</label>
+                                                    <p class="text-muted" id="view-prodprice">$20.00</p>
+                                                </div>
+                                                <div class="review-form-name">
+                                                    <label class="form-label font-weight-bold">Stock:</label>
+                                                    <p class="text-muted" id="view-prodstock">15 units</p>
+                                                </div>
+                                            </div>
+                                            <div class="review-form-name address-form mb-3">
+                                                <label class="form-label font-weight-bold">Description:</label>
+                                                <p class="text-muted" id="view-proddesc">A wonderful classic design piece ideal for any casual or chic outfit combination.</p>
+                                            </div>
+                                            <div class="login-btn text-center">
+                                                <a href="#" onclick="modalAction('.view-product-modal')" class="shop-btn">Close</a>
                                             </div>
                                         </div>
                                     </div>
@@ -350,10 +386,19 @@
                                                 </div>
                                             </td>
                                             <td class="table-wrapper">
-                                                <div class="table-wrapper-center" style="display: flex; gap: 10px; justify-content: center;">
+                                                <div class="table-wrapper-center" style="display: flex; gap: 10px; justify-content: center; align-items: center;">
+                                                    <!-- Botón Ver (Ojo) -->
+                                                    <a href="#" onclick="modalAction('.view-product-modal')" title="View Details">
+                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3182CE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                                            <circle cx="12" cy="12" r="3"></circle>
+                                                        </svg>
+                                                    </a>
+                                                    <!-- Botón Editar -->
                                                     <a href="#" onclick="modalAction('.product-modal')" title="Edit">
                                                         <svg width="14" height="14" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 2L16 7M2 16H7L16.5 6.5C17.3284 5.67157 17.3284 4.32843 16.5 3.5V3.5C15.6716 2.67157 14.3284 2.67157 13.5 3.5L4 13V16H2V14Z" stroke="#2D3748" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                                                     </a>
+                                                    <!-- Botón Eliminar -->
                                                     <a href="#" title="Delete">
                                                         <svg width="14" height="14" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.7879 5.95508C14.7102 6.91333 14.6353 7.84896 14.5582 8.7853C14.3801 10.9315 14.2028 13.0776 14.0219 15.2238C13.9604 15.9503 13.9208 16.6802 13.8176 17.4018C13.7074 18.1756 13.0827 18.719 12.3039 18.7225C9.39528 18.7352 6.48733 18.7367 3.57867 18.7218C2.71582 18.7176 2.09748 18.0823 2.01904 17.158C1.79291 14.4959 1.58161 11.8332 1.36254 9.17114C1.28269 8.19735 1.19859 7.22426 1.11733 6.25117C1.10955 6.15931 1.10673 6.06744 1.10107 5.95578C5.66688 5.95508 10.2171 5.95508 14.7879 5.95508Z" fill="#EB5757"/></svg>
                                                     </a>
