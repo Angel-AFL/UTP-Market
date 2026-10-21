@@ -144,9 +144,6 @@ class ViewController
      */
     public static function render(string $viewName, array $data = [], ?string $layout = 'main'): void
     {
-        // Extrae las variables para que estén disponibles en la vista
-        extract($data);
-
         // Sanear el nombre de la vista
         $viewName = trim($viewName, '/');
         $viewName = preg_replace('/\.php$/', '', $viewName);
@@ -158,9 +155,33 @@ class ViewController
             $viewFile = __DIR__ . '/views/404.php';
         }
 
+        self::renderFile($viewFile, $data, $layout);
+    }
+
+    /**
+     * Renderiza un archivo PHP arbitrario dentro de un layout
+     *
+     * Se usa para los módulos que no viven en views/ (por ejemplo el
+     * CRUD de empresas, que se incluye tanto desde el front controller
+     * como desde la pestaña del panel de usuario).
+     *
+     * @param string $file Ruta absoluta del archivo a renderizar
+     * @param array $data Variables que estarán disponibles en el archivo
+     * @param string|null $layout Nombre del layout en views/layouts/ (o null para sin layout)
+     */
+    public static function renderFile(string $file, array $data = [], ?string $layout = 'main'): void
+    {
+        // Extrae las variables para que estén disponibles en la vista
+        extract($data);
+
+        if (!file_exists($file)) {
+            http_response_code(404);
+            $file = __DIR__ . '/views/404.php';
+        }
+
         // Captura el contenido de la vista
         ob_start();
-        require $viewFile;
+        require $file;
         $content = ob_get_clean();
 
         // Si se especificó un layout, lo renderiza pasando $content

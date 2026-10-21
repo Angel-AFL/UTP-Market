@@ -488,7 +488,7 @@
                             </div>
                         </div>
 
-                        <?php include 'views/empresa/index.php'; ?>
+                        <?php require __DIR__ . '/empresas/index.php'; ?>
 
                         <div class="tab-pane fade" id="v-pills-payment" role="tabpanel"
                             aria-labelledby="v-pills-order-tab" tabindex="0">
