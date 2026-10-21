@@ -1,11 +1,15 @@
 
 <?php
 /**
- * VISTA DINÁMICA DE EMPRESAS - UTP MARKET
- * URL: /empresa?id=1
+ * UTP-Market — Vista dinámica de empresas
+ * Ejemplo: /empresa?id=3
  *
- * La conexión se obtiene de config/database.php.
- * La consulta utiliza el ID de la URL.
+ * Archivo: views/empresa.php
+ *
+ * Requisitos:
+ * - Archivo .env en la raíz del proyecto.
+ * - Extensión cURL habilitada en PHP.
+ * - Tabla public.empresa en Supabase.
  */
 
 if (session_status() === PHP_SESSION_NONE) {
@@ -13,58 +17,258 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 /* =========================================================
-   1. CONEXIÓN Y CONSULTA DE LA EMPRESA
+   1. LEER VARIABLES DEL ARCHIVO .ENV
    ========================================================= */
 
-try {
-    // Esta ruta supone que config/database.php está en la raíz.
-    $conexion = require __DIR__ . '/../config/database.php';
+$envPath = dirname(__DIR__) . '/.env';
 
-    if (!$conexion instanceof PDO) {
+if (!is_readable($envPath)) {
+    error_log('UTP-Market: no se encuentra el archivo .env.');
+    http_response_code(500);
+    exit('No se encontró el archivo de configuración.');
+}
+
+$env = [];
+$lineasEnv = file(
+    $envPath,
+    FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES
+);
+
+if ($lineasEnv === false) {
+    http_response_code(500);
+    exit('No se pudo leer la configuración.');
+}
+
+foreach ($lineasEnv as $numero => $linea) {
+    $linea = trim($linea);
+
+    if ($linea === '' || str_starts_with($linea, '#')) {
+        continue;
+    }
+
+    if (!preg_match(
+        '/^([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)$/',
+        $linea,
+        $coincidencias
+    )) {
+        continue;
+    }
+
+    $clave = $coincidencias[1];
+    $valor = trim($coincidencias[2]);
+
+    if (
+        strlen($valor) >= 2 &&
+        (
+            ($valor[0] === '"' && substr($valor, -1) === '"') ||
+            ($valor[0] === "'" && substr($valor, -1) === "'")
+        )
+    ) {
+        $valor = substr($valor, 1, -1);
+    }
+
+    $env[$clave] = $valor;
+}
+
+/* =========================================================
+   2. CONFIGURACIÓN DE SUPABASE
+   ========================================================= */
+
+$supabaseUrl = rtrim(
+    trim((string) (
+        $env['SUPABASE_URL']
+        ?? $env['PUBLIC_SUPABASE_URL']
+        ?? ''
+    )),
+    '/'
+);
+
+/*
+ * La clave secreta se lee desde .env y nunca se imprime
+ * en el HTML. Para una página pública, se recomienda usar
+ * una clave publicable con políticas RLS de solo lectura.
+ */
+$supabaseKey = trim((string) (
+    $env['SUPABASE_SERVICE_ROLE_KEY']
+    ?? $env['PUBLIC_SUPABASE_PUBLISHABLE_KEY']
+    ?? $env['SUPABASE_PUBLISHABLE_KEY']
+    ?? ''
+));
+
+if (
+    !filter_var($supabaseUrl, FILTER_VALIDATE_URL) ||
+    strtolower((string) parse_url(
+        $supabaseUrl,
+        PHP_URL_SCHEME
+    )) !== 'https' ||
+    $supabaseKey === ''
+) {
+    error_log('UTP-Market: configuración de Supabase inválida.');
+    http_response_code(500);
+    exit('Revisa la URL y la clave de Supabase en el archivo .env.');
+}
+
+if (!function_exists('curl_init')) {
+    http_response_code(500);
+    exit('La extensión cURL de PHP no está habilitada.');
+}
+
+/* =========================================================
+   3. VALIDAR EL ID DE LA EMPRESA
+   ========================================================= */
+
+$idTexto = $_GET['id'] ?? null;
+
+if (
+    !is_string($idTexto) ||
+    !ctype_digit($idTexto) ||
+    (int) $idTexto < 1
+) {
+    http_response_code(400);
+    exit('ID inválido. Utiliza /empresa?id=3.');
+}
+
+$idEmpresa = (int) $idTexto;
+
+/* =========================================================
+   4. FUNCIÓN PARA CONSULTAR SUPABASE
+   ========================================================= */
+
+$consultarSupabase = static function (
+    string $tabla,
+    array $filtros = [],
+    string $select = '*'
+) use ($supabaseUrl, $supabaseKey): array {
+
+    if (!preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', $tabla)) {
+        throw new InvalidArgumentException('Nombre de tabla inválido.');
+    }
+
+    $parametros = [
+        'select' => $select
+    ];
+
+    foreach ($filtros as $columna => $valor) {
+        if (!preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', $columna)) {
+            throw new InvalidArgumentException('Columna inválida.');
+        }
+
+        $parametros[$columna] = $valor;
+    }
+
+    $url = $supabaseUrl
+        . '/rest/v1/'
+        . rawurlencode($tabla)
+        . '?'
+        . http_build_query($parametros);
+
+    $curl = curl_init($url);
+
+    curl_setopt_array($curl, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_CONNECTTIMEOUT => 10,
+        CURLOPT_TIMEOUT => 20,
+
+        // No desactivar la validación del certificado SSL.
+        CURLOPT_SSL_VERIFYPEER => true,
+        CURLOPT_SSL_VERIFYHOST => 2,
+
+        CURLOPT_HTTPHEADER => [
+            'apikey: ' . $supabaseKey,
+            'Authorization: Bearer ' . $supabaseKey,
+            'Accept: application/json'
+        ]
+    ]);
+
+    $respuesta = curl_exec($curl);
+    $codigoHttp = (int) curl_getinfo(
+        $curl,
+        CURLINFO_HTTP_CODE
+    );
+
+    $errorCurl = curl_error($curl);
+
+    curl_close($curl);
+
+    if ($respuesta === false) {
+        error_log('UTP-Market cURL: ' . $errorCurl);
+
         throw new RuntimeException(
-            'database.php debe devolver una instancia de PDO.'
+            'No se pudo conectar con Supabase.'
         );
     }
 
-    $idEmpresa = filter_input(
-        INPUT_GET,
-        'id',
-        FILTER_VALIDATE_INT
-    );
+    if ($codigoHttp < 200 || $codigoHttp >= 300) {
+        error_log(
+            'UTP-Market Supabase HTTP ' .
+            $codigoHttp . ': ' .
+            substr((string) $respuesta, 0, 1000)
+        );
 
-    if (!$idEmpresa || $idEmpresa < 1) {
-        http_response_code(400);
-        exit('El ID de la empresa no es válido.');
+        throw new RuntimeException(
+            'Supabase respondió con HTTP ' . $codigoHttp . '.'
+        );
     }
 
-    $consulta = $conexion->prepare(
-        'SELECT * FROM empresa
-         WHERE id = :id AND estado = 1
-         LIMIT 1'
+    $datos = json_decode($respuesta, true);
+
+    if (
+        !is_array($datos) ||
+        json_last_error() !== JSON_ERROR_NONE
+    ) {
+        throw new RuntimeException(
+            'Supabase devolvió una respuesta JSON inválida.'
+        );
+    }
+
+    return $datos;
+};
+
+/* =========================================================
+   5. OBTENER LOS DATOS DE LA EMPRESA
+   ========================================================= */
+
+try {
+    $resultados = $consultarSupabase(
+        'empresa',
+        [
+            'id' => 'eq.' . $idEmpresa,
+            'limit' => '1'
+        ]
     );
 
-    $consulta->execute(['id' => $idEmpresa]);
-    $empresa = $consulta->fetch(PDO::FETCH_ASSOC);
+    $empresa = $resultados[0] ?? null;
 
-    if (!$empresa) {
+    if (!is_array($empresa)) {
         http_response_code(404);
         exit('No se encontró la empresa solicitada.');
     }
 
-} catch (Throwable $error) {
-    error_log('Error al cargar empresa: ' . $error->getMessage());
+} catch (Throwable $e) {
+    error_log(
+        'UTP-Market empresa: ' . $e->getMessage()
+    );
+
     http_response_code(500);
-    exit('No se pudo cargar la empresa. Verifica la conexión y la estructura de la base de datos.');
+
+    exit(
+        'No se pudo cargar la empresa. ' .
+        'Revisa la conexión con Supabase y los permisos de la API.'
+    );
 }
 
 /* =========================================================
-   2. FUNCIONES AUXILIARES
+   6. FUNCIONES AUXILIARES
    ========================================================= */
 
 $escapar = static function ($valor): string {
+    if (!is_scalar($valor) || $valor === null) {
+        $valor = '';
+    }
+
     return htmlspecialchars(
-        (string) ($valor ?? ''),
-        ENT_QUOTES,
+        (string) $valor,
+        ENT_QUOTES | ENT_SUBSTITUTE,
         'UTF-8'
     );
 };
@@ -73,450 +277,374 @@ $obtener = static function (
     string $columna,
     string $predeterminado = ''
 ) use (&$empresa): string {
-    return trim((string) (
-        $empresa[$columna] ?? $predeterminado
-    ));
-};
 
-$nombre = $obtener('nombre', 'Empresa');
-$eslogan = $obtener('eslogan', 'Bienvenido a nuestra empresa');
-$descripcion = $obtener(
-    'descripcion',
-    'Conoce nuestros productos y servicios.'
-);
+    $valor = $empresa[$columna] ?? $predeterminado;
 
-$logo = $obtener('logo');
-$portada = $obtener('portada');
-$textoBoton = $obtener('texto_boton', 'Conoce nuestros servicios');
-
-$telefono = $obtener('telefono');
-$correo = $obtener('correo');
-$direccion = $obtener('direccion');
-$sitioWeb = $obtener('sitio_web');
-
-$slug = $obtener('slug');
-
-if ($slug === '') {
-    $slug = strtolower(trim(
-        preg_replace('/[^a-zA-Z0-9]+/', '-', $nombre),
-        '-'
-    ));
-}
-
-/*
- * Si posteriormente agregas columnas JSON llamadas servicios,
- * galeria, redes_sociales o preguntas_frecuentes, esta vista
- * podrá leerlas sin tener que escribir los datos manualmente.
- */
-$leerJson = static function ($valor): array {
-    if (is_array($valor)) {
-        return $valor;
+    if (!is_scalar($valor)) {
+        return $predeterminado;
     }
 
-    if (!is_string($valor) || trim($valor) === '') {
-        return [];
+    return trim((string) $valor);
+};
+
+$urlWebValida = static function (string $url): bool {
+    if (!filter_var($url, FILTER_VALIDATE_URL)) {
+        return false;
     }
 
-    $datos = json_decode($valor, true);
+    $esquema = strtolower(
+        (string) parse_url($url, PHP_URL_SCHEME)
+    );
 
-    return is_array($datos) ? $datos : [];
+    return in_array($esquema, ['http', 'https'], true);
 };
 
-$servicios = $leerJson($empresa['servicios'] ?? []);
-$galeria = $leerJson($empresa['galeria'] ?? []);
-$redes = $leerJson($empresa['redes_sociales'] ?? []);
-$preguntas = $leerJson(
-    $empresa['preguntas_frecuentes'] ?? []
-);
+$urlImagen = static function (string $url) use ($urlWebValida): string {
+    $url = trim($url);
 
-$caracteristicas = $leerJson(
-    $empresa['caracteristicas'] ?? []
-);
-
-$whatsapp = preg_replace('/\D+/', '', $telefono);
-
-$enlaceWhatsapp = $whatsapp !== ''
-    ? 'https://wa.me/' . $whatsapp
-    : '';
-
-$esUrlSegura = static function (string $url): bool {
-    return (bool) preg_match('~^https?://~i', $url);
-};
-
-$urlImagen = static function (string $ruta): string {
-    $ruta = trim($ruta);
-
-    if ($ruta === '') {
+    if ($url === '') {
         return '';
     }
 
-    if (preg_match('~^https?://~i', $ruta)) {
-        return $ruta;
+    if ($urlWebValida($url)) {
+        return $url;
     }
 
-    return function_exists('asset')
-        ? asset(ltrim($ruta, '/'))
-        : '/' . ltrim($ruta, '/');
+    // Permitir rutas locales de imágenes.
+    if (str_starts_with($url, '/') && !str_starts_with($url, '//')) {
+        return $url;
+    }
+
+    if (function_exists('asset')) {
+        return asset(ltrim($url, '/'));
+    }
+
+    return '/' . ltrim($url, '/');
 };
 
 /* =========================================================
-   3. ESTILOS DE LA PÁGINA
+   7. DATOS DE LA EMPRESA
+   Columnas confirmadas en tus capturas
    ========================================================= */
+
+$id = $obtener('id', (string) $idEmpresa);
+$nombre = $obtener('nombre', 'Empresa');
+$eslogan = $obtener('eslogan');
+$descripcion = $obtener('descripcion');
+
+$logo = $obtener('logo_url');
+$imagenPortada = $obtener('imagen_url');
+
+$correo = $obtener('correo');
+$telefono = $obtener('telefono');
+$whatsapp = $obtener('whatsapp');
+$direccion = $obtener('direccion');
+$facebook = $obtener('facebook');
+$instagram = $obtener('instagram');
+
+if ($whatsapp === '') {
+    $whatsapp = $telefono;
+}
+
+$numeroWhatsapp = preg_replace(
+    '/\D+/',
+    '',
+    $whatsapp
+);
+
+$enlaceWhatsapp = $numeroWhatsapp !== ''
+    ? 'https://wa.me/' . $numeroWhatsapp
+    : '';
+
+$enlaceFacebook = $urlWebValida($facebook)
+    ? $facebook
+    : '';
+
+$enlaceInstagram = $urlWebValida($instagram)
+    ? $instagram
+    : '';
+
+$logoUrl = $urlImagen($logo);
+$portadaUrl = $urlImagen($imagenPortada);
+
 ?>
 
 <style>
-    .empresa-page {
-        --empresa-color: <?= $escapar($obtener('color_principal', '#7d3037')) ?>;
-        --empresa-acento: <?= $escapar($obtener('color_secundario', '#ffb82e')) ?>;
-        --empresa-texto: #30271f;
-        --empresa-fondo: #fff;
-        color: var(--empresa-texto);
-        background: var(--empresa-fondo);
-        font-family: inherit;
-    }
+.empresa-page {
+    --empresa-color: #7d2e35;
+    --empresa-fondo: #f7f4f1;
+    --empresa-texto: #30271f;
+    color: var(--empresa-texto);
+    background: #fff;
+    font-family: inherit;
+}
 
-    .empresa-page *,
-    .empresa-page *::before,
-    .empresa-page *::after {
-        box-sizing: border-box;
-    }
+.empresa-page *,
+.empresa-page *::before,
+.empresa-page *::after {
+    box-sizing: border-box;
+}
 
-    .empresa-page img {
-        max-width: 100%;
-    }
+.empresa-page img {
+    max-width: 100%;
+}
 
-    .empresa-page a {
-        text-decoration: none;
-    }
+.empresa-page a {
+    text-decoration: none;
+}
 
-    .empresa-container {
-        width: min(1200px, 92%);
-        margin-inline: auto;
-    }
+.empresa-container {
+    width: min(1160px, 92%);
+    margin: 0 auto;
+}
 
+.empresa-hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 430px;
+    overflow: hidden;
+    background: #332c29;
+}
+
+.empresa-hero-fondo {
+    position: absolute;
+    inset: 0;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.empresa-hero-fondo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(24, 19, 18, .88),
+        rgba(24, 19, 18, .52),
+        rgba(24, 19, 18, .12)
+    );
+}
+
+.empresa-hero-contenido {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    padding: 65px 0;
+    color: #fff;
+}
+
+.empresa-logo {
+    display: block;
+    width: 115px;
+    height: 115px;
+    margin-bottom: 22px;
+    padding: 8px;
+    object-fit: contain;
+    background: #fff;
+    border-radius: 15px;
+}
+
+.empresa-etiqueta {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 30px;
+    background: #e6c7a8;
+    color: #33251d;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.empresa-hero h1 {
+    margin: 20px 0 12px;
+    font-size: clamp(36px, 5vw, 62px);
+    line-height: 1.1;
+    overflow-wrap: anywhere;
+}
+
+.empresa-hero p {
+    font-size: 18px;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+.empresa-botones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 26px;
+}
+
+.empresa-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 20px;
+    border: 1px solid var(--empresa-color);
+    border-radius: 7px;
+    background: var(--empresa-color);
+    color: #fff !important;
+    font-size: 14px;
+    font-weight: 700;
+    transition: opacity .2s ease;
+}
+
+.empresa-btn:hover {
+    opacity: .85;
+}
+
+.empresa-btn-secundario {
+    border-color: #fff;
+    background: transparent;
+}
+
+.empresa-seccion {
+    padding: 65px 0;
+}
+
+.empresa-seccion-fondo {
+    background: var(--empresa-fondo);
+}
+
+.empresa-titulo {
+    margin: 0 0 12px;
+    text-align: center;
+    font-size: clamp(27px, 3vw, 38px);
+}
+
+.empresa-subtitulo {
+    max-width: 720px;
+    margin: 0 auto 35px;
+    color: #77716b;
+    line-height: 1.8;
+    text-align: center;
+}
+
+.empresa-descripcion {
+    max-width: 900px;
+    margin: auto;
+    font-size: 17px;
+    line-height: 1.9;
+    overflow-wrap: anywhere;
+}
+
+.empresa-contacto {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.empresa-contacto-item {
+    padding: 22px;
+    border: 1px solid #eee7e1;
+    border-radius: 10px;
+    background: #fff;
+    overflow-wrap: anywhere;
+}
+
+.empresa-contacto-item h3 {
+    margin: 0 0 10px;
+    font-size: 17px;
+}
+
+.empresa-contacto-item p {
+    margin: 0;
+    color: #6e6863;
+    line-height: 1.8;
+}
+
+.empresa-contacto-item a {
+    color: var(--empresa-color);
+    overflow-wrap: anywhere;
+}
+
+.empresa-redes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+.empresa-red {
+    display: inline-block;
+    padding: 11px 18px;
+    border: 1px solid #ddd3cb;
+    border-radius: 30px;
+    color: var(--empresa-color) !important;
+    font-weight: 700;
+}
+
+.empresa-red:hover {
+    background: #f0e4dc;
+}
+
+.empresa-vacio {
+    grid-column: 1 / -1;
+    padding: 25px;
+    color: #77716b;
+    text-align: center;
+}
+
+.empresa-pie {
+    padding: 25px 0;
+    background: #30271f;
+    color: #fff;
+    text-align: center;
+}
+
+.empresa-pie p {
+    margin: 0;
+}
+
+@media (max-width: 650px) {
     .empresa-hero {
-        position: relative;
-        display: flex;
-        align-items: center;
-        min-height: 390px;
-        overflow: hidden;
-        background: #f6f1ed;
-    }
-
-    .empresa-hero-fondo {
-        position: absolute;
-        inset: 0;
-        background-position: center;
-        background-size: cover;
-    }
-
-    .empresa-hero-fondo::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-            90deg,
-            rgba(28, 20, 17, .83),
-            rgba(28, 20, 17, .25)
-        );
+        min-height: 360px;
     }
 
     .empresa-hero-contenido {
-        position: relative;
-        z-index: 1;
-        width: min(760px, 92%);
-        padding: 65px 0;
-        color: #fff;
-    }
-
-    .empresa-etiqueta {
-        display: inline-block;
-        padding: 8px 14px;
-        border-radius: 30px;
-        background: var(--empresa-acento);
-        color: #211b14;
-        font-size: 12px;
-        font-weight: 800;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-    }
-
-    .empresa-hero h1 {
-        margin: 20px 0 12px;
-        font-size: clamp(34px, 5vw, 64px);
-        line-height: 1.08;
-        overflow-wrap: anywhere;
-    }
-
-    .empresa-hero p {
-        font-size: 18px;
-        line-height: 1.8;
-    }
-
-    .empresa-botones {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        margin-top: 25px;
-    }
-
-    .empresa-btn {
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        gap: 8px;
-        padding: 13px 21px;
-        border: 2px solid var(--empresa-color);
-        border-radius: 6px;
-        background: var(--empresa-color);
-        color: white !important;
-        font-weight: 700;
-        transition: .2s ease;
-    }
-
-    .empresa-btn:hover {
-        opacity: .88;
-        transform: translateY(-2px);
-    }
-
-    .empresa-btn-secundario {
-        border-color: rgba(255,255,255,.8);
-        background: transparent;
-    }
-
-    .empresa-logo-contenedor {
-        margin-bottom: 20px;
-    }
-
-    .empresa-logo {
-        width: 125px;
-        height: 100px;
-        object-fit: contain;
-        padding: 10px;
-        border-radius: 10px;
-        background: #fff;
+        padding: 45px 0;
     }
 
     .empresa-seccion {
-        padding: 65px 0;
-    }
-
-    .empresa-seccion:nth-of-type(even) {
-        background: #faf8f6;
-    }
-
-    .empresa-titulo {
-        margin: 0 0 12px;
-        font-size: clamp(26px, 3vw, 38px);
-        text-align: center;
-    }
-
-    .empresa-subtitulo {
-        max-width: 720px;
-        margin: 0 auto 35px;
-        color: #77716b;
-        line-height: 1.8;
-        text-align: center;
-    }
-
-    .empresa-descripcion {
-        max-width: 900px;
-        margin: 0 auto;
-        font-size: 17px;
-        line-height: 1.9;
-        white-space: normal;
-        overflow-wrap: anywhere;
-    }
-
-    .empresa-grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 24px;
-    }
-
-    .empresa-tarjeta {
-        overflow: hidden;
-        border: 1px solid #eee7e1;
-        border-radius: 12px;
-        background: #fff;
-        box-shadow: 0 5px 20px rgba(0,0,0,.035);
-    }
-
-    .empresa-tarjeta-imagen {
-        display: block;
-        width: 100%;
-        height: 220px;
-        object-fit: cover;
-        background: #f0ece8;
-    }
-
-    .empresa-tarjeta-contenido {
-        padding: 22px;
-    }
-
-    .empresa-tarjeta h3 {
-        margin: 0 0 10px;
-        font-size: 20px;
-    }
-
-    .empresa-tarjeta p {
-        color: #77716b;
-        line-height: 1.7;
-        overflow-wrap: anywhere;
-    }
-
-    .empresa-galeria {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 15px;
-    }
-
-    .empresa-galeria img {
-        display: block;
-        width: 100%;
-        height: 240px;
-        border-radius: 10px;
-        object-fit: cover;
-        background: #eee;
+        padding: 45px 0;
     }
 
     .empresa-contacto {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 20px;
+        grid-template-columns: 1fr;
     }
 
-    .empresa-contacto-item {
-        padding: 22px;
-        border: 1px solid #eee7e1;
-        border-radius: 10px;
-        background: #fff;
-        overflow-wrap: anywhere;
+    .empresa-logo {
+        width: 90px;
+        height: 90px;
     }
-
-    .empresa-contacto-item h3 {
-        margin: 0 0 10px;
-        font-size: 17px;
-    }
-
-    .empresa-contacto-item p {
-        margin: 0;
-        color: #6e6863;
-        line-height: 1.7;
-    }
-
-    .empresa-contacto-item a {
-        color: var(--empresa-color);
-        overflow-wrap: anywhere;
-    }
-
-    .empresa-pregunta {
-        max-width: 850px;
-        margin: 12px auto;
-        padding: 20px;
-        border: 1px solid #eee7e1;
-        border-radius: 8px;
-        background: white;
-    }
-
-    .empresa-pregunta h3 {
-        margin: 0 0 10px;
-        font-size: 17px;
-    }
-
-    .empresa-pregunta p {
-        margin: 0;
-        color: #6e6863;
-        line-height: 1.7;
-    }
-
-    .empresa-redes {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 12px;
-        margin-top: 25px;
-    }
-
-    .empresa-red {
-        padding: 10px 17px;
-        border: 1px solid #ddd;
-        border-radius: 25px;
-        color: var(--empresa-color) !important;
-        font-weight: 700;
-    }
-
-    .empresa-vacio {
-        grid-column: 1 / -1;
-        padding: 25px;
-        color: #777;
-        text-align: center;
-    }
-
-    @media (max-width: 800px) {
-        .empresa-grid,
-        .empresa-galeria {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-
-        .empresa-hero {
-            min-height: 330px;
-        }
-    }
-
-    @media (max-width: 560px) {
-        .empresa-grid,
-        .empresa-galeria,
-        .empresa-contacto {
-            grid-template-columns: 1fr;
-        }
-
-        .empresa-hero {
-            min-height: 300px;
-        }
-
-        .empresa-hero-contenido {
-            padding: 45px 0;
-        }
-
-        .empresa-seccion {
-            padding: 42px 0;
-        }
-
-        .empresa-galeria img {
-            height: 230px;
-        }
-    }
+}
 </style>
 
 <main class="empresa-page">
 
-    <!-- =====================================================
-         PORTADA DE LA EMPRESA
-         ===================================================== -->
-
+    <!-- PORTADA -->
     <section class="empresa-hero">
 
-        <?php if ($portada !== ''): ?>
-            <div
-                class="empresa-hero-fondo"
-                style="background-image: url('<?= $escapar($urlImagen($portada)) ?>')"
-            ></div>
-        <?php else: ?>
-            <div class="empresa-hero-fondo"></div>
-        <?php endif; ?>
+        <div
+            class="empresa-hero-fondo"
+            <?php if ($portadaUrl !== ''): ?>
+                style="background-image:url('<?= $escapar($portadaUrl) ?>')"
+            <?php endif; ?>
+        ></div>
 
         <div class="empresa-container">
             <div class="empresa-hero-contenido">
 
-                <?php if ($logo !== ''): ?>
-                    <div class="empresa-logo-contenedor">
-                        <img
-                            class="empresa-logo"
-                            src="<?= $escapar($urlImagen($logo)) ?>"
-                            alt="Logo de <?= $escapar($nombre) ?>"
-                        >
-                    </div>
+                <?php if ($logoUrl !== ''): ?>
+                    <img
+                        class="empresa-logo"
+                        src="<?= $escapar($logoUrl) ?>"
+                        alt="Logo de <?= $escapar($nombre) ?>"
+                    >
                 <?php endif; ?>
 
                 <span class="empresa-etiqueta">
@@ -530,12 +658,8 @@ $urlImagen = static function (string $ruta): string {
                 <?php endif; ?>
 
                 <div class="empresa-botones">
-
-                    <a
-                        class="empresa-btn"
-                        href="#empresa-servicios"
-                    >
-                        <?= $escapar($textoBoton) ?>
+                    <a class="empresa-btn" href="#empresa-informacion">
+                        Conócenos
                     </a>
 
                     <?php if ($enlaceWhatsapp !== ''): ?>
@@ -548,17 +672,18 @@ $urlImagen = static function (string $ruta): string {
                             Contactar por WhatsApp
                         </a>
                     <?php endif; ?>
-
                 </div>
+
             </div>
         </div>
+
     </section>
 
-    <!-- =====================================================
-         INFORMACIÓN DE LA EMPRESA
-         ===================================================== -->
-
-    <section class="empresa-seccion" id="empresa-nosotros">
+    <!-- INFORMACIÓN -->
+    <section
+        class="empresa-seccion"
+        id="empresa-informacion"
+    >
         <div class="empresa-container">
 
             <h2 class="empresa-titulo">
@@ -566,232 +691,25 @@ $urlImagen = static function (string $ruta): string {
             </h2>
 
             <p class="empresa-subtitulo">
-                Descubre quiénes somos y qué ofrecemos.
+                Conoce más acerca de nuestra empresa.
             </p>
 
             <div class="empresa-descripcion">
-                <?= nl2br($escapar($descripcion)) ?>
-            </div>
-
-            <?php if (!empty($caracteristicas)): ?>
-                <div class="empresa-grid" style="margin-top:35px">
-
-                    <?php foreach ($caracteristicas as $caracteristica): ?>
-                        <?php
-                        if (!is_array($caracteristica)) {
-                            continue;
-                        }
-
-                        $tituloCaracteristica =
-                            $caracteristica['titulo']
-                            ?? $caracteristica['nombre']
-                            ?? '';
-
-                        $textoCaracteristica =
-                            $caracteristica['descripcion']
-                            ?? $caracteristica['texto']
-                            ?? '';
-
-                        if ($tituloCaracteristica === '') {
-                            continue;
-                        }
-                        ?>
-
-                        <article class="empresa-tarjeta">
-                            <div class="empresa-tarjeta-contenido">
-                                <h3>
-                                    <?= $escapar($tituloCaracteristica) ?>
-                                </h3>
-                                <p>
-                                    <?= $escapar($textoCaracteristica) ?>
-                                </p>
-                            </div>
-                        </article>
-
-                    <?php endforeach; ?>
-
-                </div>
-            <?php endif; ?>
-
-        </div>
-    </section>
-
-    <!-- =====================================================
-         SERVICIOS
-         ===================================================== -->
-
-    <section
-        class="empresa-seccion"
-        id="empresa-servicios"
-    >
-        <div class="empresa-container">
-
-            <h2 class="empresa-titulo">
-                Nuestros servicios
-            </h2>
-
-            <p class="empresa-subtitulo">
-                Conoce los servicios disponibles de
-                <?= $escapar($nombre) ?>.
-            </p>
-
-            <div class="empresa-grid">
-
-                <?php if (empty($servicios)): ?>
-
-                    <div class="empresa-vacio">
-                        Próximamente encontrarás aquí los servicios
-                        de esta empresa.
-                    </div>
-
+                <?php if ($descripcion !== ''): ?>
+                    <?= nl2br($escapar($descripcion)) ?>
                 <?php else: ?>
-
-                    <?php foreach ($servicios as $servicio): ?>
-                        <?php
-                        if (!is_array($servicio)) {
-                            continue;
-                        }
-
-                        $tituloServicio =
-                            $servicio['nombre']
-                            ?? $servicio['titulo']
-                            ?? '';
-
-                        $descripcionServicio =
-                            $servicio['descripcion']
-                            ?? '';
-
-                        $imagenServicio =
-                            $servicio['imagen']
-                            ?? '';
-
-                        $precioServicio =
-                            $servicio['precio']
-                            ?? '';
-
-                        if ($tituloServicio === '') {
-                            continue;
-                        }
-                        ?>
-
-                        <article class="empresa-tarjeta">
-
-                            <?php if ($imagenServicio !== ''): ?>
-                                <img
-                                    class="empresa-tarjeta-imagen"
-                                    src="<?= $escapar($urlImagen($imagenServicio)) ?>"
-                                    alt="<?= $escapar($tituloServicio) ?>"
-                                    loading="lazy"
-                                >
-                            <?php endif; ?>
-
-                            <div class="empresa-tarjeta-contenido">
-
-                                <h3>
-                                    <?= $escapar($tituloServicio) ?>
-                                </h3>
-
-                                <p>
-                                    <?= $escapar($descripcionServicio) ?>
-                                </p>
-
-                                <?php if ($precioServicio !== ''): ?>
-                                    <p>
-                                        <strong>Precio:</strong>
-                                        <?= $escapar($precioServicio) ?>
-                                    </p>
-                                <?php endif; ?>
-
-                                <?php if ($enlaceWhatsapp !== ''): ?>
-                                    <a
-                                        class="empresa-btn"
-                                        href="<?= $escapar($enlaceWhatsapp) ?>"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        Solicitar información
-                                    </a>
-                                <?php endif; ?>
-
-                            </div>
-                        </article>
-
-                    <?php endforeach; ?>
-
+                    Estamos preparando más información sobre nuestra empresa.
                 <?php endif; ?>
-
             </div>
+
         </div>
     </section>
 
-    <!-- =====================================================
-         GALERÍA
-         ===================================================== -->
-
-    <section class="empresa-seccion" id="empresa-galeria">
-        <div class="empresa-container">
-
-            <h2 class="empresa-titulo">
-                Galería
-            </h2>
-
-            <p class="empresa-subtitulo">
-                Conoce algunos de nuestros trabajos y productos.
-            </p>
-
-            <div class="empresa-galeria">
-
-                <?php
-                $imagenesValidas = 0;
-
-                foreach ($galeria as $imagen):
-                    if (is_string($imagen)) {
-                        $rutaGaleria = $imagen;
-                        $textoGaleria = $nombre;
-                    } elseif (is_array($imagen)) {
-                        $rutaGaleria =
-                            $imagen['imagen']
-                            ?? $imagen['ruta']
-                            ?? '';
-
-                        $textoGaleria =
-                            $imagen['titulo']
-                            ?? $nombre;
-                    } else {
-                        continue;
-                    }
-
-                    if ($rutaGaleria === '') {
-                        continue;
-                    }
-
-                    $imagenesValidas++;
-                ?>
-
-                    <img
-                        src="<?= $escapar($urlImagen($rutaGaleria)) ?>"
-                        alt="<?= $escapar($textoGaleria) ?>"
-                        loading="lazy"
-                    >
-
-                <?php endforeach; ?>
-
-                <?php if ($imagenesValidas === 0): ?>
-                    <div class="empresa-vacio">
-                        Próximamente se mostrarán las imágenes
-                        de esta empresa.
-                    </div>
-                <?php endif; ?>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- =====================================================
-         CONTACTO
-         ===================================================== -->
-
-    <section class="empresa-seccion" id="empresa-contacto">
+    <!-- CONTACTO -->
+    <section
+        class="empresa-seccion empresa-seccion-fondo"
+        id="empresa-contacto"
+    >
         <div class="empresa-container">
 
             <h2 class="empresa-titulo">
@@ -799,159 +717,126 @@ $urlImagen = static function (string $ruta): string {
             </h2>
 
             <p class="empresa-subtitulo">
-                ¿Tienes alguna duda? Ponte en contacto con
-                <?= $escapar($nombre) ?>.
+                Comunícate con <?= $escapar($nombre) ?>.
             </p>
 
             <div class="empresa-contacto">
 
                 <?php if ($telefono !== ''): ?>
-                    <div class="empresa-contacto-item">
+                    <article class="empresa-contacto-item">
                         <h3>Teléfono</h3>
-                        <p><?= $escapar($telefono) ?></p>
-                    </div>
+                        <p>
+                            <a href="tel:<?= $escapar(
+                                preg_replace('/[^\d+]/', '', $telefono)
+                            ) ?>">
+                                <?= $escapar($telefono) ?>
+                            </a>
+                        </p>
+                    </article>
                 <?php endif; ?>
 
-                <?php if ($correo !== ''): ?>
-                    <div class="empresa-contacto-item">
+                <?php if (
+                    $correo !== '' &&
+                    filter_var($correo, FILTER_VALIDATE_EMAIL)
+                ): ?>
+                    <article class="empresa-contacto-item">
                         <h3>Correo electrónico</h3>
                         <p>
                             <a href="mailto:<?= $escapar($correo) ?>">
                                 <?= $escapar($correo) ?>
                             </a>
                         </p>
-                    </div>
+                    </article>
                 <?php endif; ?>
 
                 <?php if ($direccion !== ''): ?>
-                    <div class="empresa-contacto-item">
+                    <article class="empresa-contacto-item">
                         <h3>Dirección</h3>
                         <p><?= nl2br($escapar($direccion)) ?></p>
-                    </div>
+                    </article>
                 <?php endif; ?>
 
-                <?php if ($sitioWeb !== '' && $esUrlSegura($sitioWeb)): ?>
-                    <div class="empresa-contacto-item">
-                        <h3>Sitio web</h3>
+                <?php if ($whatsapp !== ''): ?>
+                    <article class="empresa-contacto-item">
+                        <h3>WhatsApp</h3>
                         <p>
-                            <a
-                                href="<?= $escapar($sitioWeb) ?>"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                Visitar sitio web
-                            </a>
+                            <?php if ($enlaceWhatsapp !== ''): ?>
+                                <a
+                                    href="<?= $escapar($enlaceWhatsapp) ?>"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    Enviar mensaje
+                                </a>
+                            <?php else: ?>
+                                <?= $escapar($whatsapp) ?>
+                            <?php endif; ?>
                         </p>
-                    </div>
+                    </article>
                 <?php endif; ?>
 
-                <?php if (
-                    $telefono === ''
-                    && $correo === ''
-                    && $direccion === ''
-                    && $sitioWeb === ''
-                ): ?>
+                <?php
+                $hayContacto = (
+                    $telefono !== '' ||
+                    (
+                        $correo !== '' &&
+                        filter_var($correo, FILTER_VALIDATE_EMAIL)
+                    ) ||
+                    $direccion !== '' ||
+                    $whatsapp !== ''
+                );
+                ?>
+
+                <?php if (!$hayContacto): ?>
                     <div class="empresa-vacio">
-                        Los datos de contacto de esta empresa
-                        todavía no están disponibles.
+                        Los datos de contacto aún no están disponibles.
                     </div>
                 <?php endif; ?>
 
             </div>
 
-            <?php if (!empty($redes)): ?>
+            <!-- REDES SOCIALES -->
+            <?php
+            $redes = [];
 
+            if ($enlaceFacebook !== '') {
+                $redes[] = [
+                    'nombre' => 'Facebook',
+                    'url' => $enlaceFacebook
+                ];
+            }
+
+            if ($enlaceInstagram !== '') {
+                $redes[] = [
+                    'nombre' => 'Instagram',
+                    'url' => $enlaceInstagram
+                ];
+            }
+            ?>
+
+            <?php if ($redes !== []): ?>
                 <div class="empresa-redes">
-
                     <?php foreach ($redes as $red): ?>
-                        <?php
-                        if (!is_array($red)) {
-                            continue;
-                        }
-
-                        $nombreRed = $red['nombre'] ?? '';
-                        $urlRed = $red['url'] ?? '';
-
-                        if (
-                            $nombreRed === ''
-                            || !$esUrlSegura($urlRed)
-                        ) {
-                            continue;
-                        }
-                        ?>
-
                         <a
                             class="empresa-red"
-                            href="<?= $escapar($urlRed) ?>"
+                            href="<?= $escapar($red['url']) ?>"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            <?= $escapar($nombreRed) ?>
+                            <?= $escapar($red['nombre']) ?>
                         </a>
-
                     <?php endforeach; ?>
-
                 </div>
-
-            <?php endif; ?>
-
-            <?php if (!empty($preguntas)): ?>
-
-                <div style="margin-top:55px">
-
-                    <h2 class="empresa-titulo">
-                        Preguntas frecuentes
-                    </h2>
-
-                    <?php foreach ($preguntas as $pregunta): ?>
-                        <?php
-                        if (!is_array($pregunta)) {
-                            continue;
-                        }
-
-                        $textoPregunta =
-                            $pregunta['pregunta']
-                            ?? $pregunta['titulo']
-                            ?? '';
-
-                        $respuestaPregunta =
-                            $pregunta['respuesta']
-                            ?? $pregunta['descripcion']
-                            ?? '';
-
-                        if ($textoPregunta === '') {
-                            continue;
-                        }
-                        ?>
-
-                        <article class="empresa-pregunta">
-                            <h3>
-                                <?= $escapar($textoPregunta) ?>
-                            </h3>
-
-                            <p>
-                                <?= nl2br($escapar($respuestaPregunta)) ?>
-                            </p>
-                        </article>
-
-                    <?php endforeach; ?>
-
-                </div>
-
             <?php endif; ?>
 
         </div>
     </section>
 
-    <!-- =====================================================
-         IDENTIFICACIÓN DE LA EMPRESA
-         ===================================================== -->
-
-    <footer style="padding:25px 0;background:#30271f;color:#fff">
-        <div class="empresa-container" style="text-align:center">
+    <!-- PIE DE PÁGINA -->
+    <footer class="empresa-pie">
+        <div class="empresa-container">
             <p>
-                <?= $escapar($nombre) ?>
-                · UTP-Market
+                <?= $escapar($nombre) ?> · UTP-Market
             </p>
         </div>
     </footer>
