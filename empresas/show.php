@@ -39,70 +39,86 @@ $empresasAcciones  = '<a href="' . empresas_url('edit', ['id' => (int) $empresa[
 require __DIR__ . '/_layout.php';
 ?>
 
-<div class="row g-4">
+<section class="empresa-detail">
+    <div class="row g-4 align-items-stretch">
+        <div class="col-lg-8">
+            <div class="empresa-detail__card h-100">
+                <h2 class="empresa-detail__title">Información de la empresa</h2>
 
-    <div class="col-lg-8">
-        <div class="account-section">
-            <div class="review-form">
-                <div class="review-form-name">
-                    <label class="form-label">Eslogan</label>
-                    <p class="mb-0">
-                        <?= htmlspecialchars((string) ($empresa['eslogan'] ?? 'Sin eslogan.'), ENT_QUOTES, 'UTF-8') ?>
-                    </p>
-                </div>
+                <dl class="empresa-detail__list">
+                    <div class="empresa-detail__item">
+                        <dt>Eslogan</dt>
+                        <dd><?= htmlspecialchars((string) ($empresa['eslogan'] ?? 'Sin eslogan.'), ENT_QUOTES, 'UTF-8') ?></dd>
+                    </div>
 
-                <div class="review-form-name">
-                    <label class="form-label">Descripción</label>
-                    <p class="mb-0" style="white-space: pre-line;">
-                        <?= htmlspecialchars((string) ($empresa['descripcion'] ?? 'Sin descripción.'), ENT_QUOTES, 'UTF-8') ?>
-                    </p>
-                </div>
+                    <div class="empresa-detail__item empresa-detail__item--wide">
+                        <dt>Descripción</dt>
+                        <dd class="empresa-detail__description"><?= htmlspecialchars((string) ($empresa['descripcion'] ?? 'Sin descripción.'), ENT_QUOTES, 'UTF-8') ?></dd>
+                    </div>
 
-                <div class="review-form-name">
-                    <label class="form-label">URL de la imagen</label>
-                    <p class="mb-0">
-                        <?php if (!empty($empresa['url_imagen'])): ?>
-                            <a href="<?= htmlspecialchars((string) $empresa['url_imagen'], ENT_QUOTES, 'UTF-8') ?>"
-                                target="_blank" rel="noopener noreferrer">Ver imagen</a>
-                        <?php else: ?>
-                            <span class="text-muted">Sin imagen</span>
-                        <?php endif; ?>
-                    </p>
-                </div>
+                    <div class="empresa-detail__item">
+                        <dt>Redes sociales</dt>
+                        <dd><?= htmlspecialchars((string) ($empresa['whatsapp'] ?? 'Sin WhatsApp.'), ENT_QUOTES, 'UTF-8') ?></dd>
+                        <dd><?= htmlspecialchars((string) ($empresa['facebook'] ?? 'Sin Facebook.'), ENT_QUOTES, 'UTF-8') ?></dd>
+                        <dd><?= htmlspecialchars((string) ($empresa['instagram'] ?? 'Sin Instagram.'), ENT_QUOTES, 'UTF-8') ?></dd>
+                    </div>
 
-                <div class="review-form-name">
-                    <label class="form-label">Fechas</label>
-                    <p class="mb-0">
-                        <small class="text-muted">
-                            Creada: <?= htmlspecialchars((string) ($empresa['created_at'] ?? '—'), ENT_QUOTES, 'UTF-8') ?><br>
-                            Actualizada: <?= htmlspecialchars((string) ($empresa['updated_at'] ?? '—'), ENT_QUOTES, 'UTF-8') ?>
-                        </small>
-                    </p>
-                </div>
+                    <div class="empresa-detail__item">
+                        <dt>Correo</dt>
+                        <dd><?= htmlspecialchars((string) ($empresa['correo'] ?? 'Sin correo.'), ENT_QUOTES, 'UTF-8') ?></dd>
+                    </div>
+
+                    <div class="empresa-detail__item">
+                        <dt>Direccion</dt>
+                        <dd><?= htmlspecialchars((string) ($empresa['direccion'] ?? 'Dirección no proporcionada'), ENT_QUOTES, 'UTF-8') ?></dd>
+                    </div>
+
+                    <div class="empresa-detail__item">
+                        <dt>Teléfono</dt>
+                        <dd><?= htmlspecialchars((string) ($empresa['telefono'] ?? 'Sin teléfono.'), ENT_QUOTES, 'UTF-8') ?></dd>
+                    </div>
+
+                    <div class="empresa-detail__item">
+                        <dt>Imagen</dt>
+                        <dd>
+                            <?php if (!empty($empresa['url_imagen'])): ?>
+                                <a href="<?= htmlspecialchars((string) $empresa['url_imagen'], ENT_QUOTES, 'UTF-8') ?>"
+                                    target="_blank" rel="noopener noreferrer" class="empresa-detail__link">Ver imagen original</a>
+                            <?php else: ?>
+                                <span class="text-muted">Sin imagen</span>
+                            <?php endif; ?>
+                        </dd>
+                    </div>
+
+                    <div class="empresa-detail__item">
+                        <dt>Fechas</dt>
+                        <dd class="empresa-detail__dates">
+                            <span><strong>Creada:</strong> <?= htmlspecialchars((string) ($empresa['created_at'] ?? '—'), ENT_QUOTES, 'UTF-8') ?></span>
+                            <span><strong>Actualizada:</strong> <?= htmlspecialchars((string) ($empresa['updated_at'] ?? '—'), ENT_QUOTES, 'UTF-8') ?></span>
+                        </dd>
+                    </div>
+                </dl>
             </div>
         </div>
-    </div>
-dd
-    <div class="col-lg-4">
-        <div class="img-upload-section">
-            <div class="logo-wrapper">
-                <h5 class="comment-title">Imagen</h5>
+
+        <div class="col-lg-4">
+            <aside class="empresa-detail__card empresa-detail__image-card h-100">
+                <h2 class="empresa-detail__title">Imagen de la empresa</h2>
                 <img src="<?= !empty($empresa['url_imagen'])
                         ? htmlspecialchars((string) $empresa['url_imagen'], ENT_QUOTES, 'UTF-8')
                         : asset('assets/images/homepage-one/sallers-cover.png') ?>"
                     alt="<?= htmlspecialchars((string) $empresa['nombre'], ENT_QUOTES, 'UTF-8') ?>"
-                    class="upload-img"
+                    class="empresa-detail__image"
                     onerror="this.src='<?= asset('assets/images/homepage-one/sallers-cover.png') ?>'">
 
-                <form action="<?= empresas_url('delete') ?>" method="POST" class="mt-3"
+                <form action="<?= empresas_url('delete') ?>" method="POST" class="empresa-detail__delete-form"
                     onsubmit="return confirm('¿Eliminar la empresa «<?= htmlspecialchars((string) $empresa['nombre'], ENT_QUOTES, 'UTF-8') ?>»? Esta acción no se puede deshacer.');">
                     <?= empresas_csrf_field() ?>
                     <input type="hidden" name="redirect" value="<?= htmlspecialchars(empresas_url('empresas'), ENT_QUOTES, 'UTF-8') ?>">
                     <input type="hidden" name="id" value="<?= (int) $empresa['id_empresa'] ?>">
-                    <button type="submit" class="btn btn-outline-danger btn-sm">Eliminar empresa</button>
+                    <button type="submit" class="btn btn-outline-danger">Eliminar empresa</button>
                 </form>
-            </div>
+            </aside>
         </div>
     </div>
-
-</div>
+</section>
