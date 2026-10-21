@@ -2,30 +2,28 @@
 declare(strict_types=1);
 
 /**
- * Modelo de datos de "empresas".
+ * Modelo de empresas - UTP-Market
  *
- * La carpeta `empresas/` trabaja directamente contra Supabase mediante
- * su API REST (PostgREST), usando `SUPABASE_URL` y
- * `SUPABASE_SERVICE_ROLE_KEY` del archivo `.env`.
+ * Base de datos: Supabase
+ * Tabla: public.empresa
  *
- * Tabla remota: `public.empresa`
- *   id, nombre, eslogan, descripcion, logo_url, imagen_url, correo,
- *   telefono, whatsapp, direccion, facebook, instagram, created_at, updated_at
+ * Columnas:
+ * id, nombre, slug, eslogan, descripcion,
+ * logo_url, imagen_url, correo, telefono,
+ * whatsapp, direccion, facebook, instagram,
+ * estado, created_at, updated_at
  *
- * No se usa ninguna base de datos local.
+ * slug y estado no se modifican desde este modelo.
  */
+
 final class EmpresaModel
 {
-    /** Nombre de la tabla en Supabase */
     private const TABLA = Supabase::EMPRESAS_TABLE;
 
-    /** Columnas que se piden a la API */
     private const SELECT = '*';
 
     /**
-     * Listado de empresas (más recientes primero).
-     *
-     * @param string|null $busqueda Texto a buscar en nombre o descripción
+     * Obtener todas las empresas.
      */
     public static function all(?string $busqueda = null): array
     {
@@ -35,12 +33,16 @@ final class EmpresaModel
         ];
 
         if ($busqueda !== null && trim($busqueda) !== '') {
-            // PostgREST usa comas y paréntesis para separar filtros:
-            // se limpian para no romper la consulta.
-            $texto = trim((string) preg_replace('/[\s,()*]+/', ' ', $busqueda));
+            $texto = trim((string) preg_replace(
+                '/[\s,()*]+/',
+                ' ',
+                $busqueda
+            ));
 
             if ($texto !== '') {
-                $query['or'] = '(nombre.ilike.*' . $texto . '*,descripcion.ilike.*' . $texto . '*)';
+                $query['or'] =
+                    '(nombre.ilike.*' . $texto .
+                    '*,descripcion.ilike.*' . $texto . '*)';
             }
         }
 
@@ -51,7 +53,7 @@ final class EmpresaModel
     }
 
     /**
-     * Obtiene una empresa por su id (null si no existe)
+     * Obtener una empresa por ID.
      */
     public static function find(int $id): ?array
     {
@@ -65,14 +67,13 @@ final class EmpresaModel
             'limit'  => 1,
         ]);
 
-        return $filas ? self::normalizar($filas[0]) : null;
+        return $filas
+            ? self::normalizar($filas[0])
+            : null;
     }
 
     /**
-     * Catálogo de categorías.
-     *
-     * La tabla `empresa` de Supabase no maneja categorías, así que se
-     * devuelve un catálogo vacío para mantener la compatibilidad.
+     * Compatibilidad con el CRUD existente.
      */
     public static function categorias(): array
     {
@@ -80,64 +81,167 @@ final class EmpresaModel
     }
 
     /**
-     * Valida los datos de una empresa.
-     *
-     * @param array $datos Datos crudos (nombre, descripcion, url_imagen)
-     * @return array Lista de errores (vacía si todo está correcto)
+     * Validar los datos de una empresa.
      */
-    public static function validar(array $datos, array $categorias = []): array
-    {
+    public static function validar(
+        array $datos,
+        array $categorias = []
+    ): array {
         $errores = [];
 
+        // Nombre obligatorio.
         $nombre = trim((string) ($datos['nombre'] ?? ''));
+
         if ($nombre === '') {
-            $errores['nombre'] = 'El nombre de la empresa es obligatorio.';
-        } elseif (mb_strlen($nombre) > 180) {
-            $errores['nombre'] = 'El nombre no puede superar los 180 caracteres.';
+            $errores['nombre'] =
+                'El nombre de la empresa es obligatorio.';
+        } elseif (mb_strlen($nombre) > 150) {
+            $errores['nombre'] =
+                'El nombre no puede superar los 150 caracteres.';
         }
 
-        $descripcion = (string) ($datos['descripcion'] ?? '');
-        if (mb_strlen($descripcion) > 5000) {
-            $errores['descripcion'] = 'La descripción no puede superar los 5000 caracteres.';
+        // Longitudes máximas de Supabase.
+        $limites = [
+            'eslogan'        => 255,
+            'descripcion'    => 5000,
+            'logo'           => 255,
+            'logo_url'       => 255,
+            'imagen_portada' => 255,
+            'imagen_url'     => 255,
+            'url_imagen'     => 255,
+            'correo'         => 150,
+            'telefono'       => 25,
+            'whatsapp'       => 25,
+            'direccion'      => 255,
+            'facebook'       => 255,
+            'instagram'      => 255,
+        ];
+
+        foreach ($limites as $campo => $limite) {
+            if (!array_key_exists($campo, $datos)) {
+                continue;
+            }
+
+            $valor = trim((string) ($datos[$campo] ?? ''));
+
+            if (mb_strlen($valor) > $limite) {
+                $errores[$campo] =
+                    "El campo {$campo} no puede superar "
+                    . "{$limite} caracteres.";
+            }
         }
 
-        $url = (string) ($datos['url_imagen'] ?? '');
-        if ($url !== '' && !empresas_url_imagen_valida($url)) {
-            $errores['url_imagen'] = 'La URL de la imagen debe empezar con http:// o https://';
+        // Validar correo electrónico.
+        $correo = trim((string) ($datos['correo'] ?? ''));
+
+        if (
+            $correo !== '' &&
+            !filter_var($correo, FILTER_VALIDATE_EMAIL)
+        ) {
+            $errores['correo'] =
+                'Ingresa un correo electrónico válido.';
+        }
+
+        // Validar las URLs de imágenes y redes sociales.
+        $camposUrl = [
+            'logo',
+            'logo_url',
+            'imagen_portada',
+            'imagen_url',
+            'url_imagen',
+            'facebook',
+            'instagram',
+        ];
+
+        foreach ($camposUrl as $campo) {
+            if (!array_key_exists($campo, $datos)) {
+                continue;
+            }
+
+            $valor = trim((string) ($datos[$campo] ?? ''));
+
+            if ($valor === '') {
+                continue;
+            }
+
+            if (!filter_var($valor, FILTER_VALIDATE_URL)) {
+                $errores[$campo] =
+                    "Ingresa una URL válida para {$campo}.";
+                continue;
+            }
+
+            $esquema = strtolower(
+                (string) parse_url($valor, PHP_URL_SCHEME)
+            );
+
+            if (!in_array($esquema, ['http', 'https'], true)) {
+                $errores[$campo] =
+                    "La URL de {$campo} debe utilizar HTTP o HTTPS.";
+            }
         }
 
         return $errores;
     }
 
     /**
-     * Crea una empresa y devuelve su id
+     * Crear una empresa.
      */
     public static function crear(array $datos): int
     {
-        $filas = Supabase::insert(self::TABLA, self::filaParaGuardar($datos));
+        $errores = self::validar($datos);
+
+        if ($errores) {
+            throw new InvalidArgumentException(
+                implode(' ', array_values($errores))
+            );
+        }
+
+        $filas = Supabase::insert(
+            self::TABLA,
+            self::filaParaGuardar($datos)
+        );
 
         return (int) ($filas[0]['id'] ?? 0);
     }
 
     /**
-     * Actualiza una empresa
+     * Actualizar una empresa.
      */
-    public static function actualizar(int $id, array $datos): bool
-    {
+    public static function actualizar(
+        int $id,
+        array $datos
+    ): bool {
         if ($id <= 0) {
             return false;
         }
 
+        $errores = self::validar($datos);
+
+        if ($errores) {
+            throw new InvalidArgumentException(
+                implode(' ', array_values($errores))
+            );
+        }
+
         $fila = self::filaParaGuardar($datos);
+
+        if (empty($fila)) {
+            return false;
+        }
+
         $fila['updated_at'] = gmdate('c');
 
-        $filas = Supabase::update(self::TABLA, ['id' => 'eq.' . $id], $fila);
+        $filas = Supabase::update(
+            self::TABLA,
+            ['id' => 'eq.' . $id],
+            $fila
+        );
 
         return $filas !== [];
     }
 
     /**
-     * Elimina una empresa
+     * Eliminar una empresa.
      */
     public static function eliminar(int $id): bool
     {
@@ -145,38 +249,128 @@ final class EmpresaModel
             return false;
         }
 
-        $filas = Supabase::delete(self::TABLA, ['id' => 'eq.' . $id]);
+        $filas = Supabase::delete(
+            self::TABLA,
+            ['id' => 'eq.' . $id]
+        );
 
         return $filas !== [];
     }
 
     /**
-     * Columnas que se escriben en Supabase
+     * Preparar los datos para Supabase.
+     *
+     * Solo se envían los campos presentes en
+     * el formulario para evitar borrar datos.
+     *
+     * Se traducen:
+     * logo           -> logo_url
+     * imagen_portada -> imagen_url
+     * url_imagen     -> logo_url (compatibilidad)
      */
     private static function filaParaGuardar(array $datos): array
     {
-        $descripcion = trim((string) ($datos['descripcion'] ?? ''));
-        $imagen      = trim((string) ($datos['url_imagen'] ?? ''));
-
-        return [
-            'nombre'      => (string) ($datos['nombre'] ?? ''),
-            'descripcion' => $descripcion !== '' ? $descripcion : null,
-            'logo_url'    => $imagen !== '' ? $imagen : null,
+        $camposPermitidos = [
+            'nombre',
+            'eslogan',
+            'descripcion',
+            'correo',
+            'telefono',
+            'whatsapp',
+            'direccion',
+            'facebook',
+            'instagram',
         ];
+
+        $fila = [];
+
+        foreach ($camposPermitidos as $campo) {
+            if (!array_key_exists($campo, $datos)) {
+                continue;
+            }
+
+            $valor = trim((string) ($datos[$campo] ?? ''));
+
+            $fila[$campo] = $valor !== ''
+                ? $valor
+                : null;
+        }
+
+        // Logo: acepta nombres nuevos y antiguos.
+        if (array_key_exists('logo', $datos)) {
+            $logo = trim((string) ($datos['logo'] ?? ''));
+
+            $fila['logo_url'] = $logo !== ''
+                ? $logo
+                : null;
+
+        } elseif (array_key_exists('logo_url', $datos)) {
+            $logo = trim((string) ($datos['logo_url'] ?? ''));
+
+            $fila['logo_url'] = $logo !== ''
+                ? $logo
+                : null;
+
+        } elseif (array_key_exists('url_imagen', $datos)) {
+            $logo = trim((string) ($datos['url_imagen'] ?? ''));
+
+            $fila['logo_url'] = $logo !== ''
+                ? $logo
+                : null;
+        }
+
+        // Imagen de portada.
+        if (array_key_exists('imagen_portada', $datos)) {
+            $portada = trim(
+                (string) ($datos['imagen_portada'] ?? '')
+            );
+
+            $fila['imagen_url'] = $portada !== ''
+                ? $portada
+                : null;
+
+        } elseif (array_key_exists('imagen_url', $datos)) {
+            $portada = trim(
+                (string) ($datos['imagen_url'] ?? '')
+            );
+
+            $fila['imagen_url'] = $portada !== ''
+                ? $portada
+                : null;
+        }
+
+        return $fila;
     }
 
     /**
-     * Normaliza una fila de Supabase a la forma que usan las vistas
-     * (id_empresa, url_imagen, ...).
+     * Normalizar los datos recibidos de Supabase.
+     *
+     * Permite utilizar nombres de campos nuevos
+     * y antiguos en las vistas del proyecto.
      */
     private static function normalizar(array $fila): array
     {
-        $logo   = trim((string) ($fila['logo_url'] ?? ''));
-        $imagen = trim((string) ($fila['imagen_url'] ?? ''));
+        $logo = trim(
+            (string) ($fila['logo_url'] ?? '')
+        );
+
+        $portada = trim(
+            (string) ($fila['imagen_url'] ?? '')
+        );
+
+        $imagenPrincipal = $logo !== ''
+            ? $logo
+            : $portada;
 
         return array_merge($fila, [
-            'id_empresa'     => (int) ($fila['id'] ?? 0),
-            'url_imagen'     => $logo !== '' ? $logo : $imagen,
+            'id_empresa' => (int) ($fila['id'] ?? 0),
+
+            'logo' => $logo,
+
+            'imagen_portada' => $portada,
+
+            'url_imagen' => $imagenPrincipal,
+
             'tipo_categoria' => null,
         ]);
     }

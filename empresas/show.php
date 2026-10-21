@@ -34,7 +34,7 @@ if (!$empresa) {
 
 $empresasTitulo    = $empresa['nombre'];
 $empresasSubtitulo = 'Detalle de la empresa #' . (int) $empresa['id_empresa'];
-$empresasAcciones  = '<a href="' . empresas_url('edit', ['id' => (int) $empresa['id_empresa']]) . '" class="btn btn-outline-primary btn-sm">Editar</a>';
+$empresasAcciones  = '<a href="' . empresas_url('edit', ['id' => (int) $empresa['id_empresa']]) . '" class="shop-btn" style="padding: 10px 18px; font-size: 1.35rem; line-height: 1;">Editar</a>';
 
 require __DIR__ . '/_layout.php';
 ?>
@@ -111,14 +111,20 @@ require __DIR__ . '/_layout.php';
                     class="empresa-detail__image"
                     onerror="this.src='<?= asset('assets/images/homepage-one/sallers-cover.png') ?>'">
 
-                <form action="<?= empresas_url('delete') ?>" method="POST" class="empresa-detail__delete-form"
-                    onsubmit="return confirm('¿Eliminar la empresa «<?= htmlspecialchars((string) $empresa['nombre'], ENT_QUOTES, 'UTF-8') ?>»? Esta acción no se puede deshacer.');">
-                    <?= empresas_csrf_field() ?>
-                    <input type="hidden" name="redirect" value="<?= htmlspecialchars(empresas_url('empresas'), ENT_QUOTES, 'UTF-8') ?>">
-                    <input type="hidden" name="id" value="<?= (int) $empresa['id_empresa'] ?>">
-                    <button type="submit" class="btn btn-outline-danger">Eliminar empresa</button>
-                </form>
-            </aside>
+                <div class="d-flex flex-column gap-2 mt-3">
+                    <a href="<?= empresas_url('edit', ['id' => (int) $empresa['id_empresa']]) ?>"
+                        class="shop-btn" style="margin: 0; width: 100%; text-align: center; border-radius: 6px; padding: 10px; font-size: 1.35rem; text-decoration: none;">
+                        Editar empresa
+                    </a>
+                    <form action="<?= empresas_url('delete') ?>" method="POST" class="m-0"
+                        onsubmit="return confirm('¿Eliminar la empresa «<?= htmlspecialchars((string) $empresa['nombre'], ENT_QUOTES, 'UTF-8') ?>»? Esta acción no se puede deshacer.');">
+                        <?= empresas_csrf_field() ?>
+                        <input type="hidden" name="redirect" value="<?= htmlspecialchars(empresas_url('empresas'), ENT_QUOTES, 'UTF-8') ?>">
+                        <input type="hidden" name="id" value="<?= (int) $empresa['id_empresa'] ?>">
+                        <button type="submit" class="shop-btn cancel-btn" style="margin: 0; color: #dc2626; border-color: #fecaca; background: #fef2f2; width: 100%; text-align: center; border-radius: 6px; padding: 10px; font-size: 1.35rem; cursor: pointer;">Eliminar empresa</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </section>
