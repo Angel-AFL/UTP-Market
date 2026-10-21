@@ -14,7 +14,7 @@ if (file_exists($envFile)) {
 
 // 2. Obtener las variables
 $supabaseUrl = $_ENV['PUBLIC_SUPABASE_URL'] ?? '';
-$supabaseAnonKey = $_ENV['PUBLIC_SUPABASE_ANON_KEY'] ?? '';
+$supabaseAnonKey = $_ENV['PUBLIC_SUPABASE_PUBLISHABLE_KEY'] ?? '';
 $supabaseServiceKey = $_ENV['SUPABASE_SERVICE_ROLE_KEY'] ?? '';
 
 if (empty($supabaseUrl) || empty($supabaseAnonKey)) {
