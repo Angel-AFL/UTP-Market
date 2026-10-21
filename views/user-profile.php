@@ -249,12 +249,14 @@
 
                         <!-- NUEVA VISTA / TAB-PANE PARA CRUD DE PRODUCTOS -->
                         <div class="tab-pane fade" id="v-pills-products" role="tabpanel"
-                            aria-labelledby="v-pills-products-tab" tabindex="0">
-                            <div class="cart-section">
-                                <div class="d-flex justify-content-between align-items-center mb-4">
-                                    <h5 class="heading">Product Management </h5>
-                                    <a href="#" class="shop-btn" onclick="modalAction('.product-modal')">Add New Product</a>
-                                </div>
+    aria-labelledby="v-pills-products-tab" tabindex="0">
+    <div class="cart-section">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h5 class="heading">Product Management </h5>
+            <button type="button" class="shop-btn" data-ap-open>Add New Product</button>
+        </div>
+        <?php include __DIR__ . '/agregar_producto.php'; ?>
+
 
                                 <!-- Modal para Crear/Editar Producto -->
                                 <div class="modal-wrapper product-modal">
