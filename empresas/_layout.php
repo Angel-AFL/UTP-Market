@@ -27,18 +27,29 @@ if (!Supabase::isAvailable()) {
 ?>
 <div class="empresas-module">
 
-    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
-        <div>
-            <h5 class="heading mb-1"><?= htmlspecialchars((string) $empresasTitulo, ENT_QUOTES, 'UTF-8') ?></h5>
-            <p class="paragraph mb-0"><?= htmlspecialchars((string) $empresasSubtitulo, ENT_QUOTES, 'UTF-8') ?></p>
-        </div>
+    <?php if (!defined('EMPRESAS_EMBEDDED')): ?>
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4 pb-3 border-bottom">
+            <div>
+                <h4 class="heading mb-1" style="font-size: 2rem; color: #3b2a1f; font-weight: 700;"><?= htmlspecialchars((string) $empresasTitulo, ENT_QUOTES, 'UTF-8') ?></h4>
+                <p class="paragraph mb-0" style="color: #64748b;"><?= htmlspecialchars((string) $empresasSubtitulo, ENT_QUOTES, 'UTF-8') ?></p>
+            </div>
 
-        <div class="d-flex flex-wrap align-items-center gap-2">
-            <?= $empresasAcciones ?>
-            <a href="<?= empresas_url('empresas') ?>" class="btn btn-outline-secondary btn-sm">Ver todas</a>
-            <a href="<?= empresas_url('create') ?>" class="btn btn-primary btn-sm">+ Nueva empresa</a>
+            <div class="d-flex flex-wrap align-items-center gap-2">
+                <?= $empresasAcciones ?>
+                <a href="<?= empresas_url('empresas') ?>" class="shop-btn cancel-btn" style="margin: 0; padding: 10px 18px; font-size: 1.35rem; line-height: 1; border-radius: 6px;">Ver todas</a>
+                <a href="<?= empresas_url('create') ?>" class="shop-btn" style="margin: 0; padding: 10px 18px; font-size: 1.35rem; line-height: 1; border-radius: 6px;">+ Nueva empresa</a>
+            </div>
         </div>
-    </div>
+    <?php else: ?>
+        <?php if (!empty($empresasSubtitulo) && $empresasSubtitulo !== 'Gestiona las empresas registradas en UTP-Market.'): ?>
+            <div class="mb-3">
+                <span style="display: inline-flex; align-items: center; background: #faf8f7; color: #64748b; font-size: 1.3rem; padding: 6px 14px; border-radius: 6px; border: 1px solid #ede8e3;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                    <?= htmlspecialchars((string) $empresasSubtitulo, ENT_QUOTES, 'UTF-8') ?>
+                </span>
+            </div>
+        <?php endif; ?>
+    <?php endif; ?>
 
     <?php if ($empresasDbError !== null): ?>
         <div class="alert alert-danger" role="alert">
