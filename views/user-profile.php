@@ -258,6 +258,125 @@
         <?php include __DIR__ . '/agregar_producto.php'; ?>
 
 
+<!-- Filtros independientes: búsqueda por nombre y categoría visual -->
+<section class="filtros-productos" id="filtros-busqueda-productos">
+
+    <div class="filtro-campo filtro-busqueda">
+        <label for="buscar-producto">
+            <span aria-hidden="true">⌕</span>
+            Buscar producto por nombre
+        </label>
+
+        <input
+            type="search"
+            id="buscar-producto"
+            class="control-filtro"
+            placeholder="Escribe el nombre del producto..."
+            autocomplete="off"
+        >
+    </div>
+
+    <div class="filtro-campo filtro-categoria">
+        <label for="categoria-producto">
+            <span aria-hidden="true">◇</span>
+            Categoría
+        </label>
+
+        <select id="categoria-producto" class="control-filtro">
+            <option value="">Todas las categorías</option>
+        </select>
+    </div>
+
+    <p id="mensaje-busqueda-productos"
+       class="mensaje-filtro"
+       role="status"
+       aria-live="polite">
+        Escribe un nombre para buscar productos.
+    </p>
+
+</section>
+
+<style>
+    .filtros-productos {
+        display: grid;
+        grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr);
+        gap: 22px;
+        padding: 24px;
+        margin: 22px 0;
+        background: #f8f9ff;
+        border: 1px solid #e5e9fb;
+        border-radius: 18px;
+        box-sizing: border-box;
+    }
+
+    .filtro-campo {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        min-width: 0;
+    }
+
+    .filtro-campo label {
+        color: #564d24;
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: .1px;
+    }
+
+    .filtro-campo label span {
+        color: #b67f1a;
+        margin-right: 7px;
+        font-size: 19px;
+    }
+
+    .control-filtro {
+        width: 100%;
+        min-height: 49px;
+        padding: 12px 15px;
+        background: #fff;
+        border: 1px solid #dce2f2;
+        border-radius: 12px;
+        color: #615724;
+        font: inherit;
+        font-size: 14px;
+        outline: none;
+        box-sizing: border-box;
+        transition: border-color .2s, box-shadow .2s;
+    }
+
+    .control-filtro::placeholder {
+        color: #929bb0;
+    }
+
+    .control-filtro:focus {
+        border-color: #f1bb63;
+        box-shadow: 0 0 0 4px rgba(154, 112, 45, 0.12);
+    }
+
+    .mensaje-filtro {
+        grid-column: 1 / -1;
+        margin: 0;
+        padding: 12px 15px;
+        border-radius: 10px;
+        background: #edf2ff;
+        color: #8d7b52;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    @media (max-width: 650px) {
+        .filtros-productos {
+            grid-template-columns: 1fr;
+            padding: 16px;
+            gap: 16px;
+        }
+
+        .mensaje-filtro {
+            grid-column: auto;
+        }
+    }
+</style>
+
                                 <!-- Modal para Crear/Editar Producto -->
                                 <div class="modal-wrapper product-modal">
                                     <div onclick="modalAction('.product-modal')" class="anywhere-away"></div>
