@@ -2,8 +2,6 @@
 /**
  * Modal flotante para agregar un producto/servicio en UTP-Market.
  * Inclúyelo una sola vez desde views/user-profile.php.
- * Nota: empresa_id debe asignarse desde la sesión/controlador; no se pide al usuario.
- * El campo categoria requiere que el proyecto tenga una columna/relación para guardarlo.
  */
 ?>
 <div class="ap-overlay" id="apProductModal" aria-hidden="true">
@@ -22,12 +20,12 @@
       <div class="ap-grid">
         <label class="ap-field ap-full">
           <span>Nombre de la publicación <b>*</b></span>
-          <input type="text" name="nombre" placeholder="Ej. Diseño de página web" maxlength="150" required>
+          <input type="text" name="nombre" id="inputNombre" placeholder="Ej. Diseño de página web" maxlength="150" required>
         </label>
 
         <label class="ap-field">
           <span>Tipo de publicación <b>*</b></span>
-          <select name="categoria" required>
+          <select name="categoria" id="inputCategoria" required>
             <option value="" disabled selected>Selecciona una categoría</option>
             <option value="tecnologia">Tecnología y desarrollo</option>
             <option value="diseno">Diseño y creatividad</option>
@@ -41,12 +39,12 @@
 
         <label class="ap-field">
           <span>Precio (MXN) <b>*</b></span>
-          <div class="ap-price"><span>$</span><input type="number" name="precio" placeholder="0.00" min="0" step="0.01" required></div>
+          <div class="ap-price"><span>\$</span><input type="number" name="precio" id="inputPrecio" placeholder="0.00" min="0" step="0.01" required></div>
         </label>
 
         <label class="ap-field ap-full">
           <span>Descripción <b>*</b></span>
-          <textarea name="descripcion" rows="4" maxlength="2000" placeholder="¿Qué ofreces? Describe sus características, beneficios y detalles importantes..." required></textarea>
+          <textarea name="descripcion" id="inputDescripcion" rows="4" maxlength="2000" placeholder="¿Qué ofreces? Describe sus características, beneficios y detalles importantes..." required></textarea>
           <small class="ap-help">Una descripción clara ayuda a que tu publicación se entienda mejor.</small>
         </label>
       </div>
@@ -69,10 +67,10 @@
         <p class="ap-secure"><span class="ap-secure-dot"></span>Tu publicación se asociará con tu cuenta.</p>
         <div class="ap-action-buttons">
           <button class="ap-btn ap-btn-quiet" type="button" data-ap-close>Cancelar</button>
-          <button class="ap-btn ap-btn-primary" type="submit">Guardar publicación <span aria-hidden="true">↗</span></button>
+          <button class="ap-btn ap-btn-primary" type="submit" id="btnSubmitPublicacion">Guardar publicación <span aria-hidden="true">↗</span></button>
         </div>
       </div>
-      <p class="ap-note">El formulario es visual; conecta el envío con tu controlador PHP para guardar los datos.</p>
+      <p class="ap-note">El formulario es visual; simulando conexión para reflejar en tabla.</p>
     </form>
   </section>
 </div>
@@ -96,6 +94,7 @@
 
 <script>
 (function () {
+  // LÓGICA DEL MODAL (Abrir / Cerrar)
   const modal = document.getElementById('apProductModal');
   if (!modal || modal.dataset.apReady === '1') return;
   modal.dataset.apReady = '1';
@@ -108,9 +107,8 @@
     modal.classList.add('ap-visible');
     modal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('ap-lock');
-    const firstField = modal.querySelector('input:not([type="file"]), select, textarea');
-    if (firstField) firstField.focus();
   }
+  
   function closeProductModal() {
     modal.classList.remove('ap-visible');
     modal.setAttribute('aria-hidden', 'true');
@@ -123,12 +121,111 @@
     const trigger = target && typeof target.closest === 'function' ? target.closest('[data-ap-open]') : null;
     if (trigger) openProductModal(event);
   });
+  
   closeButtons.forEach(button => button.addEventListener('click', closeProductModal));
   modal.addEventListener('click', function (event) {
     if (event.target === modal) closeProductModal();
   });
+  
   document.addEventListener('keydown', function (event) {
     if (event.key === 'Escape' && modal.classList.contains('ap-visible')) closeProductModal();
   });
+
+  // LÓGICA DE SIMULACIÓN Y ACTUALIZACIÓN DE TABLA
+  const productForm = document.getElementById('apProductForm');
+  const submitBtn = document.getElementById('btnSubmitPublicacion');
+
+  productForm.addEventListener('submit', function(e) {
+    e.preventDefault(); // Evitamos que la página recargue
+
+    // Cambiamos el estado del botón a "Cargando"
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = 'Guardando...';
+    submitBtn.disabled = true;
+
+    // Obtenemos los valores ingresados
+    const nombre = document.getElementById('inputNombre').value;
+    const precio = document.getElementById('inputPrecio').value;
+
+    /* 
+     ====================================================================
+     TODO: ESPACIO PARA SUPABASE
+     Aquí irá la conexión asíncrona (ej. await supabase.from('productos').insert(...))
+     Por ahora, simularemos un tiempo de espera de 1 segundo (1000ms).
+     ====================================================================
+    */
+    setTimeout(() => {
+        
+        // 1. Encontramos la tabla en la vista padre (user-profile.php)
+        const tbody = document.querySelector('.cart-section table tbody');
+        
+        if(tbody) {
+            // 2. Creamos la nueva fila
+            const newRow = document.createElement('tr');
+            newRow.className = 'table-row ticket-row';
+
+            // 3. Inyectamos la estructura HTML con las variables (nombre, precio)
+            newRow.innerHTML = `
+                <td class="table-wrapper wrapper-product">
+                    <div class="wrapper">
+                        <div class="wrapper-img">
+                            <!-- Imagen por defecto temporal -->
+                            <img src="assets/images/homepage-one/product-img/product-img-1.webp" alt="img">
+                        </div>
+                        <div class="wrapper-content">
+                            <h5 class="heading">${nombre}</h5>
+                        </div>
+                    </div>
+                </td>
+                <td class="table-wrapper">
+                    <div class="table-wrapper-center">
+                        <h5 class="heading">$${parseFloat(precio).toFixed(2)}</h5>
+                    </div>
+                </td>
+                <td class="table-wrapper">
+                    <div class="table-wrapper-center">
+                        <h5 class="heading">N/A</h5> <!-- Por defecto ya que el form no pide Stock -->
+                    </div>
+                </td>
+                <td class="table-wrapper wrapper-total">
+                    <div class="table-wrapper-center">
+                        <h5 class="heading" style="color: #27AE60;">Activo</h5>
+                    </div>
+                </td>
+                <td class="table-wrapper">
+                    <div class="table-wrapper-center" style="display: flex; gap: 10px; justify-content: center;">
+                        <a href="#" title="Edit">
+                            <svg width="14" height="14" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 2L16 7M2 16H7L16.5 6.5C17.3284 5.67157 17.3284 4.32843 16.5 3.5V3.5C15.6716 2.67157 14.3284 2.67157 13.5 3.5L4 13V16H2V14Z" stroke="#2D3748" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </a>
+                        <a href="#" title="Delete" onclick="this.closest('tr').remove(); event.preventDefault();">
+                            <svg width="14" height="14" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.7879 5.95508C14.7102 6.91333 14.6353 7.84896 14.5582 8.7853C14.3801 10.9315 14.2028 13.0776 14.0219 15.2238C13.9604 15.9503 13.9208 16.6802 13.8176 17.4018C13.7074 18.1756 13.0827 18.719 12.3039 18.7225C9.39528 18.7352 6.48733 18.7367 3.57867 18.7218C2.71582 18.7176 2.09748 18.0823 2.01904 17.158C1.79291 14.4959 1.58161 11.8332 1.36254 9.17114C1.28269 8.19735 1.19859 7.22426 1.11733 6.25117C1.10955 6.15931 1.10673 6.06744 1.10107 5.95578C5.66688 5.95508 10.2171 5.95508 14.7879 5.95508Z" fill="#EB5757"/></svg>
+                        </a>
+                    </div>
+                </td>
+            `;
+
+            // 4. Insertamos la nueva fila al principio de la tabla
+            // Usamos after() en la fila de encabezados (table-top-row)
+            const firstRow = tbody.querySelector('.table-top-row');
+            if(firstRow) {
+                firstRow.after(newRow);
+            } else {
+                tbody.appendChild(newRow);
+            }
+        }
+
+        // 5. Restauramos el formulario a su estado inicial
+        productForm.reset();
+        
+        // 6. Cerramos el modal
+        closeProductModal();
+
+        // 7. Restauramos el botón
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+
+    }, 1000); // Fin de la simulación
+  });
+
 })();
 </script>
