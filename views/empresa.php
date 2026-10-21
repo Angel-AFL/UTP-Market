@@ -842,3 +842,4 @@ $portadaUrl = $urlImagen($imagenPortada);
     </footer>
 
 </main>
+ 
