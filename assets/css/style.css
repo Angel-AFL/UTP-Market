@@ -4734,6 +4734,101 @@ table .ticket-row:hover {
 .privacy-section .policy {
   margin-bottom: 3rem;
 }
+
+.empresa-detail {
+  margin-bottom: 3rem;
+}
+.empresa-detail__card {
+  padding: 2.5rem;
+  background: #ffffff;
+  border: 1px solid rgba(59, 42, 31, 0.1);
+  border-radius: 1rem;
+  box-shadow: 0 0.8rem 2.4rem rgba(59, 42, 31, 0.06);
+}
+.empresa-detail__title {
+  margin: 0 0 2rem;
+  color: var(--color-secondary);
+  font-size: 2rem;
+  font-weight: 600;
+}
+.empresa-detail__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin: 0;
+}
+.empresa-detail__item {
+  min-width: 0;
+  padding: 1.5rem;
+  background: var(--color-background);
+  border-radius: 0.7rem;
+}
+.empresa-detail__item--wide {
+  grid-column: 1 / -1;
+}
+.empresa-detail__item dt {
+  margin-bottom: 0.7rem;
+  color: var(--color-neutral);
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+.empresa-detail__item dd {
+  margin: 0;
+  color: var(--color-secondary);
+  font-size: 1.5rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.empresa-detail__description {
+  white-space: pre-line;
+}
+.empresa-detail__link {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+.empresa-detail__dates {
+  display: grid;
+  gap: 0.5rem;
+  font-size: 1.3rem !important;
+}
+.empresa-detail__dates strong {
+  font-weight: 600;
+}
+.empresa-detail__image-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.empresa-detail__image {
+  display: block;
+  width: 100%;
+  max-height: 28rem;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: var(--color-background);
+  border-radius: 0.7rem;
+}
+.empresa-detail__delete-form {
+  width: 100%;
+  margin-top: auto;
+  padding-top: 2rem;
+}
+.empresa-detail__delete-form .btn {
+  width: 100%;
+}
+@media (max-width: 575.98px) {
+  .empresa-detail__card {
+    padding: 1.75rem;
+  }
+  .empresa-detail__list {
+    grid-template-columns: 1fr;
+  }
+  .empresa-detail__item--wide {
+    grid-column: auto;
+  }
+}
 .privacy-section .policy .policy-features {
   margin-top: 3rem;
 }
