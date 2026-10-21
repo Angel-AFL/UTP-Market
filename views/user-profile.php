@@ -1,3 +1,7 @@
+<?php
+$isEmpresasTab = isset($_GET['vista']) || (isset($_GET['tab']) && $_GET['tab'] === 'empresas');
+$activeDashboardTitle = $isEmpresasTab ? 'Gestión de Empresas' : 'Panel de Control';
+?>
 <!--------------- blog-tittle-section---------------->
     <section class="blog about-blog">
         <div class="container">
@@ -18,7 +22,7 @@
         <div class="container">
             <div class="user-profile-section">
                 <div class="dashboard-heading ">
-                    <h5 class="dashboard-title">Change Password</h5>
+                    <h5 class="dashboard-title" id="dashboardActiveTitle"><?= $activeDashboardTitle ?></h5>
                     <div class="dashboard-switch">
                         <span class="text">Switch Dashboard</span>
                         <span onclick="switchDashboard()" class="switch-icon"></span>
@@ -29,9 +33,9 @@
                         aria-orientation="vertical">
 
                         <!-- nav-buttons -->
-                        <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill"
+                        <button class="nav-link <?= !$isEmpresasTab ? 'active' : '' ?>" id="v-pills-home-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home"
-                            aria-selected="true">
+                            aria-selected="<?= !$isEmpresasTab ? 'true' : 'false' ?>">
                             <span>
                                 <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -64,6 +68,23 @@
                             </span>
                             <span class="text">
                                 Parsonal Info
+                            </span>
+                        </button>
+
+                        <button class="nav-link <?= $isEmpresasTab ? 'active' : '' ?>" id="v-pills-empresas-tab" data-bs-toggle="pill"
+                            data-bs-target="#v-pills-empresas" type="button" role="tab" aria-controls="v-pills-empresas"
+                            aria-selected="<?= $isEmpresasTab ? 'true' : 'false' ?>">
+                            <span>
+                                <svg width="14" height="19" viewBox="0 0 14 19" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M9.96898 10.7061H3.78814C1.6967 10.7061 0.00346265 12.4028 0 14.4942V18.3481H13.7606V14.4942C13.7571 12.4028 12.0604 10.7061 9.96898 10.7061Z" />
+                                    <path
+                                        d="M6.88098 9.17603C9.41488 9.17603 11.469 7.12191 11.469 4.58802C11.469 2.05412 9.41488 0 6.88098 0C4.34709 0 2.29297 2.05412 2.29297 4.58802C2.29297 7.12191 4.34709 9.17603 6.88098 9.17603Z" />
+                                </svg>
+                            </span>
+                            <span class="text">
+                                Empresas 
                             </span>
                         </button>
 
@@ -232,7 +253,7 @@
                     <!-- nav-content -->
                     <div class="tab-content nav-content" id="v-pills-tabContent" style="flex: 1 0%;">
 
-                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                        <div class="tab-pane fade <?= !$isEmpresasTab ? 'show active' : '' ?>" id="v-pills-home" role="tabpanel"
                             aria-labelledby="v-pills-home-tab" tabindex="0">
                             <!-- [Contenido de Home omitido por brevedad, se mantiene igual] -->
                         </div>
@@ -241,6 +262,8 @@
                             aria-labelledby="v-pills-profile-tab" tabindex="0">
                             <!-- [Contenido de Profile omitido por brevedad, se mantiene igual] -->
                         </div>
+
+                        <?php require __DIR__ . '/empresas/index.php'; ?>
 
                         <div class="tab-pane fade" id="v-pills-payment" role="tabpanel"
                             aria-labelledby="v-pills-order-tab" tabindex="0">
@@ -667,3 +690,32 @@
         </div>
     </section>
     <!--------------- user-profile-section-end --------------->
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tabTitles = {
+            'v-pills-home-tab': 'Panel de Control',
+            'v-pills-profile-tab': 'Información Personal',
+            'v-pills-empresas-tab': 'Gestión de Empresas',
+            'v-pills-products-tab': 'Gestión de Productos',
+            'v-pills-payment-tab': 'Métodos de Pago',
+            'v-pills-order-tab': 'Mis Pedidos',
+            'v-pills-wishlist-tab': 'Lista de Deseos',
+            'v-pills-address-tab': 'Direcciones',
+            'v-pills-review-tab': 'Reseñas',
+            'v-pills-password-tab': 'Cambiar Contraseña',
+            'v-pills-ticket-tab': 'Tickets de Soporte'
+        };
+
+        const activeTitleEl = document.getElementById('dashboardActiveTitle');
+
+        document.querySelectorAll('#v-pills-tab .nav-link').forEach(btn => {
+            btn.addEventListener('shown.bs.tab', function(e) {
+                const targetId = e.target.id;
+                if (tabTitles[targetId] && activeTitleEl) {
+                    activeTitleEl.textContent = tabTitles[targetId];
+                }
+            });
+        });
+    });
+    </script>
