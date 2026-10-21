@@ -500,7 +500,7 @@
     </section>-->
     <!--------------- category-section-end--------------->
 
-    <!-- brand-section -->
+   <!-- brand-section -->
     <section class="product brand" data-aos="fade-up">
         <div class="container">
             <div class="section-title">
@@ -516,27 +516,27 @@
                 <div class="brand-track-wrap">
                     <div class="brand-track" id="brandTrack">
                         <div class="brand-item">
-                            <a href="/product-sidebar">
+                            <a href="/empresa?id=1">
                                 <img src="assets/images/homepage-one/dopeprints.jpg" alt="Dopeprints">
                             </a>
                         </div>
                         <div class="brand-item">
-                            <a href="/product-sidebar">
+                            <a href="/empresa?id=2">
                                 <img src="assets/images/homepage-one/inovabot.jpg" alt="Inovabot">
                             </a>
                         </div>
                         <div class="brand-item">
-                            <a href="/product-sidebar">
+                            <a href="/empresa?id=3">
                                 <img src="assets/images/homepage-one/novacut.jpg" alt="Novacut">
                             </a>
                         </div>
                         <div class="brand-item">
-                            <a href="/product-sidebar">
+                            <a href="/empresa?id=4">
                                 <img src="assets/images/homepage-one/creatics.jpg" alt="Creatics">
                             </a>
                         </div>
                         <div class="brand-item">
-                            <a href="/product-sidebar">
+                            <a href="/empresa?id=5">
                                 <img src="assets/images/homepage-one/aerial.jpg" alt="Aerial">
                             </a>
                         </div>
