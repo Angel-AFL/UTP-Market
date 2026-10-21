@@ -71,9 +71,9 @@ $empresaImagen     = (string) ($empresa['url_imagen'] ?? '');
                         <?php endif; ?>
                     </div>
 
-                    <div class="submit-btn d-flex flex-wrap gap-2">
-                        <button type="submit" class="shop-btn"><?= htmlspecialchars((string) $empresaEnviar, ENT_QUOTES, 'UTF-8') ?></button>
-                        <a href="<?= empresas_url('empresas') ?>" class="shop-btn cancel-btn">Cancelar</a>
+                    <div class="submit-btn d-flex flex-wrap gap-2 mt-4">
+                        <button type="submit" class="shop-btn" style="margin: 0; border-radius: 6px; padding: 11px 24px; font-size: 1.4rem; font-weight: 600; border: none; cursor: pointer;"><?= htmlspecialchars((string) $empresaEnviar, ENT_QUOTES, 'UTF-8') ?></button>
+                        <a href="<?= empresas_url('empresas') ?>" class="shop-btn cancel-btn" style="margin: 0; border-radius: 6px; padding: 11px 22px; font-size: 1.4rem; text-decoration: none;">Cancelar</a>
                     </div>
 
                 </div>

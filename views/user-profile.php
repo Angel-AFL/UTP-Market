@@ -1,3 +1,7 @@
+<?php
+$isEmpresasTab = isset($_GET['vista']) || (isset($_GET['tab']) && $_GET['tab'] === 'empresas');
+$activeDashboardTitle = $isEmpresasTab ? 'Gestión de Empresas' : 'Panel de Control';
+?>
 <!--------------- blog-tittle-section---------------->
     <section class="blog about-blog">
         <div class="container">
@@ -18,7 +22,7 @@
         <div class="container">
             <div class="user-profile-section">
                 <div class="dashboard-heading ">
-                    <h5 class="dashboard-title">Change Password</h5>
+                    <h5 class="dashboard-title" id="dashboardActiveTitle"><?= $activeDashboardTitle ?></h5>
                     <div class="dashboard-switch">
                         <span class="text">Switch Dashboard</span>
                         <span onclick="switchDashboard()" class="switch-icon"></span>
@@ -29,9 +33,9 @@
                         aria-orientation="vertical">
 
                         <!-- nav-buttons -->
-                        <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill"
+                        <button class="nav-link <?= !$isEmpresasTab ? 'active' : '' ?>" id="v-pills-home-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home"
-                            aria-selected="true">
+                            aria-selected="<?= !$isEmpresasTab ? 'true' : 'false' ?>">
                             <span>
                                 <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -67,9 +71,9 @@
                             </span>
                         </button>
 
-                        <button class="nav-link" id="v-pills-empresas-tab" data-bs-toggle="pill"
+                        <button class="nav-link <?= $isEmpresasTab ? 'active' : '' ?>" id="v-pills-empresas-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-empresas" type="button" role="tab" aria-controls="v-pills-empresas"
-                            aria-selected="false">
+                            aria-selected="<?= $isEmpresasTab ? 'true' : 'false' ?>">
                             <span>
                                 <svg width="14" height="19" viewBox="0 0 14 19" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -249,7 +253,7 @@
                     <!-- nav-content -->
                     <div class="tab-content nav-content" id="v-pills-tabContent" style="flex: 1 0%;">
 
-                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                        <div class="tab-pane fade <?= !$isEmpresasTab ? 'show active' : '' ?>" id="v-pills-home" role="tabpanel"
                             aria-labelledby="v-pills-home-tab" tabindex="0">
                             <!-- [Contenido de Home omitido por brevedad, se mantiene igual] -->
                         </div>
@@ -396,3 +400,32 @@
         </div>
     </section>
     <!--------------- user-profile-section-end --------------->
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tabTitles = {
+            'v-pills-home-tab': 'Panel de Control',
+            'v-pills-profile-tab': 'Información Personal',
+            'v-pills-empresas-tab': 'Gestión de Empresas',
+            'v-pills-products-tab': 'Gestión de Productos',
+            'v-pills-payment-tab': 'Métodos de Pago',
+            'v-pills-order-tab': 'Mis Pedidos',
+            'v-pills-wishlist-tab': 'Lista de Deseos',
+            'v-pills-address-tab': 'Direcciones',
+            'v-pills-review-tab': 'Reseñas',
+            'v-pills-password-tab': 'Cambiar Contraseña',
+            'v-pills-ticket-tab': 'Tickets de Soporte'
+        };
+
+        const activeTitleEl = document.getElementById('dashboardActiveTitle');
+
+        document.querySelectorAll('#v-pills-tab .nav-link').forEach(btn => {
+            btn.addEventListener('shown.bs.tab', function(e) {
+                const targetId = e.target.id;
+                if (tabTitles[targetId] && activeTitleEl) {
+                    activeTitleEl.textContent = tabTitles[targetId];
+                }
+            });
+        });
+    });
+    </script>
