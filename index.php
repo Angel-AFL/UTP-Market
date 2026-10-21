@@ -4,6 +4,8 @@
  */
 
 require_once __DIR__ . '/ViewController.php';
+require_once __DIR__ . '/config/config.php';
+require_once __DIR__ . '/config/database.php';
 
 // Obtener la ruta solicitada
 $requestUri = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
@@ -23,6 +25,17 @@ $route = preg_replace('/\.(php|html)$/', '', $route);
 // Si la ruta está vacía o es 'index', cargar la página de inicio
 if ($route === '' || $route === 'index') {
     $route = 'index';
+}
+
+// ---------------------------------------------------------------------
+//  Módulo CRUD de empresas (/empresas, /empresas/create, ...)
+// ---------------------------------------------------------------------
+if ($route === 'empresas' || strpos($route, 'empresas/') === 0) {
+    define('UTP_FRONT_CONTROLLER', true);
+    require_once __DIR__ . '/empresas/_bootstrap.php';
+
+    empresas_router($route);
+    return;
 }
 
 // Renderizar la vista con el layout principal
