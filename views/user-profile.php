@@ -233,12 +233,12 @@
             </div>
 
             <div class="filtro-campo filtro-categoria">
-                <label for="categoria-producto">
+                <label for="empresa-producto">
                     <span aria-hidden="true">◇</span>
-                    Categoría
+                    Empresa
                 </label>
-                <select id="categoria-producto" class="control-filtro">
-                    <option value="">Todas las categorías</option>
+                <select id="empresa-producto" class="control-filtro">
+                    <option value="">Todas las empresas</option>
                 </select>
             </div>
 
@@ -350,22 +350,13 @@
                             <input type="number" id="prodstock" class="form-control" placeholder="0" min="0">
                         </div>
                     </div>
-                    <div class="account-inner-form">
-                        <div class="review-form-name">
-                            <label for="prodcat" class="form-label">Category*</label>
-                            <select id="prodcat" class="form-control">
-                                <option value="Apparel">Apparel</option>
-                                <option value="Accessories">Accessories</option>
-                                <option value="Shoes">Shoes</option>
-                            </select>
-                        </div>
-                        <div class="review-form-name">
-                            <label for="prodstatus" class="form-label">Status*</label>
-                            <select id="prodstatus" class="form-control">
-                                <option value="Active">Active</option>
-                                <option value="Inactive">Inactive</option>
-                            </select>
-                        </div>
+                    <div class="review-form-name address-form">
+                        <label for="prodimg" class="form-label">Image URL</label>
+                        <input type="url" id="prodimg" class="form-control" placeholder="https://ejemplo.com/imagen.jpg">
+                    </div>
+                    <div class="review-form-name address-form">
+                        <label for="prodvideo" class="form-label">Video URL</label>
+                        <input type="url" id="prodvideo" class="form-control" placeholder="https://...">
                     </div>
                     <div class="review-form-name address-form">
                         <label for="proddesc" class="form-label">Description*</label>
@@ -409,14 +400,19 @@
                             <span class="value" id="view-prod-stock"></span>
                         </div>
                         <div class="view-detail-card">
-                            <span class="label">Category</span>
-                            <span class="value" id="view-prod-cat"></span>
+                            <span class="label">Company</span>
+                            <span class="value" id="view-prod-company"></span>
                         </div>
                     </div>
 
                     <div class="view-detail-box">
                         <span class="label">Description</span>
                         <p id="view-prod-desc"></p>
+                    </div>
+
+                    <div class="view-detail-box" id="view-prod-video-box" hidden>
+                        <span class="label">Video</span>
+                        <p><a id="view-prod-video" href="#" target="_blank" rel="noopener">Ver video</a></p>
                     </div>
 
                     <div class="login-btn text-center">
@@ -434,7 +430,7 @@
                     <td class="table-wrapper wrapper-product"><h5 class="table-heading">PRODUCT</h5></td>
                     <td class="table-wrapper"><div class="table-wrapper-center"><h5 class="table-heading">PRICE</h5></div></td>
                     <td class="table-wrapper"><div class="table-wrapper-center"><h5 class="table-heading">STOCK</h5></div></td>
-                    <td class="table-wrapper wrapper-total"><div class="table-wrapper-center"><h5 class="table-heading">STATUS</h5></div></td>
+                    <td class="table-wrapper wrapper-total"><div class="table-wrapper-center"><h5 class="table-heading">EMPRESA</h5></div></td>
                     <td class="table-wrapper"><div class="table-wrapper-center"><h5 class="table-heading">ACTIONS</h5></div></td>
                 </tr>
                 <!-- Las filas se generan con JavaScript -->
@@ -447,50 +443,21 @@
 (function () {
     'use strict';
 
-    /* ----------------------------------------------------------
-       DATOS SIMULADOS (reemplazar luego por la base de datos).
-       Cuando exista el backend, estos objetos vendrán de un
-       fetch('api/productos.php') o de PHP con json_encode().
-       ---------------------------------------------------------- */
-    var products = [
-        {
-            id: 1,
-            name: 'Classic Design Skirt',
-            price: 20.00,
-            stock: 15,
-            category: 'Apparel',
-            status: 'Active',
-            img: 'assets/images/homepage-one/product-img/product-img-1.webp',
-            desc: 'Classic design skirt made with premium quality fabric, perfect for a coquette and modern daily look.'
-        },
-        {
-            id: 2,
-            name: 'Leather Shoulder Bag',
-            price: 45.50,
-            stock: 8,
-            category: 'Accessories',
-            status: 'Active',
-            img: 'assets/images/homepage-one/product-img/product-img-2.webp',
-            desc: 'Handcrafted leather shoulder bag with adjustable strap and spacious interior.'
-        },
-        {
-            id: 3,
-            name: 'Casual White Sneakers',
-            price: 60.00,
-            stock: 0,
-            category: 'Shoes',
-            status: 'Inactive',
-            img: 'assets/images/homepage-one/product-img/product-img-3.webp',
-            desc: 'Comfortable everyday sneakers with breathable material and cushioned sole.'
-        }
-    ];
-
+    /* ---------- Configuración ---------- */
+    var API_URL = <?= json_encode(url('api/productos.php')) ?>;
     var FALLBACK_IMG = 'assets/images/homepage-one/product-img/product-img-1.webp';
+    var EMPRESAS = {
+        1: 'Dope Prints',
+        3: 'NOVACUT'
+    };
+
+    var products = [];
+    var loadError = '';
 
     /* ---------- Referencias al DOM ---------- */
     var tbody        = document.getElementById('products-table-body');
     var inputBuscar  = document.getElementById('buscar-producto');
-    var selectFiltro = document.getElementById('categoria-producto');
+    var selectFiltro = document.getElementById('empresa-producto');
     var mensaje      = document.getElementById('mensaje-busqueda-productos');
 
     var f = {
@@ -498,8 +465,8 @@
         name:   document.getElementById('prodname'),
         price:  document.getElementById('prodprice'),
         stock:  document.getElementById('prodstock'),
-        cat:    document.getElementById('prodcat'),
-        status: document.getElementById('prodstatus'),
+        img:    document.getElementById('prodimg'),
+        video:  document.getElementById('prodvideo'),
         desc:   document.getElementById('proddesc'),
         title:  document.getElementById('product-modal-title')
     };
@@ -515,6 +482,11 @@
         return '$' + Number(n).toFixed(2);
     }
 
+    function companyName(id) {
+        if (id === null || id === undefined || id === '') return 'Sin empresa';
+        return EMPRESAS[Number(id)] || ('Empresa #' + id);
+    }
+
     function findProduct(id) {
         for (var i = 0; i < products.length; i++) {
             if (products[i].id === id) return products[i];
@@ -522,35 +494,85 @@
         return null;
     }
 
-    /* ---------- Categorías del filtro ---------- */
-    function fillCategoryFilter() {
-        var current = selectFiltro.value;
-        var cats = [];
-        products.forEach(function (p) {
-            if (cats.indexOf(p.category) === -1) cats.push(p.category);
+    function normalizarProducto(p) {
+        return {
+            id: Number(p.id),
+            name: p.nombre || 'Sin nombre',
+            price: Number(p.precio) || 0,
+            stock: Number(p.stock) || 0,
+            companyId: p.empresa_id === null || p.empresa_id === undefined ? null : Number(p.empresa_id),
+            img: p.url_imagen || FALLBACK_IMG,
+            video: p.url_video || '',
+            desc: p.descripcion || 'Sin descripción.',
+            rating: p.calificacion
+        };
+    }
+
+    async function apiRequest(url, options) {
+        options = options || {};
+        options.headers = Object.assign({
+            'Accept': 'application/json'
+        }, options.headers || {});
+
+        var response = await fetch(url, options);
+        var data = await response.json().catch(function () {
+            return {};
         });
-        selectFiltro.innerHTML = '<option value="">Todas las categorías</option>' +
-            cats.map(function (c) {
-                return '<option value="' + escapeHtml(c) + '">' + escapeHtml(c) + '</option>';
+
+        if (!response.ok) {
+            throw new Error(data.message || 'No se pudo completar la operación.');
+        }
+
+        return data;
+    }
+
+    /* ---------- Filtro de empresas ---------- */
+    function fillCompanyFilter() {
+        var current = selectFiltro.value;
+        var ids = [];
+
+        products.forEach(function (p) {
+            if (p.companyId !== null && ids.indexOf(p.companyId) === -1) {
+                ids.push(p.companyId);
+            }
+        });
+
+        ids.sort(function (a, b) { return a - b; });
+
+        selectFiltro.innerHTML = '<option value="">Todas las empresas</option>' +
+            ids.map(function (id) {
+                return '<option value="' + id + '">' + escapeHtml(companyName(id)) + '</option>';
             }).join('');
-        selectFiltro.value = cats.indexOf(current) !== -1 ? current : '';
+
+        selectFiltro.value = ids.some(function (id) {
+            return String(id) === current;
+        }) ? current : '';
     }
 
     /* ---------- Render de la tabla ---------- */
     function render() {
         var text = inputBuscar.value.trim().toLowerCase();
-        var cat  = selectFiltro.value;
+        var empresa = selectFiltro.value;
 
         var list = products.filter(function (p) {
             var okName = p.name.toLowerCase().indexOf(text) !== -1;
-            var okCat  = !cat || p.category === cat;
-            return okName && okCat;
+            var okEmpresa = !empresa || String(p.companyId) === empresa;
+            return okName && okEmpresa;
         });
 
         // Conserva la fila de encabezados (la primera)
         var header = tbody.querySelector('.table-top-row');
         tbody.innerHTML = '';
         tbody.appendChild(header);
+
+        if (loadError) {
+            var errorRow = document.createElement('tr');
+            errorRow.className = 'table-row sin-resultados';
+            errorRow.innerHTML = '<td colspan="5">' + escapeHtml(loadError) + '</td>';
+            tbody.appendChild(errorRow);
+            mensaje.textContent = loadError;
+            return;
+        }
 
         if (!list.length) {
             var empty = document.createElement('tr');
@@ -560,20 +582,19 @@
         }
 
         list.forEach(function (p) {
-            var active = p.status === 'Active';
             var tr = document.createElement('tr');
             tr.className = 'table-row ticket-row';
             tr.innerHTML =
                 '<td class="table-wrapper wrapper-product">' +
                     '<div class="wrapper">' +
-                        '<div class="wrapper-img"><img src="' + escapeHtml(p.img) + '" alt="img"></div>' +
+                        '<div class="wrapper-img"><img src="' + escapeHtml(p.img) + '" alt="Imagen del producto"></div>' +
                         '<div class="wrapper-content"><h5 class="heading">' + escapeHtml(p.name) + '</h5></div>' +
                     '</div>' +
                 '</td>' +
                 '<td class="table-wrapper"><div class="table-wrapper-center"><h5 class="heading">' + money(p.price) + '</h5></div></td>' +
                 '<td class="table-wrapper"><div class="table-wrapper-center"><h5 class="heading">' + p.stock + '</h5></div></td>' +
                 '<td class="table-wrapper wrapper-total"><div class="table-wrapper-center">' +
-                    '<h5 class="heading" style="color:' + (active ? '#27AE60' : '#EB5757') + ';">' + escapeHtml(p.status) + '</h5>' +
+                    '<h5 class="heading">' + escapeHtml(companyName(p.companyId)) + '</h5>' +
                 '</div></td>' +
                 '<td class="table-wrapper">' +
                     '<div class="table-wrapper-center" style="display:flex; gap:10px; justify-content:center;">' +
@@ -588,31 +609,78 @@
                         '</a>' +
                     '</div>' +
                 '</td>';
+
+            var rowImg = tr.querySelector('img');
+            if (rowImg) {
+                rowImg.addEventListener('error', function () {
+                    rowImg.onerror = null;
+                    rowImg.src = FALLBACK_IMG;
+                });
+            }
+
             tbody.appendChild(tr);
         });
 
-        // Mensaje de estado
-        if (!text && !cat) {
+        if (!text && !empresa) {
             mensaje.textContent = 'Escribe un nombre para buscar productos.';
         } else {
             mensaje.textContent = list.length + (list.length === 1 ? ' producto encontrado.' : ' productos encontrados.');
         }
     }
 
+    /* ---------- Cargar productos desde Supabase ---------- */
+    async function loadProducts() {
+        loadError = '';
+        mensaje.textContent = 'Cargando productos...';
+        tbody.setAttribute('aria-busy', 'true');
+
+        try {
+            var data = await apiRequest(API_URL);
+            products = (Array.isArray(data) ? data : []).map(normalizarProducto);
+            fillCompanyFilter();
+        } catch (error) {
+            products = [];
+            loadError = error.message || 'No se pudieron cargar los productos.';
+            fillCompanyFilter();
+        } finally {
+            tbody.removeAttribute('aria-busy');
+        }
+
+        render();
+    }
+
     /* ---------- Ver producto ---------- */
-    function openView(p) {
-        document.getElementById('view-prod-img').src = p.img || FALLBACK_IMG;
-        document.getElementById('view-prod-name').textContent  = p.name;
-        document.getElementById('view-prod-price').textContent = money(p.price);
-        document.getElementById('view-prod-stock').textContent = p.stock;
-        document.getElementById('view-prod-cat').textContent   = p.category;
-        document.getElementById('view-prod-desc').textContent  = p.desc;
+    async function openView(p) {
+        try {
+            var data = await apiRequest(API_URL + '?id=' + encodeURIComponent(p.id));
+            var producto = normalizarProducto(data);
 
-        var badge = document.getElementById('view-prod-status');
-        badge.textContent = p.status;
-        badge.classList.toggle('inactive', p.status !== 'Active');
+            document.getElementById('view-prod-img').src = producto.img || FALLBACK_IMG;
+            document.getElementById('view-prod-name').textContent  = producto.name;
+            document.getElementById('view-prod-price').textContent = money(producto.price);
+            document.getElementById('view-prod-stock').textContent = producto.stock;
+            document.getElementById('view-prod-company').textContent = companyName(producto.companyId);
+            document.getElementById('view-prod-desc').textContent  = producto.desc;
 
-        modalAction('.view-product-modal');
+            var badge = document.getElementById('view-prod-status');
+            badge.textContent = 'Publicado';
+            badge.classList.remove('inactive');
+
+            var videoBox = document.getElementById('view-prod-video-box');
+            var videoLink = document.getElementById('view-prod-video');
+            if (producto.video) {
+                videoLink.href = producto.video;
+                videoLink.textContent = 'Abrir video';
+                videoBox.hidden = false;
+            } else {
+                videoLink.removeAttribute('href');
+                videoBox.hidden = true;
+            }
+
+            modalAction('.view-product-modal');
+        } catch (error) {
+            alert(error.message || 'No se pudo consultar el producto.');
+        }
     }
 
     /* ---------- Editar producto: precarga el formulario ---------- */
@@ -622,50 +690,63 @@
         f.name.value   = p.name;
         f.price.value  = p.price;
         f.stock.value  = p.stock;
-        f.cat.value    = p.category;
-        f.status.value = p.status;
-        f.desc.value   = p.desc;
+        f.img.value    = p.img === FALLBACK_IMG ? '' : p.img;
+        f.video.value  = p.video;
+        f.desc.value   = p.desc === 'Sin descripción.' ? '' : p.desc;
 
         modalAction('.product-modal');
     }
 
-    /* ---------- Guardar cambios ---------- */
-    function saveProduct(e) {
+    /* ---------- Guardar cambios con PATCH ---------- */
+    async function saveProduct(e) {
         e.preventDefault();
 
+        var id    = parseInt(f.id.value, 10);
         var name  = f.name.value.trim();
         var desc  = f.desc.value.trim();
         var price = parseFloat(f.price.value);
         var stock = parseInt(f.stock.value, 10);
 
-        if (!name || !desc || isNaN(price) || isNaN(stock) || price < 0 || stock < 0) {
-            alert('Please fill in all required fields with valid values.');
+        if (!id || !name || isNaN(price) || isNaN(stock) || price < 0 || stock < 0) {
+            alert('Completa el nombre, precio y stock con valores válidos.');
             return;
         }
 
-        var p = findProduct(parseInt(f.id.value, 10));
-        if (!p) return;
+        try {
+            await apiRequest(API_URL, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    id: id,
+                    nombre: name,
+                    precio: price,
+                    stock: stock,
+                    descripcion: desc,
+                    url_imagen: f.img.value.trim(),
+                    url_video: f.video.value.trim()
+                })
+            });
 
-        p.name     = name;
-        p.price    = price;
-        p.stock    = stock;
-        p.category = f.cat.value;
-        p.status   = f.status.value;
-        p.desc     = desc;
-
-        fillCategoryFilter();
-        render();
-        modalAction('.product-modal');
-        // TODO (cuando haya BD): fetch('api/actualizar_producto.php', {method:'POST', body: JSON.stringify(p)})
+            modalAction('.product-modal');
+            await loadProducts();
+        } catch (error) {
+            alert(error.message || 'No se pudo actualizar el producto.');
+        }
     }
 
-    /* ---------- Eliminar producto ---------- */
-    function deleteProduct(p) {
-        if (!confirm('Delete "' + p.name + '"?')) return;
-        products = products.filter(function (x) { return x.id !== p.id; });
-        fillCategoryFilter();
-        render();
-        // TODO (cuando haya BD): fetch('api/eliminar_producto.php', {method:'POST', body: JSON.stringify({id:p.id})})
+    /* ---------- Eliminar producto con DELETE ---------- */
+    async function deleteProduct(p) {
+        if (!confirm('Delete "' + p.name + '"? Su imagen y video también se eliminarán si ningún otro producto los usa.')) return;
+
+        try {
+            await apiRequest(API_URL + '?id=' + encodeURIComponent(p.id), {
+                method: 'DELETE'
+            });
+
+            await loadProducts();
+        } catch (error) {
+            alert(error.message || 'No se pudo eliminar el producto.');
+        }
     }
 
     /* ---------- Eventos ---------- */
@@ -687,10 +768,10 @@
     document.getElementById('btn-save-product').addEventListener('click', saveProduct);
     inputBuscar.addEventListener('input', render);
     selectFiltro.addEventListener('change', render);
+    document.addEventListener('producto:creado', loadProducts);
 
     /* ---------- Inicio ---------- */
-    fillCategoryFilter();
-    render();
+    loadProducts();
 })();
 </script>
 

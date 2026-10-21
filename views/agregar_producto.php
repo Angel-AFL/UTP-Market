@@ -65,10 +65,10 @@
       <div class="ap-grid">
         <label class="ap-field ap-full">
           <span>Imagen principal (URL)</span>
-          <input type="url" name="imagen" id="apImageUrl"
+          <input type="url" name="url_imagen" id="apImageUrl"
                  placeholder="https://ejemplo.com/imagen.jpg"
                  autocomplete="url">
-          <small>Pega el enlace directo de una imagen pública. No necesitas subir archivos.</small>
+          <small>Pega el enlace directo de una imagen pública. Se registrará automáticamente en el catálogo.</small>
 
           <div class="ap-image-preview" id="apImagePreview" hidden>
             <img id="apImagePreviewImg" alt="Vista previa del producto">
@@ -83,14 +83,16 @@
         <label class="ap-field ap-full">
           <span>Enlace de video</span>
           <input type="url" name="url_video" placeholder="https://...">
-          <small>Pega un enlace público si tienes un video que muestre tu producto o servicio.</small>
+          <small>Pega un enlace público si tienes un video. Se registrará automáticamente en el catálogo.</small>
         </label>
       </div>
+
+      <p class="ap-form-status" id="apFormStatus" role="status" aria-live="polite" hidden></p>
 
       <div class="ap-actions">
         <p class="ap-secure">
           <span class="ap-secure-dot"></span>
-          Tu publicación se asociará con tu cuenta.
+          La publicación se asociará con la empresa Dope Prints.
         </p>
 
         <div class="ap-action-buttons">
@@ -414,6 +416,37 @@
     line-height: 1.5;
   }
 
+  .ap-form-status {
+    margin: 18px 0 0;
+    padding: 11px 14px;
+    border-radius: 11px;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  .ap-form-status[hidden] {
+    display: none;
+  }
+
+  .ap-form-status.is-error {
+    background: #fdf0f0;
+    border: 1px solid #f4d4d4;
+    color: #9b2c34;
+  }
+
+  .ap-form-status.is-success {
+    background: #eef8f1;
+    border: 1px solid #cfe9d8;
+    color: #2f6b45;
+  }
+
+  .ap-btn:disabled {
+    opacity: .65;
+    cursor: not-allowed;
+    transform: none;
+  }
+
   .ap-actions {
     display: flex;
     align-items: center;
@@ -675,172 +708,78 @@
   imageInput.addEventListener('input', actualizarVistaPrevia);
   imageInput.addEventListener('change', actualizarVistaPrevia);
 
-  // LÓGICA DE SIMULACIÓN Y ACTUALIZACIÓN DE TABLA
+  // ENVÍO DEL FORMULARIO A LA API
   const productForm = document.getElementById('apProductForm');
   const submitBtn = document.getElementById('btnSubmitPublicacion');
+  const formStatus = document.getElementById('apFormStatus');
+  const videoInput = productForm.querySelector('[name="url_video"]');
+  const API_URL = <?= json_encode(url('api/productos.php')) ?>;
 
-  productForm.addEventListener('submit', function (e) {
+  function mostrarEstado(mensaje, tipo) {
+    formStatus.textContent = mensaje;
+    formStatus.classList.remove('is-error', 'is-success');
+    formStatus.classList.add(tipo === 'error' ? 'is-error' : 'is-success');
+    formStatus.hidden = false;
+  }
+
+  function ocultarEstado() {
+    formStatus.hidden = true;
+    formStatus.textContent = '';
+    formStatus.classList.remove('is-error', 'is-success');
+  }
+
+  productForm.addEventListener('submit', async function (e) {
     e.preventDefault();
 
     const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = 'Guardando...';
-    submitBtn.disabled = true;
-
     const nombre = document.getElementById('inputNombre').value.trim();
     const precio = document.getElementById('inputPrecio').value;
-    const imagenUrl = imageInput.value.trim();
+    const descripcion = document.getElementById('inputDescripcion').value.trim();
 
-    setTimeout(function () {
-      // Encontramos la tabla de la vista user-profile.php
-      const tbody = document.querySelector('.cart-section table tbody');
+    const payload = {
+      nombre: nombre,
+      precio: Number(precio),
+      descripcion: descripcion,
+      url_imagen: imageInput.value.trim(),
+      url_video: videoInput ? videoInput.value.trim() : ''
+    };
 
-      if (tbody) {
-        const newRow = document.createElement('tr');
-        newRow.className = 'table-row ticket-row';
+    submitBtn.innerHTML = 'Guardando...';
+    submitBtn.disabled = true;
+    ocultarEstado();
 
-        // Construimos las celdas de forma segura
-        const productCell = document.createElement('td');
-        productCell.className = 'table-wrapper wrapper-product';
+    try {
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
 
-        const wrapper = document.createElement('div');
-        wrapper.className = 'wrapper';
+      const data = await response.json().catch(function () {
+        return {};
+      });
 
-        const wrapperImg = document.createElement('div');
-        wrapperImg.className = 'wrapper-img';
-
-        const img = document.createElement('img');
-        img.alt = 'Imagen del producto';
-        img.src = imagenUrl || 'assets/images/homepage-one/product-img/product-img-1.webp';
-
-        img.onerror = function () {
-          img.onerror = null;
-          img.src = 'assets/images/homepage-one/product-img/product-img-1.webp';
-        };
-
-        wrapperImg.appendChild(img);
-
-        const wrapperContent = document.createElement('div');
-        wrapperContent.className = 'wrapper-content';
-
-        const productHeading = document.createElement('h5');
-        productHeading.className = 'heading';
-        productHeading.textContent = nombre;
-
-        wrapperContent.appendChild(productHeading);
-        wrapper.appendChild(wrapperImg);
-        wrapper.appendChild(wrapperContent);
-        productCell.appendChild(wrapper);
-        newRow.appendChild(productCell);
-
-        // Precio
-        const priceCell = document.createElement('td');
-        priceCell.className = 'table-wrapper';
-
-        const priceCenter = document.createElement('div');
-        priceCenter.className = 'table-wrapper-center';
-
-        const priceHeading = document.createElement('h5');
-        priceHeading.className = 'heading';
-
-        const numericPrice = Number.parseFloat(precio);
-        priceHeading.textContent = '$' + (
-          Number.isFinite(numericPrice) ? numericPrice.toFixed(2) : '0.00'
-        );
-
-        priceCenter.appendChild(priceHeading);
-        priceCell.appendChild(priceCenter);
-        newRow.appendChild(priceCell);
-
-        // Stock
-        const stockCell = document.createElement('td');
-        stockCell.className = 'table-wrapper';
-
-        const stockCenter = document.createElement('div');
-        stockCenter.className = 'table-wrapper-center';
-
-        const stockHeading = document.createElement('h5');
-        stockHeading.className = 'heading';
-        stockHeading.textContent = 'N/A';
-
-        stockCenter.appendChild(stockHeading);
-        stockCell.appendChild(stockCenter);
-        newRow.appendChild(stockCell);
-
-        // Estado
-        const statusCell = document.createElement('td');
-        statusCell.className = 'table-wrapper wrapper-total';
-
-        const statusCenter = document.createElement('div');
-        statusCenter.className = 'table-wrapper-center';
-
-        const statusHeading = document.createElement('h5');
-        statusHeading.className = 'heading';
-        statusHeading.style.color = '#27AE60';
-        statusHeading.textContent = 'Activo';
-
-        statusCenter.appendChild(statusHeading);
-        statusCell.appendChild(statusCenter);
-        newRow.appendChild(statusCell);
-
-        // Acciones
-        const actionsCell = document.createElement('td');
-        actionsCell.className = 'table-wrapper';
-
-        const actionsCenter = document.createElement('div');
-        actionsCenter.className = 'table-wrapper-center';
-        actionsCenter.style.display = 'flex';
-        actionsCenter.style.gap = '10px';
-        actionsCenter.style.justifyContent = 'center';
-
-        const editLink = document.createElement('a');
-        editLink.href = '#';
-        editLink.title = 'Editar';
-        editLink.setAttribute('aria-label', 'Editar producto');
-        editLink.innerHTML =
-          '<svg width="14" height="14" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 2L16 7M2 16H7L16.5 6.5C17.3284 5.67157 17.3284 4.32843 16.5 3.5V3.5C15.6716 2.67157 14.3284 2.67157 13.5 3.5L4 13V16H2V14Z" stroke="#2D3748" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-
-        editLink.addEventListener('click', function (event) {
-          event.preventDefault();
-        });
-
-        const deleteLink = document.createElement('a');
-        deleteLink.href = '#';
-        deleteLink.title = 'Eliminar';
-        deleteLink.setAttribute('aria-label', 'Eliminar producto');
-        deleteLink.innerHTML =
-          '<svg width="14" height="19" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.7879 5.95508C14.7102 6.91333 14.6353 7.84896 14.5582 8.7853C14.3801 10.9315 14.2028 13.0776 14.0219 15.2238C13.9604 15.9503 13.9208 16.6802 13.8176 17.4018C13.7074 18.1756 13.0827 18.719 12.3039 18.7225C9.39528 18.7352 6.48733 18.7367 3.57867 18.7218C2.71582 18.7176 2.09748 18.0823 2.01904 17.158C1.79291 14.4959 1.58161 11.8332 1.36254 9.17114C1.28269 8.19735 1.19859 7.22426 1.11733 6.25117C1.10955 6.15931 1.10673 6.06744 1.10107 5.95578C5.66688 5.95508 10.2171 5.95508 14.7879 5.95508Z" fill="#EB5757"/></svg>';
-
-        deleteLink.addEventListener('click', function (event) {
-          event.preventDefault();
-          newRow.remove();
-        });
-
-        actionsCenter.appendChild(editLink);
-        actionsCenter.appendChild(deleteLink);
-        actionsCell.appendChild(actionsCenter);
-        newRow.appendChild(actionsCell);
-
-        const firstRow = tbody.querySelector('.table-top-row');
-
-        if (firstRow) {
-          firstRow.after(newRow);
-        } else {
-          tbody.appendChild(newRow);
-        }
+      if (!response.ok) {
+        throw new Error(data.message || 'No se pudo guardar la publicación.');
       }
 
-      // Restablecemos el formulario y la vista previa
       productForm.reset();
       actualizarVistaPrevia();
-
-      // Cerramos el modal
+      ocultarEstado();
       closeProductModal();
 
-      // Restauramos el botón
+      document.dispatchEvent(new CustomEvent('producto:creado', {
+        detail: data.producto || null
+      }));
+    } catch (error) {
+      mostrarEstado(error.message || 'No se pudo guardar la publicación. Intenta de nuevo.', 'error');
+    } finally {
       submitBtn.innerHTML = originalText;
       submitBtn.disabled = false;
-
-    }, 1000);
+    }
   });
 })();
 </script>
