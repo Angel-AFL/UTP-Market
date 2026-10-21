@@ -57,6 +57,28 @@ require __DIR__ . '/_layout.php';
                     </div>
 
                     <div class="empresa-detail__item">
+                        <dt>Redes sociales</dt>
+                        <dd><?= htmlspecialchars((string) ($empresa['whatsapp'] ?? 'Sin WhatsApp.'), ENT_QUOTES, 'UTF-8') ?></dd>
+                        <dd><?= htmlspecialchars((string) ($empresa['facebook'] ?? 'Sin Facebook.'), ENT_QUOTES, 'UTF-8') ?></dd>
+                        <dd><?= htmlspecialchars((string) ($empresa['instagram'] ?? 'Sin Instagram.'), ENT_QUOTES, 'UTF-8') ?></dd>
+                    </div>
+
+                    <div class="empresa-detail__item">
+                        <dt>Correo</dt>
+                        <dd><?= htmlspecialchars((string) ($empresa['correo'] ?? 'Sin correo.'), ENT_QUOTES, 'UTF-8') ?></dd>
+                    </div>
+
+                    <div class="empresa-detail__item">
+                        <dt>Direccion</dt>
+                        <dd><?= htmlspecialchars((string) ($empresa['direccion'] ?? 'Dirección no proporcionada'), ENT_QUOTES, 'UTF-8') ?></dd>
+                    </div>
+
+                    <div class="empresa-detail__item">
+                        <dt>Teléfono</dt>
+                        <dd><?= htmlspecialchars((string) ($empresa['telefono'] ?? 'Sin teléfono.'), ENT_QUOTES, 'UTF-8') ?></dd>
+                    </div>
+
+                    <div class="empresa-detail__item">
                         <dt>Imagen</dt>
                         <dd>
                             <?php if (!empty($empresa['url_imagen'])): ?>

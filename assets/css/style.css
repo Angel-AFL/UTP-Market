@@ -4829,6 +4829,7 @@ table .ticket-row:hover {
     grid-column: auto;
   }
 }
+/*# sourceMappingURL=style.css.map */
 .privacy-section .policy .policy-features {
   margin-top: 3rem;
 }
@@ -6021,4 +6022,4 @@ table .ticket-row:hover {
 }
 .user-dashboard .nav-content .modal-wrapper.active {
   display: flex;
-} /*# sourceMappingURL=style.css.map */
+}
