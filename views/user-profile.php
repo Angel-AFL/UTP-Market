@@ -217,7 +217,7 @@
     <div class="cart-section">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h5 class="heading">Product Management</h5>
-            <button type="button" class="shop-btn" data-ap-open>Add New Product</button>
+            <button type="button" class="shop-btn" data-ap-open>Agregar productos</button>
         </div>
         <?php include __DIR__ . '/agregar_producto.php'; ?>
 
