@@ -26,9 +26,9 @@ if (file_exists($envFile)) {
     }
 }
 
-// 2. Obtener las variables (compatibilidad con nombres antiguos)
-$supabaseUrl = $_ENV['SUPABASE_URL'] ?? $_ENV['PUBLIC_SUPABASE_URL'] ?? '';
-$supabaseAnonKey = $_ENV['SUPABASE_ANON_KEY'] ?? $_ENV['PUBLIC_SUPABASE_ANON_KEY'] ?? '';
+
+$supabaseUrl = $_ENV['PUBLIC_SUPABASE_URL'] ?? $_ENV['SUPABASE_URL'] ?? '';
+$supabaseAnonKey = $_ENV['PUBLIC_SUPABASE_PUBLISHABLE_KEY'] ?? $_ENV['PUBLIC_SUPABASE_ANON_KEY'] ?? '';
 $supabaseServiceKey = $_ENV['SUPABASE_SERVICE_ROLE_KEY'] ?? '';
 
 if (empty($supabaseUrl) || (empty($supabaseAnonKey) && empty($supabaseServiceKey))) {
