@@ -1,6 +1,5 @@
-
 <?php
-
+// Modal flotante para agregar un producto en UTP-Market.
 ?>
 
 <div class="ap-overlay" id="apProductModal" aria-hidden="true">
@@ -109,508 +108,68 @@
 </div>
 
 <style>
-  #apProductModal,
-  #apProductModal * {
-    box-sizing: border-box;
-  }
-
-  .ap-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 99999;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 22px;
-    background: rgba(25,18,18,.68);
-    backdrop-filter: blur(9px);
-    -webkit-backdrop-filter: blur(9px);
-  }
-
-  .ap-overlay.ap-visible {
-    display: flex;
-    animation: apFade .2s ease-out;
-  }
-
-  .ap-modal {
-    position: relative;
-    width: min(760px,100%);
-    max-height: calc(100vh - 44px);
-    overflow-y: auto;
-    background: #fffdfa;
-    border: 1px solid rgba(255,255,255,.7);
-    border-radius: 26px;
-    box-shadow: 0 35px 100px rgba(14,8,8,.35);
-    padding: 30px 38px 27px;
-    color: #2f2524;
-    animation: apRise .24s cubic-bezier(.2,.8,.2,1);
-  }
-
-  .ap-topline {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 27px;
-  }
-
-  .ap-mark {
-    display: grid;
-    place-items: center;
-    width: 35px;
-    height: 35px;
-    border-radius: 11px;
-    background: #7a2e34;
-    color: #fff;
-    font-size: 11px;
-    font-weight: 900;
-    letter-spacing: -.5px;
-    box-shadow: 0 5px 13px #7a2e3430;
-  }
-
-  .ap-toplabel {
-    color: #9a8984;
-    font-size: 9px;
-    font-weight: 850;
-    letter-spacing: 1.65px;
-  }
-
-  .ap-close {
-    position: absolute;
-    top: 27px;
-    right: 29px;
-    display: grid;
-    place-items: center;
-    width: 39px;
-    height: 39px;
-    border: 1px solid #eee4df;
-    border-radius: 13px;
-    background: #fff;
-    color: #72544e;
-    font-size: 26px;
-    line-height: 1;
-    cursor: pointer;
-    transition: all .2s;
-  }
-
-  .ap-close:hover {
-    background: #f7ece8;
-    color: #7a2e34;
-    transform: rotate(90deg);
-  }
-
-  .ap-heading {
-    padding-right: 35px;
-    margin-bottom: 28px;
-  }
-
-  .ap-eyebrow {
-    display: block;
-    margin-bottom: 9px;
-    color: #a14a4f;
-    font-size: 9px;
-    font-weight: 900;
-    letter-spacing: 2px;
-  }
-
-  .ap-heading h2 {
-    margin: 0;
-    color: #302322;
-    font-size: clamp(27px,4vw,36px);
-    font-weight: 850;
-    letter-spacing: -1.25px;
-    line-height: 1.12;
-  }
-
-  .ap-heading h2 em {
-    color: #9b4147;
-    font-style: normal;
-  }
-
-  .ap-heading p {
-    max-width: 500px;
-    margin: 11px 0 0;
-    color: #8a7b76;
-    font-size: 13px;
-    line-height: 1.65;
-  }
-
-  .ap-section-title {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 0 0 17px;
-    padding-bottom: 13px;
-    border-bottom: 1px solid #f0e7e2;
-  }
-
-  .ap-section-title > span {
-    display: grid;
-    place-items: center;
-    width: 31px;
-    height: 31px;
-    border-radius: 10px;
-    background: #f5e9e6;
-    color: #8e383e;
-    font-size: 10px;
-    font-weight: 900;
-  }
-
-  .ap-section-title div {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-  }
-
-  .ap-section-title strong {
-    color: #45312e;
-    font-size: 12px;
-    font-weight: 850;
-  }
-
-  .ap-section-title small {
-    color: #a18e87;
-    font-size: 10px;
-  }
-
-  .ap-section-media {
-    margin-top: 25px;
-  }
-
-  .ap-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 17px;
-  }
-
-  .ap-field {
-    display: flex;
-    min-width: 0;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .ap-full {
-    grid-column: 1/-1;
-  }
-
-  .ap-field > span {
-    color: #4b3935;
-    font-size: 11px;
-    font-weight: 800;
-  }
-
-  .ap-field b {
-    color: #a13b42;
-  }
-
-  .ap-field input,
-  .ap-field textarea,
-  .ap-field select {
-    width: 100%;
-    min-width: 0;
-    border: 1px solid #e9ded8;
-    border-radius: 13px;
-    background: #fff;
-    padding: 12px 14px;
-    color: #352724;
-    font: inherit;
-    font-size: 12px;
-    outline: none;
-    transition: border-color .2s,box-shadow .2s,background .2s;
-  }
-
-  .ap-field input,
-  .ap-field select {
-    height: 46px;
-  }
-
-  .ap-field textarea {
-    min-height: 103px;
-    resize: vertical;
-    line-height: 1.6;
-  }
-
-  .ap-field input:focus,
-  .ap-field textarea:focus,
-  .ap-field select:focus {
-    border-color: #a13b42;
-    background: #fff;
-    box-shadow: 0 0 0 4px rgba(161,59,66,.09);
-  }
-
-  .ap-field input::placeholder,
-  .ap-field textarea::placeholder {
-    color: #b5a7a1;
-  }
-
-  .ap-field select {
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b7771' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 14px center;
-    padding-right: 38px;
-  }
-
-  .ap-field small {
-    color: #a08f89;
-    font-size: 10px;
-    line-height: 1.5;
-  }
-
-  .ap-help {
-    text-align: right;
-  }
-
-  .ap-price {
-    position: relative;
-  }
-
-  .ap-price > span {
-    position: absolute;
-    top: 50%;
-    left: 14px;
-    transform: translateY(-50%);
-    color: #927b74;
-    font-size: 13px;
-  }
-
-  .ap-price input {
-    padding-left: 30px;
-  }
-
-  /* Vista previa de la imagen por URL */
-  .ap-image-preview {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 8px;
-    padding: 12px;
-    border: 1px solid #eee4df;
-    border-radius: 14px;
-    background: #fcf8f5;
-  }
-
-  .ap-image-preview[hidden],
-  .ap-image-error[hidden] {
-    display: none;
-  }
-
-  .ap-image-preview img {
-    display: block;
-    width: 100%;
-    max-height: 220px;
-    object-fit: contain;
-    border-radius: 9px;
-    background: #fff;
-  }
-
-  .ap-image-preview span {
-    color: #8a7b76;
-    font-size: 10px;
-  }
-
-  .ap-image-error {
-    margin: 0;
-    color: #a13b42;
-    font-size: 11px;
-    line-height: 1.5;
-  }
-
-  .ap-form-status {
-    margin: 18px 0 0;
-    padding: 11px 14px;
-    border-radius: 11px;
-    font-size: 11px;
-    font-weight: 700;
-    line-height: 1.5;
-  }
-
-  .ap-form-status[hidden] {
-    display: none;
-  }
-
-  .ap-form-status.is-error {
-    background: #fdf0f0;
-    border: 1px solid #f4d4d4;
-    color: #9b2c34;
-  }
-
-  .ap-form-status.is-success {
-    background: #eef8f1;
-    border: 1px solid #cfe9d8;
-    color: #2f6b45;
-  }
-
-  .ap-btn:disabled {
-    opacity: .65;
-    cursor: not-allowed;
-    transform: none;
-  }
-
-  .ap-actions {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 18px;
-    margin-top: 25px;
-    padding-top: 20px;
-    border-top: 1px solid #f0e7e2;
-  }
-
-  .ap-secure {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    margin: 0;
-    color: #93817b;
-    font-size: 10px;
-  }
-
-  .ap-secure-dot {
-    width: 7px;
-    height: 7px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    background: #6b9b78;
-    box-shadow: 0 0 0 4px #6b9b781c;
-  }
-
-  .ap-action-buttons {
-    display: flex;
-    gap: 9px;
-  }
-
-  .ap-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    min-height: 43px;
-    padding: 0 17px;
-    border: 1px solid transparent;
-    border-radius: 12px;
-    font-size: 11px;
-    font-weight: 850;
-    cursor: pointer;
-    transition: transform .2s,background .2s,box-shadow .2s;
-  }
-
-  .ap-btn:hover {
-    transform: translateY(-2px);
-  }
-
-  .ap-btn-quiet {
-    background: #f5efeb;
-    color: #735852;
-  }
-
-  .ap-btn-quiet:hover {
-    background: #eee2dc;
-  }
-
-  .ap-btn-primary {
-    background: #7a2e34;
-    color: #fff;
-    box-shadow: 0 7px 18px rgba(122,46,52,.2);
-  }
-
-  .ap-btn-primary:hover {
-    background: #61232a;
-    box-shadow: 0 10px 24px rgba(122,46,52,.27);
-  }
-
-  .ap-btn-primary span {
-    font-size: 16px;
-  }
-
-  .ap-note {
-    margin: 12px 0 0;
-    color: #b0a19b;
-    font-size: 9px;
-    line-height: 1.5;
-    text-align: right;
-  }
-
-  body.ap-lock {
-    overflow: hidden;
-  }
-
-  @keyframes apFade {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  @keyframes apRise {
-    from { opacity: 0; transform: translateY(12px) scale(.985); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-  }
-
-  @media(max-width:620px) {
-    .ap-overlay {
-      padding: 9px;
-    }
-
-    .ap-modal {
-      max-height: calc(100vh - 18px);
-      padding: 23px 19px 20px;
-      border-radius: 20px;
-    }
-
-    .ap-topline {
-      margin-bottom: 23px;
-    }
-
-    .ap-close {
-      top: 20px;
-      right: 19px;
-      width: 35px;
-      height: 35px;
-    }
-
-    .ap-heading {
-      margin-bottom: 24px;
-    }
-
-    .ap-grid {
-      grid-template-columns: 1fr;
-      gap: 14px;
-    }
-
-    .ap-full {
-      grid-column: auto;
-    }
-
-    .ap-actions {
-      align-items: stretch;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .ap-action-buttons {
-      flex-direction: column-reverse;
-    }
-
-    .ap-btn {
-      width: 100%;
-    }
-
-    .ap-note,
-    .ap-help {
-      text-align: left;
-    }
-  }
-
-  @media(prefers-reduced-motion:reduce) {
-    .ap-overlay.ap-visible,
-    .ap-modal {
-      animation: none;
-    }
-
-    .ap-close,
-    .ap-btn {
-      transition: none;
-    }
-  }
+  #apProductModal, #apProductModal * { box-sizing: border-box; }
+  .ap-overlay { position: fixed; inset: 0; z-index: 99999; display: none; align-items: center; justify-content: center; padding: 22px; background: rgba(25,18,18,.68); backdrop-filter: blur(9px); -webkit-backdrop-filter: blur(9px); }
+  .ap-overlay.ap-visible { display: flex; animation: apFade .2s ease-out; }
+  .ap-modal { position: relative; width: min(760px,100%); max-height: calc(100vh - 44px); overflow-y: auto; background: #fffdfa; border: 1px solid rgba(255,255,255,.7); border-radius: 26px; box-shadow: 0 35px 100px rgba(14,8,8,.35); padding: 30px 38px 27px; color: #2f2524; animation: apRise .24s cubic-bezier(.2,.8,.2,1); }
+  .ap-topline { display: flex; align-items: center; gap: 10px; margin-bottom: 27px; }
+  .ap-mark { display: grid; place-items: center; width: 35px; height: 35px; border-radius: 11px; background: #7a2e34; color: #fff; font-size: 11px; font-weight: 900; letter-spacing: -.5px; box-shadow: 0 5px 13px #7a2e3430; }
+  .ap-toplabel { color: #9a8984; font-size: 9px; font-weight: 850; letter-spacing: 1.65px; }
+  .ap-close { position: absolute; top: 27px; right: 29px; display: grid; place-items: center; width: 39px; height: 39px; border: 1px solid #eee4df; border-radius: 13px; background: #fff; color: #72544e; font-size: 26px; line-height: 1; cursor: pointer; transition: all .2s; }
+  .ap-close:hover { background: #f7ece8; color: #7a2e34; transform: rotate(90deg); }
+  .ap-heading { padding-right: 35px; margin-bottom: 28px; }
+  .ap-eyebrow { display: block; margin-bottom: 9px; color: #a14a4f; font-size: 9px; font-weight: 900; letter-spacing: 2px; }
+  .ap-heading h2 { margin: 0; color: #302322; font-size: clamp(27px,4vw,36px); font-weight: 850; letter-spacing: -1.25px; line-height: 1.12; }
+  .ap-heading h2 em { color: #9b4147; font-style: normal; }
+  .ap-heading p { max-width: 500px; margin: 11px 0 0; color: #8a7b76; font-size: 13px; line-height: 1.65; }
+  .ap-section-title { display: flex; align-items: center; gap: 12px; margin: 0 0 17px; padding-bottom: 13px; border-bottom: 1px solid #f0e7e2; }
+  .ap-section-title > span { display: grid; place-items: center; width: 31px; height: 31px; border-radius: 10px; background: #f5e9e6; color: #8e383e; font-size: 10px; font-weight: 900; }
+  .ap-section-title div { display: flex; flex-direction: column; gap: 3px; }
+  .ap-section-title strong { color: #45312e; font-size: 12px; font-weight: 850; }
+  .ap-section-title small { color: #a18e87; font-size: 10px; }
+  .ap-section-media { margin-top: 25px; }
+  .ap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 17px; }
+  .ap-field { display: flex; min-width: 0; flex-direction: column; gap: 8px; }
+  .ap-full { grid-column: 1/-1; }
+  .ap-field > span { color: #4b3935; font-size: 11px; font-weight: 800; }
+  .ap-field b { color: #a13b42; }
+  .ap-field input, .ap-field textarea, .ap-field select { width: 100%; min-width: 0; border: 1px solid #e9ded8; border-radius: 13px; background: #fff; padding: 12px 14px; color: #352724; font: inherit; font-size: 12px; outline: none; transition: border-color .2s,box-shadow .2s,background .2s; }
+  .ap-field input, .ap-field select { height: 46px; }
+  .ap-field textarea { min-height: 103px; resize: vertical; line-height: 1.6; }
+  .ap-field input:focus, .ap-field textarea:focus, .ap-field select:focus { border-color: #a13b42; background: #fff; box-shadow: 0 0 0 4px rgba(161,59,66,.09); }
+  .ap-field input::placeholder, .ap-field textarea::placeholder { color: #b5a7a1; }
+  .ap-field small { color: #a08f89; font-size: 10px; line-height: 1.5; }
+  .ap-help { text-align: right; }
+  .ap-price { position: relative; }
+  .ap-price > span { position: absolute; top: 50%; left: 14px; transform: translateY(-50%); color: #927b74; font-size: 13px; }
+  .ap-price input { padding-left: 30px; }
+  .ap-image-preview { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; padding: 12px; border: 1px solid #eee4df; border-radius: 14px; background: #fcf8f5; }
+  .ap-image-preview[hidden], .ap-image-error[hidden] { display: none; }
+  .ap-image-preview img { display: block; width: 100%; max-height: 220px; object-fit: contain; border-radius: 9px; background: #fff; }
+  .ap-image-preview span { color: #8a7b76; font-size: 10px; }
+  .ap-image-error { margin: 0; color: #a13b42; font-size: 11px; line-height: 1.5; }
+  .ap-form-status { margin: 18px 0 0; padding: 11px 14px; border-radius: 11px; font-size: 11px; font-weight: 700; line-height: 1.5; }
+  .ap-form-status[hidden] { display: none; }
+  .ap-form-status.is-error { background: #fdf0f0; border: 1px solid #f4d4d4; color: #9b2c34; }
+  .ap-form-status.is-success { background: #eef8f1; border: 1px solid #cfe9d8; color: #2f6b45; }
+  .ap-btn:disabled { opacity: .65; cursor: not-allowed; transform: none; }
+  .ap-actions { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-top: 25px; padding-top: 20px; border-top: 1px solid #f0e7e2; }
+  .ap-secure { display: flex; align-items: center; gap: 7px; margin: 0; color: #93817b; font-size: 10px; }
+  .ap-secure-dot { width: 7px; height: 7px; flex-shrink: 0; border-radius: 50%; background: #6b9b78; box-shadow: 0 0 0 4px #6b9b781c; }
+  .ap-action-buttons { display: flex; gap: 9px; }
+  .ap-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 43px; padding: 0 17px; border: 1px solid transparent; border-radius: 12px; font-size: 11px; font-weight: 850; cursor: pointer; transition: transform .2s,background .2s,box-shadow .2s; }
+  .ap-btn:hover { transform: translateY(-2px); }
+  .ap-btn-quiet { background: #f5efeb; color: #735852; }
+  .ap-btn-quiet:hover { background: #eee2dc; }
+  .ap-btn-primary { background: #7a2e34; color: #fff; box-shadow: 0 7px 18px rgba(122,46,52,.2); }
+  .ap-btn-primary:hover { background: #61232a; box-shadow: 0 10px 24px rgba(122,46,52,.27); }
+  .ap-btn-primary span { font-size: 16px; }
+  .ap-note { margin: 12px 0 0; color: #b0a19b; font-size: 9px; line-height: 1.5; text-align: right; }
+  body.ap-lock { overflow: hidden; }
+  @keyframes apFade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes apRise { from { opacity: 0; transform: translateY(12px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+  @media(max-width:620px) { .ap-overlay { padding: 9px; } .ap-modal { max-height: calc(100vh - 18px); padding: 23px 19px 20px; border-radius: 20px; } .ap-topline { margin-bottom: 23px; } .ap-close { top: 20px; right: 19px; width: 35px; height: 35px; } .ap-heading { margin-bottom: 24px; } .ap-grid { grid-template-columns: 1fr; gap: 14px; } .ap-full { grid-column: auto; } .ap-actions { align-items: stretch; flex-direction: column; gap: 14px; } .ap-action-buttons { flex-direction: column-reverse; } .ap-btn { width: 100%; } .ap-note, .ap-help { text-align: left; } }
+  @media(prefers-reduced-motion:reduce) { .ap-overlay.ap-visible, .ap-modal { animation: none; } .ap-close, .ap-btn { transition: none; } }
 </style>
 
 <script>
@@ -708,11 +267,13 @@
   imageInput.addEventListener('input', actualizarVistaPrevia);
   imageInput.addEventListener('change', actualizarVistaPrevia);
 
-  // ENVÍO DEL FORMULARIO A LA API
+  // ENVÍO DEL FORMULARIO A LA API PHP
   const productForm = document.getElementById('apProductForm');
   const submitBtn = document.getElementById('btnSubmitPublicacion');
   const formStatus = document.getElementById('apFormStatus');
   const videoInput = productForm.querySelector('[name="url_video"]');
+  
+  // Aquí usamos la ruta que se conecta con tu backend
   const API_URL = <?= json_encode(url('api/productos.php')) ?>;
 
   function mostrarEstado(mensaje, tipo) {
@@ -736,6 +297,7 @@
     const precio = document.getElementById('inputPrecio').value;
     const descripcion = document.getElementById('inputDescripcion').value.trim();
 
+    // Empaquetamos los datos exactamente como los pide tu api/productos.php
     const payload = {
       nombre: nombre,
       precio: Number(precio),
@@ -749,6 +311,7 @@
     ocultarEstado();
 
     try {
+      // Enviamos la petición POST para que el backend la inserte en Supabase
       const response = await fetch(API_URL, {
         method: 'POST',
         headers: {
@@ -766,14 +329,17 @@
         throw new Error(data.message || 'No se pudo guardar la publicación.');
       }
 
+      // Limpieza de formulario
       productForm.reset();
       actualizarVistaPrevia();
       ocultarEstado();
       closeProductModal();
 
+      // Disparamos el evento para que la tabla en user-profile se recargue automáticamente
       document.dispatchEvent(new CustomEvent('producto:creado', {
         detail: data.producto || null
       }));
+      
     } catch (error) {
       mostrarEstado(error.message || 'No se pudo guardar la publicación. Intenta de nuevo.', 'error');
     } finally {
