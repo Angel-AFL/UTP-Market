@@ -196,41 +196,45 @@
                 <!-- nav-content -->
                 <div class="tab-content nav-content" id="v-pills-tabContent" style="flex: 1 0%;">
 
-                    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
-                        aria-labelledby="v-pills-home-tab" tabindex="0">
-                        <!-- TU CONTENIDO DE HOME (el original no lo incluía) -->
-                    </div>
+                        <!-- NUEVO APARTADO: Product CRUD -->
+                        <button class="nav-link" id="v-pills-products-tab" data-bs-toggle="pill"
+                            data-bs-target="#v-pills-products" type="button" role="tab" aria-controls="v-pills-products"
+                            aria-selected="false">
+                            <span>
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M14 4.5V13.5C14 14.0523 13.5523 14.5 13 14.5H3C2.44772 14.5 2 14.0523 2 13.5V4.5C2 3.94772 2.44772 3.5 3 3.5H13C13.5523 3.5 14 3.94772 14 4.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M5 3.5V2.5C5 1.94772 5.44772 1.5 6 1.5H10C10.5523 1.5 11 1.94772 11 2.5V3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                            <span class="text">
+                                Manage Products
+                            </span>
+                        </button>
+
+                        <button class="nav-link" id="v-pills-order-tab" data-bs-toggle="pill"
+                            data-bs-target="#v-pills-order" type="button" role="tab" aria-controls="v-pills-order"
+                            aria-selected="false">
+                            <span>
+                                <svg width="15" height="18" viewBox="0 0 15 18" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M10.9643 15.8454C10.8728 15.8399 10.8054 15.8331 10.7381 15.8331C9.37517 15.8324 8.01229 15.8324 6.60539 15.8324C6.85294 16.5145 6.77799 17.099 6.11648 17.4676C5.68672 17.7076 5.24457 17.6615 4.86018 17.3562C4.36027 16.9594 4.3087 16.4409 4.56175 15.8317C3.82667 15.8317 3.13285 15.8406 2.43903 15.8296C1.53136 15.8152 0.910425 14.8958 1.25974 14.0638C1.34845 13.852 1.51898 13.6581 1.69295 13.502C2.43628 12.8384 3.19199 12.1872 3.95182 11.5429C4.11204 11.4075 4.16499 11.2816 4.11479 11.074C3.36389 7.96037 2.61506 4.8454 1.87999 1.72768C1.82085 1.476 1.71564 1.42512 1.48597 1.432C0.997754 1.44712 0.507472 1.43681 0 1.43681C0 1.06824 0 0.741614 0 0.390921C0.782525 0.390921 1.54786 0.377856 2.31182 0.397798C2.58825 0.405362 2.70308 0.630905 2.76772 0.885329C3.01389 1.86177 3.27725 2.83339 3.5138 3.81189C3.57775 4.07732 3.68846 4.22034 3.96901 4.19971C3.98001 4.19903 3.9917 4.20315 4.00339 4.20315C4.60369 4.21003 4.95026 4.4507 5.25488 5.03863C6.60195 7.64613 10.1907 7.96587 12.0686 5.68981C12.2206 5.50622 12.3512 5.44639 12.585 5.4904C13.0911 5.58529 13.6027 5.64855 14.1136 5.71801C14.333 5.74826 14.4306 5.85416 14.4251 6.08314C14.3839 7.93906 14.3461 9.79498 14.3144 11.6509C14.3089 11.9816 14.0937 11.9665 13.8661 11.9665C11.0819 11.9651 8.29697 11.9693 5.51274 11.9596C5.2425 11.959 5.03897 12.0291 4.8368 12.2072C4.05428 12.8962 3.25525 13.5659 2.47135 14.2536C2.37095 14.3416 2.32488 14.4908 2.25337 14.6111C2.38264 14.6552 2.51192 14.737 2.64119 14.737C6.60608 14.7439 10.571 14.7425 14.5358 14.7425C14.6823 14.7425 14.8288 14.7425 15 14.7425C15 15.1152 15 15.4514 15 15.8193C14.3426 15.8193 13.6935 15.8193 13.0127 15.8193C13.25 16.4568 13.2156 17.0055 12.6442 17.4064C12.2536 17.68 11.7406 17.6814 11.3521 17.4091C10.78 17.011 10.7339 16.4636 10.9643 15.8454Z" />
+                                    <path
+                                        d="M8.8449 6.1337C7.15883 6.12476 5.787 4.74744 5.78906 3.06549C5.79113 1.37254 7.18564 -0.00685072 8.88753 2.55979e-05C10.5702 0.00690192 11.9413 1.38835 11.9392 3.07374C11.9372 4.77563 10.555 6.14264 8.8449 6.1337ZM9.94924 1.61802C9.38194 2.22039 8.85178 2.78287 8.31199 3.35636C8.11326 3.12806 7.94342 2.93278 7.76394 2.72786C7.48201 2.96853 7.22553 3.1872 6.95735 3.41618C7.28191 3.80125 7.57484 4.16708 7.8884 4.51502C8.10157 4.75225 8.43232 4.77082 8.65236 4.54458C9.33656 3.83907 10.0042 3.11775 10.6382 2.44593C10.4031 2.16332 10.1858 1.9027 9.94924 1.61802Z" />
+                                </svg>
+                            </span>
+                            <span class="text">
+                                Order
+                            </span>
+                        </button>
 
                     <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
                         aria-labelledby="v-pills-profile-tab" tabindex="0">
                         <!-- TU CONTENIDO DE PERSONAL INFO (el original no lo incluía) -->
                     </div>
 
-                    <div class="tab-pane fade" id="v-pills-payment" role="tabpanel"
-                        aria-labelledby="v-pills-payment-tab" tabindex="0">
-                        <!-- TU CONTENIDO DE PAYMENT (el original no lo incluía) -->
-                    </div>
 
-                    <!-- ===== PESTAÑA MANAGE PRODUCTS (completa) ===== -->
-<div class="tab-pane fade" id="v-pills-products" role="tabpanel"
-    aria-labelledby="v-pills-products-tab" tabindex="0">
-    <div class="cart-section">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h5 class="heading">Product Management</h5>
-            <button type="button" class="shop-btn" data-ap-open>Agregar productos</button>
-        </div>
-        <?php include __DIR__ . '/agregar_producto.php'; ?>
-
-        <!-- Filtros: búsqueda por nombre y categoría -->
-        <section class="filtros-productos" id="filtros-busqueda-productos">
-            <div class="filtro-campo filtro-busqueda">
-                <label for="buscar-producto">
-                    <span aria-hidden="true">⌕</span>
-                    Buscar producto por nombre
-                </label>
-                <input type="search" id="buscar-producto" class="control-filtro"
-                    placeholder="Escribe el nombre del producto..." autocomplete="off">
-            </div>
 
             <div class="filtro-campo filtro-categoria">
                 <label for="empresa-producto">
@@ -242,178 +246,183 @@
                 </select>
             </div>
 
-            <p id="mensaje-busqueda-productos" class="mensaje-filtro" role="status" aria-live="polite">
-                Escribe un nombre para buscar productos.
-            </p>
-        </section>
+                        <button class="nav-link" id="v-pills-ticket-tab" data-bs-toggle="pill"
+                            data-bs-target="#v-pills-ticket" type="button" role="tab" aria-controls="v-pills-ticket"
+                            aria-selected="false">
+                            <span>
+                                <svg width="18" height="20" viewBox="0 0 18 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M6.25959 11.7769C4.29097 12.7964 3.80544 13.2903 2.96997 15.1301C2.40643 14.5916 1.85349 14.0636 1.28388 13.519C1.61565 12.979 1.93756 12.4548 2.25872 11.9299C2.47914 11.5686 2.211 10.8982 1.80349 10.7967C1.20511 10.6483 0.605962 10.5051 0 10.3574C0 9.20229 0 8.06763 0 6.88903C0.588541 6.74739 1.18466 6.6065 1.77926 6.46031C2.21555 6.35276 2.48672 5.68923 2.25342 5.30671C1.93832 4.79089 1.62095 4.27582 1.31645 3.77969C2.14359 2.95179 2.95331 2.14283 3.78499 1.31191C4.28491 1.61868 4.80982 1.94211 5.33701 2.26327C5.67787 2.47081 6.35276 2.20116 6.44819 1.81713C6.59741 1.21798 6.73981 0.616567 6.88979 0C8.04263 0 9.18639 0 10.3627 0C10.5013 0.579451 10.6407 1.16496 10.7831 1.74972C10.8967 2.21555 11.5489 2.48975 11.9526 2.24206C12.4677 1.9262 12.9812 1.61034 13.4698 1.31039C14.2962 2.13677 15.0983 2.93892 15.936 3.77742C15.6391 4.26294 15.318 4.78559 14.9983 5.30974C14.7658 5.69074 15.04 6.35048 15.4778 6.45804C16.0641 6.60196 16.6526 6.74057 17.2502 6.88449C17.2502 8.04718 17.2502 9.1932 17.2502 10.3627C16.6943 10.4945 16.1428 10.624 15.5922 10.7551C14.9923 10.8982 14.7362 11.508 15.0559 12.0283C15.3521 12.5108 15.6475 12.9941 15.955 13.4948C15.4286 14.0583 14.9165 14.606 14.3689 15.1915C13.7614 13.5281 12.6692 12.4101 11.0634 11.7935C13.1335 9.92414 12.6858 7.32608 11.2823 6.01266C9.77341 4.60001 7.41092 4.6394 5.95055 6.11037C4.57047 7.50105 4.29248 10.0234 6.25959 11.7769Z" />
+                                </svg>
+                            </span>
+                            <span class="text">
+                                Support Ticket
+                            </span>
+                        </button>
 
-        <style>
-            .filtros-productos {
-                display: grid;
-                grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr);
-                gap: 22px;
-                padding: 24px;
-                margin: 22px 0;
-                background: #f8f9ff;
-                border: 1px solid #e5e9fb;
-                border-radius: 18px;
-                box-sizing: border-box;
-            }
-            .filtro-campo { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
-            .filtro-campo label { color: #564d24; font-size: 15px; font-weight: 700; letter-spacing: .1px; }
-            .filtro-campo label span { color: #b67f1a; margin-right: 7px; font-size: 19px; }
-            .control-filtro {
-                width: 100%; min-height: 49px; padding: 12px 15px; background: #fff;
-                border: 1px solid #dce2f2; border-radius: 12px; color: #615724;
-                font: inherit; font-size: 14px; outline: none; box-sizing: border-box;
-                transition: border-color .2s, box-shadow .2s;
-            }
-            .control-filtro::placeholder { color: #929bb0; }
-            .control-filtro:focus { border-color: #f1bb63; box-shadow: 0 0 0 4px rgba(154, 112, 45, 0.12); }
-            .mensaje-filtro {
-                grid-column: 1 / -1; margin: 0; padding: 12px 15px; border-radius: 10px;
-                background: #edf2ff; color: #8d7b52; font-size: 13px; line-height: 1.5;
-            }
-
-            /* Modal "Ver" */
-            .view-product-modal .modal-main {
-                max-width: 580px; width: 92%; background: #ffffff; border-radius: 24px;
-                padding: 35px; box-shadow: 0 20px 40px rgba(45, 55, 72, 0.12); border: 1px solid #edf2f7;
-            }
-            .view-product-header {
-                display: flex; align-items: center; gap: 18px; margin-bottom: 25px;
-                padding-bottom: 20px; border-bottom: 1px solid #f1f5f9;
-            }
-            .view-product-thumb {
-                width: 90px; height: 90px; border-radius: 16px; object-fit: cover;
-                border: 2px solid #f8fafc; box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            }
-            .view-product-title-area h4 { margin: 0 0 6px 0; font-size: 20px; font-weight: 700; color: #1e293b; }
-            .view-product-badge {
-                display: inline-block; padding: 4px 12px; background: #ecfdf5; color: #059669;
-                font-size: 12px; font-weight: 600; border-radius: 20px;
-            }
-            .view-product-badge.inactive { background: #fef2f2; color: #dc2626; }
-            .view-details-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px; }
-            .view-detail-card {
-                background: #f8fafc; padding: 14px; border-radius: 14px;
-                border: 1px solid #f1f5f9; text-align: center;
-            }
-            .view-detail-card span.label, .view-detail-box span.label {
-                display: block; font-size: 11px; color: #64748b; margin-bottom: 6px;
-                text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;
-            }
-            .view-detail-card span.value { font-size: 16px; color: #0f172a; font-weight: 700; }
-            .view-detail-box {
-                background: #f8fafc; padding: 18px; border-radius: 14px;
-                border: 1px solid #f1f5f9; margin-bottom: 25px;
-            }
-            .view-detail-box p { margin: 0; font-size: 14px; color: #334155; line-height: 1.6; }
-
-            .sin-resultados td { text-align: center; padding: 30px; color: #8d7b52; }
-
-            @media (max-width: 650px) {
-                .filtros-productos { grid-template-columns: 1fr; padding: 16px; gap: 16px; }
-                .mensaje-filtro { grid-column: auto; }
-                .view-details-grid { grid-template-columns: 1fr; }
-                .view-product-header { flex-direction: column; align-items: flex-start; }
-            }
-        </style>
-
-        <!-- ================= Modal Crear/Editar Producto ================= -->
-        <div class="modal-wrapper product-modal">
-            <div onclick="modalAction('.product-modal')" class="anywhere-away"></div>
-            <div class="login-section account-section modal-main">
-                <div class="review-form">
-                    <div class="review-content">
-                        <h5 class="comment-title" id="product-modal-title">Edit Product</h5>
-                        <div class="close-btn">
-                            <img src="assets/images/homepage-one/close-btn.png"
-                                onclick="modalAction('.product-modal')" alt="close-btn">
+                        <div class="nav-link">
+                            <a href="/login">
+                                <span>
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M7.50224 15.7537C7.50224 16.0247 7.50895 16.2465 7.5 16.4683C7.4597 17.5682 6.52164 18.2515 5.4806 17.9155C4.00075 17.4383 2.52761 16.9387 1.05448 16.4392C0.380597 16.2107 0 15.6641 0 14.9405C0 10.4892 0 6.03569 0.00223881 1.58218C0.00223881 0.627852 0.629104 0.00955666 1.59403 0.00731646C4.28731 0.00283606 6.98284 -0.00164434 9.67612 0.000595862C11.0104 0.00283606 11.9798 0.961641 12 2.29904C12.0112 2.99126 12.0067 3.68124 12 4.37347C11.9955 4.90439 11.6933 5.25162 11.2478 5.25162C10.8022 5.25386 10.4955 4.90663 10.491 4.37571C10.4843 3.69693 10.4933 3.0159 10.4888 2.33712C10.4843 1.79276 10.209 1.50153 9.67388 1.49705C8.72463 1.48585 7.77761 1.49481 6.82836 1.49481C6.72313 1.49481 6.61791 1.49481 6.46791 1.49481C6.51492 1.55081 6.53284 1.59114 6.56418 1.60682C7.24254 1.91597 7.51119 2.46481 7.51119 3.1884C7.50672 6.72791 7.50895 10.2674 7.50895 13.8069C7.50895 13.9436 7.50895 14.0802 7.50895 14.2415C8.32164 14.2415 9.09179 14.2662 9.8597 14.2303C10.2649 14.2124 10.4888 13.8898 10.491 13.4396C10.4978 12.5031 10.4955 11.5645 10.4933 10.6259C10.4933 10.2854 10.594 10.0008 10.9119 9.83507C11.3888 9.58865 11.9754 9.89332 11.9888 10.4511C12.0179 11.5511 12.0493 12.6577 11.9664 13.7532C11.8746 14.9494 10.9052 15.7447 9.69403 15.7514C8.97537 15.7559 8.26343 15.7537 7.50224 15.7537Z" />
+                                    </svg>
+                                </span>
+                                <span class="text">
+                                    Logout
+                                </span>
+                            </a>
                         </div>
                     </div>
 
-                    <!-- ID oculto del producto que se está editando -->
-                    <input type="hidden" id="prodid">
+                    <!-- nav-content -->
+                    <div class="tab-content nav-content" id="v-pills-tabContent" style="flex: 1 0%;">
 
-                    <div class="review-form-name address-form">
-                        <label for="prodname" class="form-label">Product Name*</label>
-                        <input type="text" id="prodname" class="form-control" placeholder="Enter product name">
-                    </div>
-                    <div class="account-inner-form">
-                        <div class="review-form-name">
-                            <label for="prodprice" class="form-label">Price ($)*</label>
-                            <input type="number" id="prodprice" class="form-control" placeholder="0.00" step="0.01" min="0">
+                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                            aria-labelledby="v-pills-home-tab" tabindex="0">
+                            <!-- [Contenido de Home] -->
                         </div>
-                        <div class="review-form-name">
-                            <label for="prodstock" class="form-label">Stock*</label>
-                            <input type="number" id="prodstock" class="form-control" placeholder="0" min="0">
+
+                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
+                            aria-labelledby="v-pills-profile-tab" tabindex="0">
+                            <!-- [Contenido de Profile] -->
                         </div>
-                    </div>
-                    <div class="review-form-name address-form">
-                        <label for="prodimg" class="form-label">Image URL</label>
-                        <input type="url" id="prodimg" class="form-control" placeholder="https://ejemplo.com/imagen.jpg">
-                    </div>
-                    <div class="review-form-name address-form">
-                        <label for="prodvideo" class="form-label">Video URL</label>
-                        <input type="url" id="prodvideo" class="form-control" placeholder="https://...">
-                    </div>
-                    <div class="review-form-name address-form">
-                        <label for="proddesc" class="form-label">Description*</label>
-                        <textarea id="proddesc" cols="10" rows="3" class="form-control" placeholder="Write product description"></textarea>
-                    </div>
-                    <div class="login-btn text-center">
-                        <a href="#" id="btn-save-product" class="shop-btn">Save Product</a>
-                    </div>
-                </div>
-            </div>
+
+                        <div class="tab-pane fade" id="v-pills-payment" role="tabpanel"
+                            aria-labelledby="v-pills-order-tab" tabindex="0">
+                            <!-- [Contenido de Payment] -->
+                        </div>
+
+                        <!-- NUEVA VISTA / TAB-PANE PARA CRUD DE PRODUCTOS -->
+                        <div class="tab-pane fade" id="v-pills-products" role="tabpanel"
+    aria-labelledby="v-pills-products-tab" tabindex="0">
+    <div class="cart-section">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h5 class="heading">Product Management </h5>
+            <button type="button" class="shop-btn" data-ap-open>Add New Product</button>
         </div>
+        <?php include __DIR__ . '/agregar_producto.php'; ?>
 
-        <!-- ================= Modal Visualizar Producto ================= -->
-        <div class="modal-wrapper view-product-modal">
-            <div onclick="modalAction('.view-product-modal')" class="anywhere-away"></div>
-            <div class="login-section account-section modal-main">
-                <div class="review-form">
-                    <div class="review-content">
-                        <h5 class="comment-title">Product Information</h5>
-                        <div class="close-btn">
-                            <img src="assets/images/homepage-one/close-btn.png"
-                                onclick="modalAction('.view-product-modal')" alt="close-btn">
+
+                                <!-- Modal para Crear/Editar Producto -->
+                                <div class="modal-wrapper product-modal">
+                                    <div onclick="modalAction('.product-modal')" class="anywhere-away"></div>
+                                    <div class="login-section account-section modal-main">
+                                        <div class="review-form">
+                                            <div class="review-content">
+                                                <h5 class="comment-title">Product Details</h5>
+                                                <div class="close-btn">
+                                                    <img src="assets/images/homepage-one/close-btn.png"
+                                                        onclick="modalAction('.product-modal')" alt="close-btn">
+                                                </div>
+                                            </div>
+                                            <div class="review-form-name address-form">
+                                                <label for="prodname" class="form-label">Product Name*</label>
+                                                <input type="text" id="prodname" class="form-control" placeholder="Enter product name">
+                                            </div>
+                                            <div class="account-inner-form">
+                                                <div class="review-form-name">
+                                                    <label for="prodprice" class="form-label">Price ($)*</label>
+                                                    <input type="number" id="prodprice" class="form-control" placeholder="0.00">
+                                                </div>
+                                                <div class="review-form-name">
+                                                    <label for="prodstock" class="form-label">Stock*</label>
+                                                    <input type="number" id="prodstock" class="form-control" placeholder="0">
+                                                </div>
+                                            </div>
+                                            <div class="review-form-name address-form">
+                                                <label for="proddesc" class="form-label">Description*</label>
+                                                <textarea id="proddesc" cols="10" rows="3" class="form-control" placeholder="Write product description"></textarea>
+                                            </div>
+                                            <div class="login-btn text-center">
+                                                <a href="#" onclick="modalAction('.product-modal')" class="shop-btn">Save Product</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Tabla de Productos (CRUD List) -->
+                                <table>
+                                    <tbody>
+                                        <tr class="table-row table-top-row">
+                                            <td class="table-wrapper wrapper-product">
+                                                <h5 class="table-heading">PRODUCT</h5>
+                                            </td>
+                                            <td class="table-wrapper">
+                                                <div class="table-wrapper-center">
+                                                    <h5 class="table-heading">PRICE</h5>
+                                                </div>
+                                            </td>
+                                            <td class="table-wrapper">
+                                                <div class="table-wrapper-center">
+                                                    <h5 class="table-heading">STOCK</h5>
+                                                </div>
+                                            </td>
+                                            <td class="table-wrapper wrapper-total">
+                                                <div class="table-wrapper-center">
+                                                    <h5 class="table-heading">STATUS</h5>
+                                                </div>
+                                            </td>
+                                            <td class="table-wrapper">
+                                                <div class="table-wrapper-center">
+                                                    <h5 class="table-heading">ACTIONS</h5>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <!-- ID ASIGNADO AQUÍ: id="producto-1" -->
+                                        <tr class="table-row ticket-row" id="producto-1">
+                                            <td class="table-wrapper wrapper-product">
+                                                <div class="wrapper">
+                                                    <div class="wrapper-img">
+                                                        <img src="assets/images/homepage-one/product-img/product-img-1.webp" alt="img">
+                                                    </div>
+                                                    <div class="wrapper-content">
+                                                        <h5 class="heading">Classic Design Skirt</h5>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="table-wrapper">
+                                                <div class="table-wrapper-center">
+                                                    <h5 class="heading">$20.00</h5>
+                                                </div>
+                                            </td>
+                                            <td class="table-wrapper">
+                                                <div class="table-wrapper-center">
+                                                    <h5 class="heading">15</h5>
+                                                </div>
+                                            </td>
+                                            <td class="table-wrapper wrapper-total">
+                                                <div class="table-wrapper-center">
+                                                    <h5 class="heading" style="color: #27AE60;">Active</h5>
+                                                </div>
+                                            </td>
+                                            <td class="table-wrapper">
+                                                <div class="table-wrapper-center" style="display: flex; gap: 10px; justify-content: center;">
+                                                    <a href="#" onclick="modalAction('.product-modal')" title="Edit">
+                                                        <svg width="14" height="14" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 2L16 7M2 16H7L16.5 6.5C17.3284 5.67157 17.3284 4.32843 16.5 3.5V3.5C15.6716 2.67157 14.3284 2.67157 13.5 3.5L4 13V16H2V14Z" stroke="#2D3748" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                                    </a>
+                                                    <!-- EVENTO ONCLICK ASIGNADO AQUÍ PARA ELIMINAR -->
+                                                    <a href="#" title="Delete" onclick="eliminarProducto(1); return false;">
+                                                        <svg width="14" height="14" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.7879 5.95508C14.7102 6.91333 14.6353 7.84896 14.5582 8.7853C14.3801 10.9315 14.2028 13.0776 14.0219 15.2238C13.9604 15.9503 13.9208 16.6802 13.8176 17.4018C13.7074 18.1756 13.0827 18.719 12.3039 18.7225C9.39528 18.7352 6.48733 18.7367 3.57867 18.7218C2.71582 18.7176 2.09748 18.0823 2.01904 17.158C1.79291 14.4959 1.58161 11.8332 1.36254 9.17114C1.28269 8.19735 1.19859 7.22426 1.11733 6.25117C1.10955 6.15931 1.10673 6.06744 1.10107 5.95578C5.66688 5.95508 10.2171 5.95508 14.7879 5.95508Z" fill="#EB5757"/></svg>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="view-product-header">
-                        <img src="assets/images/homepage-one/product-img/product-img-1.webp" alt="Product" class="view-product-thumb" id="view-prod-img">
-                        <div class="view-product-title-area">
-                            <h4 id="view-prod-name"></h4>
-                            <span class="view-product-badge" id="view-prod-status">Active</span>
-                        </div>
-                    </div>
-
-                    <div class="view-details-grid">
-                        <div class="view-detail-card">
-                            <span class="label">Price</span>
-                            <span class="value" id="view-prod-price"></span>
-                        </div>
-                        <div class="view-detail-card">
-                            <span class="label">Stock</span>
-                            <span class="value" id="view-prod-stock"></span>
-                        </div>
-                        <div class="view-detail-card">
-                            <span class="label">Company</span>
-                            <span class="value" id="view-prod-company"></span>
-                        </div>
-                    </div>
-
-                    <div class="view-detail-box">
-                        <span class="label">Description</span>
-                        <p id="view-prod-desc"></p>
-                    </div>
-
-                    <div class="view-detail-box" id="view-prod-video-box" hidden>
-                        <span class="label">Video</span>
-                        <p><a id="view-prod-video" href="#" target="_blank" rel="noopener">Ver video</a></p>
-                    </div>
+                        <!-- Demás pestañas -->
+                        <div class="tab-pane fade" id="v-pills-order" role="tabpanel">...</div>
+                        <div class="tab-pane fade" id="v-pills-wishlist" role="tabpanel">...</div>
+                        <div class="tab-pane fade" id="v-pills-address" role="tabpanel">...</div>
+                        <div class="tab-pane fade" id="v-pills-review" role="tabpanel">...</div>
+                        <div class="tab-pane fade" id="v-pills-password" role="tabpanel">...</div>
+                        <div class="tab-pane fade" id="v-pills-ticket" role="tabpanel">...</div>
 
                     <div class="login-btn text-center">
                         <a href="#" onclick="modalAction('.view-product-modal')" class="shop-btn"
@@ -422,370 +431,49 @@
                 </div>
             </div>
         </div>
+    </section>
+    <!--------------- user-profile-section-end --------------->
 
-        <!-- ================= Tabla de productos (se llena con JS) ================= -->
-        <table>
-            <tbody id="products-table-body">
-                <tr class="table-row table-top-row">
-                    <td class="table-wrapper wrapper-product"><h5 class="table-heading">PRODUCT</h5></td>
-                    <td class="table-wrapper"><div class="table-wrapper-center"><h5 class="table-heading">PRICE</h5></div></td>
-                    <td class="table-wrapper"><div class="table-wrapper-center"><h5 class="table-heading">STOCK</h5></div></td>
-                    <td class="table-wrapper wrapper-total"><div class="table-wrapper-center"><h5 class="table-heading">EMPRESA</h5></div></td>
-                    <td class="table-wrapper"><div class="table-wrapper-center"><h5 class="table-heading">ACTIONS</h5></div></td>
-                </tr>
-                <!-- Las filas se generan con JavaScript -->
-            </tbody>
-        </table>
-    </div>
-</div>
+    <!-- SCRIPT DE ELIMINACIÓN CON SUPABASE (preparado) -->
+    <script>
+    async function eliminarProducto(idProducto) {
+        const confirmar = confirm("¿Estás seguro de que deseas eliminar este producto de la base de datos?");
+        
+        if (!confirmar) return; // Si el usuario cancela, detenemos la función
 
-<script>
-(function () {
-    'use strict';
+        try {
+            // ==========================================
+            // CÓDIGO SUPABASE (Descomentar cuando esté listo)
+            // ==========================================
+            /*
+            const { data, error } = await supabase
+                .from('nombre_de_tu_tabla') // <-- Cambia esto por tu tabla real de productos
+                .delete()
+                .eq('id', idProducto);
 
-    /* ---------- Configuración ---------- */
-    var API_URL = <?= json_encode(url('api/productos.php')) ?>;
-    var FALLBACK_IMG = 'assets/images/homepage-one/product-img/product-img-1.webp';
-    var EMPRESAS = {
-        1: 'Dope Prints',
-        3: 'NOVACUT'
-    };
-
-    var products = [];
-    var loadError = '';
-
-    /* ---------- Referencias al DOM ---------- */
-    var tbody        = document.getElementById('products-table-body');
-    var inputBuscar  = document.getElementById('buscar-producto');
-    var selectFiltro = document.getElementById('empresa-producto');
-    var mensaje      = document.getElementById('mensaje-busqueda-productos');
-
-    var f = {
-        id:     document.getElementById('prodid'),
-        name:   document.getElementById('prodname'),
-        price:  document.getElementById('prodprice'),
-        stock:  document.getElementById('prodstock'),
-        img:    document.getElementById('prodimg'),
-        video:  document.getElementById('prodvideo'),
-        desc:   document.getElementById('proddesc'),
-        title:  document.getElementById('product-modal-title')
-    };
-
-    /* ---------- Utilidades ---------- */
-    function escapeHtml(str) {
-        return String(str).replace(/[&<>"']/g, function (c) {
-            return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
-        });
-    }
-
-    function money(n) {
-        return '$' + Number(n).toFixed(2);
-    }
-
-    function companyName(id) {
-        if (id === null || id === undefined || id === '') return 'Sin empresa';
-        return EMPRESAS[Number(id)] || ('Empresa #' + id);
-    }
-
-    function findProduct(id) {
-        for (var i = 0; i < products.length; i++) {
-            if (products[i].id === id) return products[i];
-        }
-        return null;
-    }
-
-    function normalizarProducto(p) {
-        return {
-            id: Number(p.id),
-            name: p.nombre || 'Sin nombre',
-            price: Number(p.precio) || 0,
-            stock: Number(p.stock) || 0,
-            companyId: p.empresa_id === null || p.empresa_id === undefined ? null : Number(p.empresa_id),
-            img: p.url_imagen || FALLBACK_IMG,
-            video: p.url_video || '',
-            desc: p.descripcion || 'Sin descripción.',
-            rating: p.calificacion
-        };
-    }
-
-    async function apiRequest(url, options) {
-        options = options || {};
-        options.headers = Object.assign({
-            'Accept': 'application/json'
-        }, options.headers || {});
-
-        var response = await fetch(url, options);
-        var data = await response.json().catch(function () {
-            return {};
-        });
-
-        if (!response.ok) {
-            throw new Error(data.message || 'No se pudo completar la operación.');
-        }
-
-        return data;
-    }
-
-    /* ---------- Filtro de empresas ---------- */
-    function fillCompanyFilter() {
-        var current = selectFiltro.value;
-        var ids = [];
-
-        products.forEach(function (p) {
-            if (p.companyId !== null && ids.indexOf(p.companyId) === -1) {
-                ids.push(p.companyId);
+            if (error) {
+                throw error; // Lanza el error al bloque catch
             }
-        });
+            */
 
-        ids.sort(function (a, b) { return a - b; });
+            // ==========================================
+            // LÓGICA DEL FRONTEND (Se ejecuta si Supabase responde bien)
+            // ==========================================
+            
+            console.log("Simulando eliminación en BD del producto con ID:", idProducto);
 
-        selectFiltro.innerHTML = '<option value="">Todas las empresas</option>' +
-            ids.map(function (id) {
-                return '<option value="' + id + '">' + escapeHtml(companyName(id)) + '</option>';
-            }).join('');
-
-        selectFiltro.value = ids.some(function (id) {
-            return String(id) === current;
-        }) ? current : '';
-    }
-
-    /* ---------- Render de la tabla ---------- */
-    function render() {
-        var text = inputBuscar.value.trim().toLowerCase();
-        var empresa = selectFiltro.value;
-
-        var list = products.filter(function (p) {
-            var okName = p.name.toLowerCase().indexOf(text) !== -1;
-            var okEmpresa = !empresa || String(p.companyId) === empresa;
-            return okName && okEmpresa;
-        });
-
-        // Conserva la fila de encabezados (la primera)
-        var header = tbody.querySelector('.table-top-row');
-        tbody.innerHTML = '';
-        tbody.appendChild(header);
-
-        if (loadError) {
-            var errorRow = document.createElement('tr');
-            errorRow.className = 'table-row sin-resultados';
-            errorRow.innerHTML = '<td colspan="5">' + escapeHtml(loadError) + '</td>';
-            tbody.appendChild(errorRow);
-            mensaje.textContent = loadError;
-            return;
-        }
-
-        if (!list.length) {
-            var empty = document.createElement('tr');
-            empty.className = 'table-row sin-resultados';
-            empty.innerHTML = '<td colspan="5">No se encontraron productos.</td>';
-            tbody.appendChild(empty);
-        }
-
-        list.forEach(function (p) {
-            var tr = document.createElement('tr');
-            tr.className = 'table-row ticket-row';
-            tr.innerHTML =
-                '<td class="table-wrapper wrapper-product">' +
-                    '<div class="wrapper">' +
-                        '<div class="wrapper-img"><img src="' + escapeHtml(p.img) + '" alt="Imagen del producto"></div>' +
-                        '<div class="wrapper-content"><h5 class="heading">' + escapeHtml(p.name) + '</h5></div>' +
-                    '</div>' +
-                '</td>' +
-                '<td class="table-wrapper"><div class="table-wrapper-center"><h5 class="heading">' + money(p.price) + '</h5></div></td>' +
-                '<td class="table-wrapper"><div class="table-wrapper-center"><h5 class="heading">' + p.stock + '</h5></div></td>' +
-                '<td class="table-wrapper wrapper-total"><div class="table-wrapper-center">' +
-                    '<h5 class="heading">' + escapeHtml(companyName(p.companyId)) + '</h5>' +
-                '</div></td>' +
-                '<td class="table-wrapper">' +
-                    '<div class="table-wrapper-center" style="display:flex; gap:10px; justify-content:center;">' +
-                        '<a href="#" data-action="view" data-id="' + p.id + '" title="View">' +
-                            '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>' +
-                        '</a>' +
-                        '<a href="#" data-action="edit" data-id="' + p.id + '" title="Edit">' +
-                            '<svg width="14" height="14" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 2L16 7M2 16H7L16.5 6.5C17.3284 5.67157 17.3284 4.32843 16.5 3.5V3.5C15.6716 2.67157 14.3284 2.67157 13.5 3.5L4 13V16H2V14Z" stroke="#2D3748" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
-                        '</a>' +
-                        '<a href="#" data-action="delete" data-id="' + p.id + '" title="Delete">' +
-                            '<svg width="14" height="14" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.7879 5.95508C14.7102 6.91333 14.6353 7.84896 14.5582 8.7853C14.3801 10.9315 14.2028 13.0776 14.0219 15.2238C13.9604 15.9503 13.9208 16.6802 13.8176 17.4018C13.7074 18.1756 13.0827 18.719 12.3039 18.7225C9.39528 18.7352 6.48733 18.7367 3.57867 18.7218C2.71582 18.7176 2.09748 18.0823 2.01904 17.158C1.79291 14.4959 1.58161 11.8332 1.36254 9.17114C1.28269 8.19735 1.19859 7.22426 1.11733 6.25117C1.10955 6.15931 1.10673 6.06744 1.10107 5.95578C5.66688 5.95508 10.2171 5.95508 14.7879 5.95508Z" fill="#EB5757"/></svg>' +
-                        '</a>' +
-                    '</div>' +
-                '</td>';
-
-            var rowImg = tr.querySelector('img');
-            if (rowImg) {
-                rowImg.addEventListener('error', function () {
-                    rowImg.onerror = null;
-                    rowImg.src = FALLBACK_IMG;
-                });
+            // Remover la fila del HTML usando el ID que le asignamos al <tr>
+            const filaProducto = document.getElementById('producto-' + idProducto);
+            if (filaProducto) {
+                filaProducto.remove();
             }
 
-            tbody.appendChild(tr);
-        });
+            // Mostrar confirmación
+            alert("El producto fue eliminado exitosamente.");
 
-        if (!text && !empresa) {
-            mensaje.textContent = 'Escribe un nombre para buscar productos.';
-        } else {
-            mensaje.textContent = list.length + (list.length === 1 ? ' producto encontrado.' : ' productos encontrados.');
-        }
-    }
-
-    /* ---------- Cargar productos desde Supabase ---------- */
-    async function loadProducts() {
-        loadError = '';
-        mensaje.textContent = 'Cargando productos...';
-        tbody.setAttribute('aria-busy', 'true');
-
-        try {
-            var data = await apiRequest(API_URL);
-            products = (Array.isArray(data) ? data : []).map(normalizarProducto);
-            fillCompanyFilter();
         } catch (error) {
-            products = [];
-            loadError = error.message || 'No se pudieron cargar los productos.';
-            fillCompanyFilter();
-        } finally {
-            tbody.removeAttribute('aria-busy');
-        }
-
-        render();
-    }
-
-    /* ---------- Ver producto ---------- */
-    async function openView(p) {
-        try {
-            var data = await apiRequest(API_URL + '?id=' + encodeURIComponent(p.id));
-            var producto = normalizarProducto(data);
-
-            document.getElementById('view-prod-img').src = producto.img || FALLBACK_IMG;
-            document.getElementById('view-prod-name').textContent  = producto.name;
-            document.getElementById('view-prod-price').textContent = money(producto.price);
-            document.getElementById('view-prod-stock').textContent = producto.stock;
-            document.getElementById('view-prod-company').textContent = companyName(producto.companyId);
-            document.getElementById('view-prod-desc').textContent  = producto.desc;
-
-            var badge = document.getElementById('view-prod-status');
-            badge.textContent = 'Publicado';
-            badge.classList.remove('inactive');
-
-            var videoBox = document.getElementById('view-prod-video-box');
-            var videoLink = document.getElementById('view-prod-video');
-            if (producto.video) {
-                videoLink.href = producto.video;
-                videoLink.textContent = 'Abrir video';
-                videoBox.hidden = false;
-            } else {
-                videoLink.removeAttribute('href');
-                videoBox.hidden = true;
-            }
-
-            modalAction('.view-product-modal');
-        } catch (error) {
-            alert(error.message || 'No se pudo consultar el producto.');
+            console.error("Error al eliminar en Supabase:", error);
+            alert("Hubo un problema al eliminar el producto. Revisa la consola.");
         }
     }
-
-    /* ---------- Editar producto: precarga el formulario ---------- */
-    function openEdit(p) {
-        f.title.textContent = 'Edit Product';
-        f.id.value     = p.id;
-        f.name.value   = p.name;
-        f.price.value  = p.price;
-        f.stock.value  = p.stock;
-        f.img.value    = p.img === FALLBACK_IMG ? '' : p.img;
-        f.video.value  = p.video;
-        f.desc.value   = p.desc === 'Sin descripción.' ? '' : p.desc;
-
-        modalAction('.product-modal');
-    }
-
-    /* ---------- Guardar cambios con PATCH ---------- */
-    async function saveProduct(e) {
-        e.preventDefault();
-
-        var id    = parseInt(f.id.value, 10);
-        var name  = f.name.value.trim();
-        var desc  = f.desc.value.trim();
-        var price = parseFloat(f.price.value);
-        var stock = parseInt(f.stock.value, 10);
-
-        if (!id || !name || isNaN(price) || isNaN(stock) || price < 0 || stock < 0) {
-            alert('Completa el nombre, precio y stock con valores válidos.');
-            return;
-        }
-
-        try {
-            await apiRequest(API_URL, {
-                method: 'PATCH',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    id: id,
-                    nombre: name,
-                    precio: price,
-                    stock: stock,
-                    descripcion: desc,
-                    url_imagen: f.img.value.trim(),
-                    url_video: f.video.value.trim()
-                })
-            });
-
-            modalAction('.product-modal');
-            await loadProducts();
-        } catch (error) {
-            alert(error.message || 'No se pudo actualizar el producto.');
-        }
-    }
-
-    /* ---------- Eliminar producto con DELETE ---------- */
-    async function deleteProduct(p) {
-        if (!confirm('Delete "' + p.name + '"? Su imagen y video también se eliminarán si ningún otro producto los usa.')) return;
-
-        try {
-            await apiRequest(API_URL + '?id=' + encodeURIComponent(p.id), {
-                method: 'DELETE'
-            });
-
-            await loadProducts();
-        } catch (error) {
-            alert(error.message || 'No se pudo eliminar el producto.');
-        }
-    }
-
-    /* ---------- Eventos ---------- */
-    // Delegación: un solo listener para ver / editar / eliminar
-    tbody.addEventListener('click', function (e) {
-        var link = e.target.closest('a[data-action]');
-        if (!link) return;
-        e.preventDefault();
-
-        var p = findProduct(parseInt(link.getAttribute('data-id'), 10));
-        if (!p) return;
-
-        var action = link.getAttribute('data-action');
-        if (action === 'view')   openView(p);
-        if (action === 'edit')   openEdit(p);
-        if (action === 'delete') deleteProduct(p);
-    });
-
-    document.getElementById('btn-save-product').addEventListener('click', saveProduct);
-    inputBuscar.addEventListener('input', render);
-    selectFiltro.addEventListener('change', render);
-    document.addEventListener('producto:creado', loadProducts);
-
-    /* ---------- Inicio ---------- */
-    loadProducts();
-})();
-</script>
-
-                    <!-- Demás pestañas: pega aquí tu contenido original -->
-                    <div class="tab-pane fade" id="v-pills-order" role="tabpanel" aria-labelledby="v-pills-order-tab" tabindex="0"><!-- Order --></div>
-                    <div class="tab-pane fade" id="v-pills-wishlist" role="tabpanel" aria-labelledby="v-pills-wishlist-tab" tabindex="0"><!-- Wishlist --></div>
-                    <div class="tab-pane fade" id="v-pills-address" role="tabpanel" aria-labelledby="v-pills-address-tab" tabindex="0"><!-- Address --></div>
-                    <div class="tab-pane fade" id="v-pills-review" role="tabpanel" aria-labelledby="v-pills-review-tab" tabindex="0"><!-- Reviews --></div>
-                    <div class="tab-pane fade" id="v-pills-password" role="tabpanel" aria-labelledby="v-pills-password-tab" tabindex="0"><!-- Change Password --></div>
-                    <div class="tab-pane fade" id="v-pills-ticket" role="tabpanel" aria-labelledby="v-pills-ticket-tab" tabindex="0"><!-- Support Ticket --></div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--------------- user-profile-section-end ---------------->
+    </script>
