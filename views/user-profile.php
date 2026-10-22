@@ -211,17 +211,17 @@
                         <!-- TU CONTENIDO DE PAYMENT (el original no lo incluía) -->
                     </div>
 
-                    <!-- ===== PESTAÑA MANAGE PRODUCTS (completa) ===== -->
+<!-- ===== PESTAÑA MANAGE PRODUCTS (reemplaza solo este bloque) ===== -->
 <div class="tab-pane fade" id="v-pills-products" role="tabpanel"
     aria-labelledby="v-pills-products-tab" tabindex="0">
     <div class="cart-section">
-        <div class="d-flex justify-content-between align-items-center mb-4">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
             <h5 class="heading">Product Management</h5>
             <button type="button" class="shop-btn" data-ap-open>Agregar productos</button>
         </div>
         <?php include __DIR__ . '/agregar_producto.php'; ?>
 
-        <!-- Filtros: búsqueda por nombre y categoría -->
+        <!-- Filtros: búsqueda por nombre y empresa -->
         <section class="filtros-productos" id="filtros-busqueda-productos">
             <div class="filtro-campo filtro-busqueda">
                 <label for="buscar-producto">
@@ -293,7 +293,6 @@
                 display: inline-block; padding: 4px 12px; background: #ecfdf5; color: #059669;
                 font-size: 12px; font-weight: 600; border-radius: 20px;
             }
-            .view-product-badge.inactive { background: #fef2f2; color: #dc2626; }
             .view-details-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px; }
             .view-detail-card {
                 background: #f8fafc; padding: 14px; border-radius: 14px;
@@ -303,14 +302,183 @@
                 display: block; font-size: 11px; color: #64748b; margin-bottom: 6px;
                 text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;
             }
-            .view-detail-card span.value { font-size: 16px; color: #0f172a; font-weight: 700; }
+            .view-detail-card span.value { font-size: 16px; color: #0f172a; font-weight: 700; word-break: break-word; }
             .view-detail-box {
                 background: #f8fafc; padding: 18px; border-radius: 14px;
                 border: 1px solid #f1f5f9; margin-bottom: 25px;
             }
-            .view-detail-box p { margin: 0; font-size: 14px; color: #334155; line-height: 1.6; }
+            .view-detail-box p { margin: 0; font-size: 14px; color: #334155; line-height: 1.6; word-break: break-word; }
 
             .sin-resultados td { text-align: center; padding: 30px; color: #8d7b52; }
+
+            /* ---------- CRUD de productos: diseño (todo limitado a esta pestaña) ----------
+               Se adapta al ancho REAL disponible (no al de la ventana), así que
+               funciona igual con o sin el menú lateral. */
+            #v-pills-products .pm-scope { container-name: pm; container-type: inline-size; min-width: 0; }
+
+            #v-pills-products .pm-card {
+                background: #fff; border: 1px solid #e8ebf3; border-radius: 18px;
+                box-shadow: 0 1px 2px rgba(16, 24, 40, .04), 0 10px 28px rgba(16, 24, 40, .05);
+                overflow: hidden;
+            }
+            #v-pills-products .pm-card-head {
+                display: flex; align-items: center; justify-content: space-between; gap: 12px;
+                padding: 16px 20px; border-bottom: 1px solid #e8ebf3;
+            }
+            #v-pills-products .pm-card-title { font-size: 16px; font-weight: 700; color: #1f2937; }
+            #v-pills-products .pm-count {
+                padding: 3px 12px; border-radius: 999px; background: #f1f5f9; color: #475569;
+                font-size: 12px; font-weight: 600; white-space: nowrap;
+            }
+
+            #v-pills-products .pm-table { width: 100%; table-layout: fixed; border-collapse: collapse; margin: 0; }
+            #v-pills-products .pm-table td {
+                min-width: 0; padding: 16px 14px; vertical-align: middle; text-align: left;
+                background: transparent; border: 0; border-bottom: 1px solid #eef0f6;
+                overflow-wrap: anywhere; word-break: break-word;
+            }
+            #v-pills-products .pm-table .table-top-row td { background: #f7f8fc; padding: 12px 14px; border-bottom: 1px solid #e8ebf3; }
+            #v-pills-products .pm-table .table-heading { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: .4px; color: #64748b;
+                white-space: nowrap; overflow-wrap: normal; word-break: normal; }
+            #v-pills-products .pm-table .table-wrapper-center { display: flex; align-items: center; justify-content: flex-start; }
+            /* El fondo y el resaltado los controla la FILA completa; las celdas siempre transparentes */
+            #v-pills-products .pm-table tr.ticket-row {
+                background: #fff; border: 0; box-shadow: none; transform: none; margin: 0; padding: 0;
+                transition: background .15s;
+            }
+            #v-pills-products .pm-table tr.ticket-row:hover { background: #fafbff; }
+            #v-pills-products .pm-table tr.ticket-row td,
+            #v-pills-products .pm-table tr.ticket-row:hover td,
+            #v-pills-products .pm-table tr.table-top-row td {
+                background: transparent; box-shadow: none; transform: none; margin: 0; height: auto;
+            }
+            #v-pills-products .pm-table tr.table-top-row { background: #f7f8fc; }
+
+            /* Distribución en cuadrícula: los anchos de las columnas son fijos y no dependen del tema */
+            #v-pills-products .pm-table { --pm-cols: minmax(0, 1fr) 120px 140px 100px 252px; }
+            #v-pills-products .pm-table,
+            #v-pills-products .pm-table tbody { display: block; width: 100%; }
+            #v-pills-products .pm-table colgroup { display: none; }
+            #v-pills-products .pm-table tr.table-top-row,
+            #v-pills-products .pm-table tr.ticket-row { display: grid; grid-template-columns: var(--pm-cols); align-items: stretch; }
+            #v-pills-products .pm-table tr.table-top-row td,
+            #v-pills-products .pm-table tr.ticket-row td { width: auto; min-width: 0; }
+            #v-pills-products .pm-table tr.sin-resultados { display: block; }
+            #v-pills-products .pm-table .pm-extra:not([hidden]) { display: block; }
+            #v-pills-products .pm-table .pm-extra td { display: block; width: 100%; box-sizing: border-box; }
+
+            /* Producto: imagen + nombre */
+            #v-pills-products .pm-table .wrapper { display: flex; align-items: center; gap: 14px; min-width: 0; }
+            #v-pills-products .pm-table .wrapper-img { flex: 0 0 60px; width: 60px; height: 60px; margin: 0; }
+            #v-pills-products .pm-table .wrapper-img img {
+                width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 14px;
+                border: 1px solid #eef0f6; background: #f1f5f9;
+            }
+            #v-pills-products .pm-table .wrapper-content { min-width: 0; }
+            #v-pills-products .pm-table h5.heading { margin: 0; font-size: 15px; font-weight: 600; line-height: 1.35; color: #1f2937; }
+
+            /* Empresa y calificación */
+            #v-pills-products .pm-chip {
+                display: inline-block; max-width: 100%; padding: 4px 11px; border-radius: 999px;
+                background: #fdf6e7; color: #8a5d0c; font-size: 13px; font-weight: 600; line-height: 1.4;
+            }
+            #v-pills-products .pm-rating {
+                display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 999px;
+                background: #fffbeb; border: 1px solid #fde68a; color: #92400e;
+                font-size: 13px; font-weight: 700; white-space: nowrap; overflow-wrap: normal; word-break: normal;
+            }
+            #v-pills-products .pm-star { color: #f59e0b; }
+
+            /* Precio */
+            #v-pills-products .pm-price { font-size: 15px; font-weight: 700; color: #1f2937; white-space: nowrap; overflow-wrap: normal; word-break: normal; }
+
+            /* Acciones */
+            #v-pills-products .pm-actions { display: flex; flex-wrap: nowrap; align-items: center; justify-content: flex-start; gap: 8px; min-width: 0; }
+            #v-pills-products .pm-btn {
+                display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; flex: 0 0 36px;
+                border-radius: 10px; border: 1px solid #e5e7eb; background: #fff;
+                transition: background .15s, border-color .15s;
+            }
+            #v-pills-products .pm-btn.view:hover   { background: #eff6ff; border-color: #bfdbfe; }
+            #v-pills-products .pm-btn.edit:hover   { background: #f3f4f6; border-color: #d1d5db; }
+            #v-pills-products .pm-btn.delete:hover { background: #fef2f2; border-color: #fecaca; }
+            #v-pills-products .pm-more {
+                display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 36px; min-width: 84px; padding: 0 14px; flex: 0 0 auto; white-space: nowrap;
+                border-radius: 999px; border: 1px solid #e5e7eb; background: #fff; color: #475569;
+                font-size: 13px; font-weight: 600; cursor: pointer;
+                transition: background .15s, border-color .15s, color .15s;
+            }
+            #v-pills-products .pm-more::after {
+                content: ""; width: 6px; height: 6px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+                transform: rotate(45deg) translateY(-2px); transition: transform .2s;
+            }
+            #v-pills-products .pm-more:hover { background: #f8fafc; }
+            #v-pills-products .pm-more[aria-expanded="true"] { background: #fdf6e7; border-color: #f1d9a8; color: #8a5d0c; }
+            #v-pills-products .pm-more[aria-expanded="true"]::after { transform: rotate(-135deg) translateY(-2px); }
+            #v-pills-products .pm-btn:focus-visible,
+            #v-pills-products .pm-more:focus-visible { outline: 2px solid #f1bb63; outline-offset: 2px; }
+
+            /* Panel "Más" */
+            #v-pills-products .pm-extra[hidden] { display: none; }
+            #v-pills-products .pm-extra td { background: #f9fafd; padding: 18px 20px; border-bottom: 1px solid #e8ebf3; }
+            #v-pills-products .pm-extra-grid {
+                display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px;
+                animation: pmOpen .2s ease-out;
+            }
+            #v-pills-products .pm-extra-item { background: #fff; border: 1px solid #e8ebf3; border-radius: 12px; padding: 12px 14px; min-width: 0; }
+            #v-pills-products .pm-extra-item .label { display: block; margin-bottom: 4px; font-size: 12px; font-weight: 600; color: #64748b; }
+            #v-pills-products .pm-extra-item .value { font-size: 14px; color: #0f172a; overflow-wrap: anywhere; word-break: break-all; }
+            #v-pills-products .pm-extra-item a { color: #2563eb; text-decoration: underline; }
+            #v-pills-products .pm-extra-item .value.pm-extra-text { word-break: normal; overflow-wrap: anywhere; line-height: 1.6; color: #334155; }
+            #v-pills-products .pm-extra-wide { grid-column: 1 / -1; }
+            @keyframes pmOpen { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+            @media (prefers-reduced-motion: reduce) {
+                #v-pills-products .pm-extra-grid { animation: none; }
+                #v-pills-products .pm-more::after, #v-pills-products .pm-btn, #v-pills-products .pm-more { transition: none; }
+            }
+
+            /* Sin resultados / error */
+            #v-pills-products .pm-table .sin-resultados td { text-align: center; padding: 44px 14px; color: #8d7b52; }
+            #v-pills-products .pm-table .sin-resultados strong { display: block; margin-bottom: 4px; font-size: 15px; color: #564d24; }
+            #v-pills-products .pm-table .sin-resultados span { font-size: 13px; }
+
+            /* ---- Modo tabla: celdas con el alto de la fila y contenido centrado ---- */
+            @container pm (min-width: 860px) {
+                #v-pills-products .pm-table tr.ticket-row td,
+                #v-pills-products .pm-table tr.table-top-row td { display: flex; align-items: center; }
+                #v-pills-products .pm-table tr.ticket-row td .wrapper,
+                #v-pills-products .pm-table tr.ticket-row td .table-wrapper-center { min-width: 0; }
+            }
+
+            /* ---- Poco espacio: cada producto es una tarjeta ---- */
+            @container pm (max-width: 859px) {
+                #v-pills-products .pm-card { background: transparent; border: 0; box-shadow: none; border-radius: 0; overflow: visible; }
+                #v-pills-products .pm-card-head { padding: 0 2px 12px; border-bottom: 0; }
+
+                #v-pills-products .pm-table,
+                #v-pills-products .pm-table tbody { display: block; width: 100%; }
+                #v-pills-products .pm-table colgroup,
+                #v-pills-products .pm-table tr.table-top-row { display: none; }
+
+                #v-pills-products .pm-table tr.ticket-row {
+                    display: flex; flex-wrap: wrap; align-items: center;
+                    background: #fff; border: 1px solid #e8ebf3; border-radius: 16px;
+                    padding: 6px 0 0; margin-bottom: 12px; box-shadow: 0 1px 2px rgba(16, 24, 40, .04);
+                }
+                #v-pills-products .pm-table .ticket-row td { display: block; width: auto; border: 0; padding: 6px 16px; }
+                #v-pills-products .pm-table .ticket-row:hover td { background: transparent; }
+                #v-pills-products .pm-table .ticket-row td.wrapper-product { flex: 1 0 100%; padding-top: 12px; }
+                #v-pills-products .pm-table .ticket-row td.pm-td-act {
+                    flex: 1 0 100%; margin-top: 6px; padding: 12px 16px; border-top: 1px solid #eef0f6;
+                }
+
+                #v-pills-products .pm-table .pm-extra:not([hidden]) { display: block; margin: -6px 0 12px; background: #f9fafd; border: 1px solid #e8ebf3; border-radius: 16px; }
+                #v-pills-products .pm-table .pm-extra td { display: block; width: 100%; border: 0; padding: 14px; box-sizing: border-box; }
+                #v-pills-products .pm-extra-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+                #v-pills-products .pm-table .sin-resultados { display: block; }
+                #v-pills-products .pm-table .sin-resultados td { display: block; width: 100%; background: #fff; border: 1px solid #e8ebf3; border-radius: 16px; box-sizing: border-box; }
+            }
 
             @media (max-width: 650px) {
                 .filtros-productos { grid-template-columns: 1fr; padding: 16px; gap: 16px; }
@@ -320,13 +488,13 @@
             }
         </style>
 
-        <!-- ================= Modal Crear/Editar Producto ================= -->
+        <!-- ================= Modal Editar Producto ================= -->
         <div class="modal-wrapper product-modal">
             <div onclick="modalAction('.product-modal')" class="anywhere-away"></div>
             <div class="login-section account-section modal-main">
                 <div class="review-form">
                     <div class="review-content">
-                        <h5 class="comment-title" id="product-modal-title">Edit Product</h5>
+                        <h5 class="comment-title" id="product-modal-title">Editar</h5>
                         <div class="close-btn">
                             <img src="assets/images/homepage-one/close-btn.png"
                                 onclick="modalAction('.product-modal')" alt="close-btn">
@@ -342,25 +510,35 @@
                     </div>
                     <div class="account-inner-form">
                         <div class="review-form-name">
+                            <label for="prodempresa" class="form-label">Company*</label>
+                            <select id="prodempresa" class="form-control"></select>
+                        </div>
+                        <div class="review-form-name">
+                            <label for="prodresena" class="form-label">Review ID</label>
+                            <input type="number" id="prodresena" class="form-control" placeholder="0" min="0">
+                        </div>
+                    </div>
+                    <div class="account-inner-form">
+                        <div class="review-form-name">
                             <label for="prodprice" class="form-label">Price ($)*</label>
                             <input type="number" id="prodprice" class="form-control" placeholder="0.00" step="0.01" min="0">
                         </div>
                         <div class="review-form-name">
-                            <label for="prodstock" class="form-label">Stock*</label>
-                            <input type="number" id="prodstock" class="form-control" placeholder="0" min="0">
+                            <label for="prodrating" class="form-label">Rating (0-5)*</label>
+                            <input type="number" id="prodrating" class="form-control" placeholder="0.0" step="0.1" min="0" max="5">
                         </div>
-                    </div>
-                    <div class="review-form-name address-form">
-                        <label for="prodimg" class="form-label">Image URL</label>
-                        <input type="url" id="prodimg" class="form-control" placeholder="https://ejemplo.com/imagen.jpg">
-                    </div>
-                    <div class="review-form-name address-form">
-                        <label for="prodvideo" class="form-label">Video URL</label>
-                        <input type="url" id="prodvideo" class="form-control" placeholder="https://...">
                     </div>
                     <div class="review-form-name address-form">
                         <label for="proddesc" class="form-label">Description*</label>
                         <textarea id="proddesc" cols="10" rows="3" class="form-control" placeholder="Write product description"></textarea>
+                    </div>
+                    <div class="review-form-name address-form">
+                        <label for="prodimg" class="form-label">Image URL</label>
+                        <input type="text" id="prodimg" class="form-control" placeholder="https://...">
+                    </div>
+                    <div class="review-form-name address-form">
+                        <label for="prodvideo" class="form-label">Video URL</label>
+                        <input type="text" id="prodvideo" class="form-control" placeholder="https://...">
                     </div>
                     <div class="login-btn text-center">
                         <a href="#" id="btn-save-product" class="shop-btn">Save Product</a>
@@ -386,7 +564,7 @@
                         <img src="assets/images/homepage-one/product-img/product-img-1.webp" alt="Product" class="view-product-thumb" id="view-prod-img">
                         <div class="view-product-title-area">
                             <h4 id="view-prod-name"></h4>
-                            <span class="view-product-badge" id="view-prod-status">Active</span>
+                            <span class="view-product-badge" id="view-prod-rating"></span>
                         </div>
                     </div>
 
@@ -396,12 +574,12 @@
                             <span class="value" id="view-prod-price"></span>
                         </div>
                         <div class="view-detail-card">
-                            <span class="label">Stock</span>
-                            <span class="value" id="view-prod-stock"></span>
+                            <span class="label">Company</span>
+                            <span class="value" id="view-prod-empresa"></span>
                         </div>
                         <div class="view-detail-card">
-                            <span class="label">Company</span>
-                            <span class="value" id="view-prod-company"></span>
+                            <span class="label">Review ID</span>
+                            <span class="value" id="view-prod-resena"></span>
                         </div>
                     </div>
 
@@ -424,18 +602,33 @@
         </div>
 
         <!-- ================= Tabla de productos (se llena con JS) ================= -->
-        <table>
-            <tbody id="products-table-body">
-                <tr class="table-row table-top-row">
-                    <td class="table-wrapper wrapper-product"><h5 class="table-heading">PRODUCT</h5></td>
-                    <td class="table-wrapper"><div class="table-wrapper-center"><h5 class="table-heading">PRICE</h5></div></td>
-                    <td class="table-wrapper"><div class="table-wrapper-center"><h5 class="table-heading">STOCK</h5></div></td>
-                    <td class="table-wrapper wrapper-total"><div class="table-wrapper-center"><h5 class="table-heading">EMPRESA</h5></div></td>
-                    <td class="table-wrapper"><div class="table-wrapper-center"><h5 class="table-heading">ACTIONS</h5></div></td>
-                </tr>
-                <!-- Las filas se generan con JavaScript -->
-            </tbody>
-        </table>
+        <div class="pm-scope">
+            <div class="pm-card">
+                <div class="pm-card-head">
+                    <span class="pm-card-title">Listado de productos</span>
+                    <span class="pm-count" id="pm-count">0 productos</span>
+                </div>
+                <table class="pm-table">
+                    <colgroup>
+                        <col>
+                        <col style="width:130px">
+                        <col style="width:152px">
+                        <col style="width:100px">
+                        <col style="width:252px">
+                    </colgroup>
+                    <tbody id="products-table-body">
+                        <tr class="table-row table-top-row">
+                            <td class="table-wrapper wrapper-product"><h5 class="table-heading">PRODUCTO</h5></td>
+                            <td class="table-wrapper"><div class="table-wrapper-center"><h5 class="table-heading">EMPRESA</h5></div></td>
+                            <td class="table-wrapper"><div class="table-wrapper-center"><h5 class="table-heading">CALIFICACIÓN</h5></div></td>
+                            <td class="table-wrapper"><div class="table-wrapper-center"><h5 class="table-heading">PRECIO</h5></div></td>
+                            <td class="table-wrapper"><div class="table-wrapper-center"><h5 class="table-heading">ACCIONES</h5></div></td>
+                        </tr>
+                        <!-- Las filas se generan con JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -448,7 +641,7 @@
     var FALLBACK_IMG = 'assets/images/homepage-one/product-img/product-img-1.webp';
     var EMPRESAS = {
         1: 'Dope Prints',
-        3: 'NOVACUT'
+        3: 'NOVACUT',
     };
 
     var products = [];
@@ -459,84 +652,83 @@
     var inputBuscar  = document.getElementById('buscar-producto');
     var selectFiltro = document.getElementById('empresa-producto');
     var mensaje      = document.getElementById('mensaje-busqueda-productos');
+    var countEl      = document.getElementById('pm-count');
 
     var f = {
-        id:     document.getElementById('prodid'),
-        name:   document.getElementById('prodname'),
-        price:  document.getElementById('prodprice'),
-        stock:  document.getElementById('prodstock'),
-        img:    document.getElementById('prodimg'),
-        video:  document.getElementById('prodvideo'),
-        desc:   document.getElementById('proddesc'),
-        title:  document.getElementById('product-modal-title')
+        id:      document.getElementById('prodid'),
+        name:    document.getElementById('prodname'),
+        empresa: document.getElementById('prodempresa'),
+        resena:  document.getElementById('prodresena'),
+        price:   document.getElementById('prodprice'),
+        rating:  document.getElementById('prodrating'),
+        desc:    document.getElementById('proddesc'),
+        img:     document.getElementById('prodimg'),
+        video:   document.getElementById('prodvideo'),
+        title:   document.getElementById('product-modal-title')
     };
 
     /* ---------- Utilidades ---------- */
     function escapeHtml(str) {
-        return String(str).replace(/[&<>"']/g, function (c) {
+        return String(str == null ? '' : str).replace(/[&<>"']/g, function (c) {
             return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
         });
     }
-
-    function money(n) {
-        return '$' + Number(n).toFixed(2);
-    }
-
+    function money(n) { return '$' + Number(n).toFixed(2); }
     function companyName(id) {
         if (id === null || id === undefined || id === '') return 'Sin empresa';
         return EMPRESAS[Number(id)] || ('Empresa #' + id);
     }
-
     function findProduct(id) {
         for (var i = 0; i < products.length; i++) {
             if (products[i].id === id) return products[i];
         }
         return null;
     }
+    function isSafeUrl(u) { return /^(https?:\/\/|assets\/|\/)/i.test(u || ''); }
 
+    /* ---------- Select de empresa del formulario ---------- */
+    function fillEmpresaSelect() {
+        f.empresa.innerHTML = Object.keys(EMPRESAS).map(function (k) {
+            return '<option value="' + k + '">' + escapeHtml(EMPRESAS[k]) + '</option>';
+        }).join('');
+    }
+
+    /* ---------- Normaliza lo que devuelve la API ---------- */
     function normalizarProducto(p) {
         return {
             id: Number(p.id),
             name: p.nombre || 'Sin nombre',
             price: Number(p.precio) || 0,
-            stock: Number(p.stock) || 0,
             companyId: p.empresa_id === null || p.empresa_id === undefined ? null : Number(p.empresa_id),
-            img: p.url_imagen || FALLBACK_IMG,
+            resenaId: (function (r) { return r === null || r === undefined || r === '' ? null : Number(r); })(p.resena_id !== undefined ? p.resena_id : p['reseña_id']),
+            img: p.url_imagen || '',
             video: p.url_video || '',
-            desc: p.descripcion || 'Sin descripción.',
-            rating: p.calificacion
+            desc: p.descripcion || '',
+            rating: Number(p.calificacion) || 0
         };
     }
 
     async function apiRequest(url, options) {
         options = options || {};
-        options.headers = Object.assign({
-            'Accept': 'application/json'
-        }, options.headers || {});
+        options.headers = Object.assign({ 'Accept': 'application/json' }, options.headers || {});
 
         var response = await fetch(url, options);
-        var data = await response.json().catch(function () {
-            return {};
-        });
+        var data = await response.json().catch(function () { return {}; });
 
         if (!response.ok) {
             throw new Error(data.message || 'No se pudo completar la operación.');
         }
-
         return data;
     }
 
-    /* ---------- Filtro de empresas ---------- */
+    /* ---------- Filtro de empresas (según los productos cargados) ---------- */
     function fillCompanyFilter() {
         var current = selectFiltro.value;
         var ids = [];
 
         products.forEach(function (p) {
-            if (p.companyId !== null && ids.indexOf(p.companyId) === -1) {
-                ids.push(p.companyId);
-            }
+            if (p.companyId !== null && ids.indexOf(p.companyId) === -1) ids.push(p.companyId);
         });
-
         ids.sort(function (a, b) { return a - b; });
 
         selectFiltro.innerHTML = '<option value="">Todas las empresas</option>' +
@@ -544,9 +736,25 @@
                 return '<option value="' + id + '">' + escapeHtml(companyName(id)) + '</option>';
             }).join('');
 
-        selectFiltro.value = ids.some(function (id) {
-            return String(id) === current;
-        }) ? current : '';
+        selectFiltro.value = ids.some(function (id) { return String(id) === current; }) ? current : '';
+    }
+
+    /* ---------- Panel "Más": las demás columnas ---------- */
+    function linkOrDash(url) {
+        if (!url) return '—';
+        if (!isSafeUrl(url)) return escapeHtml(url);
+        return '<a href="' + escapeHtml(url) + '" target="_blank" rel="noopener">' + escapeHtml(url) + '</a>';
+    }
+    function extraItem(label, value) {
+        return '<div class="pm-extra-item"><span class="label">' + label + '</span><span class="value">' + escapeHtml(value) + '</span></div>';
+    }
+    function extraHtml(p) {
+        return '<div class="pm-extra-grid">' +
+            extraItem('Reseña', p.resenaId || '—') +
+            '<div class="pm-extra-item pm-extra-wide"><span class="label">Descripción</span><span class="value pm-extra-text">' + escapeHtml(p.desc || 'Sin descripción.') + '</span></div>' +
+            '<div class="pm-extra-item pm-extra-wide"><span class="label">URL de la imagen</span><span class="value">' + linkOrDash(p.img) + '</span></div>' +
+            '<div class="pm-extra-item pm-extra-wide"><span class="label">URL del video</span><span class="value">' + linkOrDash(p.video) + '</span></div>' +
+        '</div>';
     }
 
     /* ---------- Render de la tabla ---------- */
@@ -571,13 +779,14 @@
             errorRow.innerHTML = '<td colspan="5">' + escapeHtml(loadError) + '</td>';
             tbody.appendChild(errorRow);
             mensaje.textContent = loadError;
+            countEl.textContent = '0 productos';
             return;
         }
 
         if (!list.length) {
             var empty = document.createElement('tr');
             empty.className = 'table-row sin-resultados';
-            empty.innerHTML = '<td colspan="5">No se encontraron productos.</td>';
+            empty.innerHTML = '<td colspan="5"><strong>No se encontraron productos.</strong><span>Prueba con otro nombre o empresa.</span></td>';
             tbody.appendChild(empty);
         }
 
@@ -587,29 +796,29 @@
             tr.innerHTML =
                 '<td class="table-wrapper wrapper-product">' +
                     '<div class="wrapper">' +
-                        '<div class="wrapper-img"><img src="' + escapeHtml(p.img) + '" alt="Imagen del producto"></div>' +
+                        '<div class="wrapper-img"><img src="' + escapeHtml(p.img || FALLBACK_IMG) + '" alt="' + escapeHtml(p.name) + '"></div>' +
                         '<div class="wrapper-content"><h5 class="heading">' + escapeHtml(p.name) + '</h5></div>' +
                     '</div>' +
                 '</td>' +
-                '<td class="table-wrapper"><div class="table-wrapper-center"><h5 class="heading">' + money(p.price) + '</h5></div></td>' +
-                '<td class="table-wrapper"><div class="table-wrapper-center"><h5 class="heading">' + p.stock + '</h5></div></td>' +
-                '<td class="table-wrapper wrapper-total"><div class="table-wrapper-center">' +
-                    '<h5 class="heading">' + escapeHtml(companyName(p.companyId)) + '</h5>' +
-                '</div></td>' +
-                '<td class="table-wrapper">' +
-                    '<div class="table-wrapper-center" style="display:flex; gap:10px; justify-content:center;">' +
-                        '<a href="#" data-action="view" data-id="' + p.id + '" title="View">' +
+                '<td class="table-wrapper pm-td-emp" data-label="EMPRESA"><div class="table-wrapper-center"><span class="pm-chip">' + escapeHtml(companyName(p.companyId)) + '</span></div></td>' +
+                '<td class="table-wrapper pm-td-cal" data-label="CALIFICACIÓN"><div class="table-wrapper-center"><span class="pm-rating" aria-label="Rating ' + p.rating.toFixed(1) + ' of 5"><span class="pm-star" aria-hidden="true">★</span>' + p.rating.toFixed(1) + '</span></div></td>' +
+                '<td class="table-wrapper pm-td-price" data-label="PRECIO"><div class="table-wrapper-center"><span class="pm-price">' + money(p.price) + '</span></div></td>' +
+                '<td class="table-wrapper pm-td-act" data-label="ACCIONES">' +
+                    '<div class="pm-actions">' +
+                        '<button type="button" class="pm-more" data-action="more" aria-expanded="false">Más</button>' +
+                        '<a href="#" class="pm-btn view" data-action="view" data-id="' + p.id + '" title="View" aria-label="View">' +
                             '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>' +
                         '</a>' +
-                        '<a href="#" data-action="edit" data-id="' + p.id + '" title="Edit">' +
+                        '<a href="#" class="pm-btn edit" data-action="edit" data-id="' + p.id + '" title="Edit" aria-label="Edit">' +
                             '<svg width="14" height="14" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 2L16 7M2 16H7L16.5 6.5C17.3284 5.67157 17.3284 4.32843 16.5 3.5V3.5C15.6716 2.67157 14.3284 2.67157 13.5 3.5L4 13V16H2V14Z" stroke="#2D3748" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
                         '</a>' +
-                        '<a href="#" data-action="delete" data-id="' + p.id + '" title="Delete">' +
+                        '<a href="#" class="pm-btn delete" data-action="delete" data-id="' + p.id + '" title="Delete" aria-label="Delete">' +
                             '<svg width="14" height="14" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.7879 5.95508C14.7102 6.91333 14.6353 7.84896 14.5582 8.7853C14.3801 10.9315 14.2028 13.0776 14.0219 15.2238C13.9604 15.9503 13.9208 16.6802 13.8176 17.4018C13.7074 18.1756 13.0827 18.719 12.3039 18.7225C9.39528 18.7352 6.48733 18.7367 3.57867 18.7218C2.71582 18.7176 2.09748 18.0823 2.01904 17.158C1.79291 14.4959 1.58161 11.8332 1.36254 9.17114C1.28269 8.19735 1.19859 7.22426 1.11733 6.25117C1.10955 6.15931 1.10673 6.06744 1.10107 5.95578C5.66688 5.95508 10.2171 5.95508 14.7879 5.95508Z" fill="#EB5757"/></svg>' +
                         '</a>' +
                     '</div>' +
                 '</td>';
 
+            // Si la imagen falla, usa la imagen por defecto
             var rowImg = tr.querySelector('img');
             if (rowImg) {
                 rowImg.addEventListener('error', function () {
@@ -618,8 +827,16 @@
                 });
             }
 
+            var extra = document.createElement('tr');
+            extra.className = 'pm-extra';
+            extra.hidden = true;
+            extra.innerHTML = '<td colspan="5">' + extraHtml(p) + '</td>';
+
             tbody.appendChild(tr);
+            tbody.appendChild(extra);
         });
+
+        countEl.textContent = list.length + (list.length === 1 ? ' producto' : ' productos');
 
         if (!text && !empresa) {
             mensaje.textContent = 'Escribe un nombre para buscar productos.';
@@ -628,7 +845,16 @@
         }
     }
 
-    /* ---------- Cargar productos desde Supabase ---------- */
+    /* ---------- Mostrar más / menos ---------- */
+    function toggleMore(btn) {
+        var extra = btn.closest('tr').nextElementSibling;
+        var open = extra.hidden;
+        extra.hidden = !open;
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        btn.textContent = open ? 'Menos' : 'Más';
+    }
+
+    /* ---------- Cargar productos desde la API ---------- */
     async function loadProducts() {
         loadError = '';
         mensaje.textContent = 'Cargando productos...';
@@ -649,50 +875,50 @@
         render();
     }
 
-    /* ---------- Ver producto ---------- */
-    async function openView(p) {
-        try {
-            var data = await apiRequest(API_URL + '?id=' + encodeURIComponent(p.id));
-            var producto = normalizarProducto(data);
+    /* ---------- Ver producto (usa los mismos datos ya cargados de la lista) ---------- */
+    function openView(p) {
+        document.getElementById('view-prod-img').src = p.img || FALLBACK_IMG;
+        document.getElementById('view-prod-name').textContent    = p.name;
+        document.getElementById('view-prod-rating').textContent  = '★ ' + p.rating.toFixed(1);
+        document.getElementById('view-prod-price').textContent   = money(p.price);
+        document.getElementById('view-prod-empresa').textContent = companyName(p.companyId);
+        document.getElementById('view-prod-resena').textContent  = p.resenaId || '—';
+        document.getElementById('view-prod-desc').textContent    = p.desc || 'Sin descripción.';
 
-            document.getElementById('view-prod-img').src = producto.img || FALLBACK_IMG;
-            document.getElementById('view-prod-name').textContent  = producto.name;
-            document.getElementById('view-prod-price').textContent = money(producto.price);
-            document.getElementById('view-prod-stock').textContent = producto.stock;
-            document.getElementById('view-prod-company').textContent = companyName(producto.companyId);
-            document.getElementById('view-prod-desc').textContent  = producto.desc;
-
-            var badge = document.getElementById('view-prod-status');
-            badge.textContent = 'Publicado';
-            badge.classList.remove('inactive');
-
-            var videoBox = document.getElementById('view-prod-video-box');
-            var videoLink = document.getElementById('view-prod-video');
-            if (producto.video) {
-                videoLink.href = producto.video;
-                videoLink.textContent = 'Abrir video';
-                videoBox.hidden = false;
-            } else {
-                videoLink.removeAttribute('href');
-                videoBox.hidden = true;
-            }
-
-            modalAction('.view-product-modal');
-        } catch (error) {
-            alert(error.message || 'No se pudo consultar el producto.');
+        var videoBox  = document.getElementById('view-prod-video-box');
+        var videoLink = document.getElementById('view-prod-video');
+        if (p.video && isSafeUrl(p.video)) {
+            videoLink.href = p.video;
+            videoLink.textContent = 'Abrir video';
+            videoBox.hidden = false;
+        } else {
+            videoLink.removeAttribute('href');
+            videoBox.hidden = true;
         }
+
+        modalAction('.view-product-modal');
     }
 
     /* ---------- Editar producto: precarga el formulario ---------- */
     function openEdit(p) {
+        // Si la empresa del producto no está en la lista, la agrega al select
+        if (p.companyId !== null && !EMPRESAS[p.companyId]) {
+            var opt = document.createElement('option');
+            opt.value = p.companyId;
+            opt.textContent = companyName(p.companyId);
+            f.empresa.appendChild(opt);
+        }
+
         f.title.textContent = 'Edit Product';
-        f.id.value     = p.id;
-        f.name.value   = p.name;
-        f.price.value  = p.price;
-        f.stock.value  = p.stock;
-        f.img.value    = p.img === FALLBACK_IMG ? '' : p.img;
-        f.video.value  = p.video;
-        f.desc.value   = p.desc === 'Sin descripción.' ? '' : p.desc;
+        f.id.value      = p.id;
+        f.name.value    = p.name;
+        f.empresa.value = p.companyId === null ? '' : p.companyId;
+        f.resena.value  = p.resenaId || '';
+        f.price.value   = p.price;
+        f.rating.value  = p.rating;
+        f.desc.value    = p.desc;
+        f.img.value     = p.img;
+        f.video.value   = p.video;
 
         modalAction('.product-modal');
     }
@@ -701,34 +927,39 @@
     async function saveProduct(e) {
         e.preventDefault();
 
-        var id    = parseInt(f.id.value, 10);
-        var name  = f.name.value.trim();
-        var desc  = f.desc.value.trim();
-        var price = parseFloat(f.price.value);
-        var stock = parseInt(f.stock.value, 10);
+        var id     = parseInt(f.id.value, 10);
+        var name   = f.name.value.trim();
+        var desc   = f.desc.value.trim();
+        var price  = parseFloat(f.price.value);
+        var rating = parseFloat(f.rating.value);
 
-        if (!id || !name || isNaN(price) || isNaN(stock) || price < 0 || stock < 0) {
-            alert('Completa el nombre, precio y stock con valores válidos.');
+        if (!id || !name || !desc || isNaN(price) || isNaN(rating) ||
+            price < 0 || rating < 0 || rating > 5) {
+            alert('Completa nombre, precio, calificación (0-5) y descripción con valores válidos.');
             return;
         }
+
+        var payload = {
+            id: id,
+            nombre: name,
+            empresa_id: f.empresa.value ? parseInt(f.empresa.value, 10) : null,
+            resena_id: f.resena.value ? parseInt(f.resena.value, 10) : null,
+            precio: price,
+            calificacion: rating,
+            descripcion: desc,
+            url_imagen: f.img.value.trim(),
+            url_video: f.video.value.trim()
+        };
 
         try {
             await apiRequest(API_URL, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    id: id,
-                    nombre: name,
-                    precio: price,
-                    stock: stock,
-                    descripcion: desc,
-                    url_imagen: f.img.value.trim(),
-                    url_video: f.video.value.trim()
-                })
+                body: JSON.stringify(payload)
             });
 
             modalAction('.product-modal');
-            await loadProducts();
+            await loadProducts();   // vuelve a leer de la BD: la tabla y "Ver" muestran lo guardado
         } catch (error) {
             alert(error.message || 'No se pudo actualizar el producto.');
         }
@@ -739,10 +970,7 @@
         if (!confirm('Delete "' + p.name + '"? Su imagen y video también se eliminarán si ningún otro producto los usa.')) return;
 
         try {
-            await apiRequest(API_URL + '?id=' + encodeURIComponent(p.id), {
-                method: 'DELETE'
-            });
-
+            await apiRequest(API_URL + '?id=' + encodeURIComponent(p.id), { method: 'DELETE' });
             await loadProducts();
         } catch (error) {
             alert(error.message || 'No se pudo eliminar el producto.');
@@ -750,16 +978,18 @@
     }
 
     /* ---------- Eventos ---------- */
-    // Delegación: un solo listener para ver / editar / eliminar
+    // Delegación: un solo listener para más / ver / editar / eliminar
     tbody.addEventListener('click', function (e) {
-        var link = e.target.closest('a[data-action]');
-        if (!link) return;
+        var el = e.target.closest('[data-action]');
+        if (!el) return;
         e.preventDefault();
 
-        var p = findProduct(parseInt(link.getAttribute('data-id'), 10));
+        var action = el.getAttribute('data-action');
+        if (action === 'more') { toggleMore(el); return; }
+
+        var p = findProduct(parseInt(el.getAttribute('data-id'), 10));
         if (!p) return;
 
-        var action = link.getAttribute('data-action');
         if (action === 'view')   openView(p);
         if (action === 'edit')   openEdit(p);
         if (action === 'delete') deleteProduct(p);
@@ -771,6 +1001,7 @@
     document.addEventListener('producto:creado', loadProducts);
 
     /* ---------- Inicio ---------- */
+    fillEmpresaSelect();
     loadProducts();
 })();
 </script>
